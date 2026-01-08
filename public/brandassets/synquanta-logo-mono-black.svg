@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100">
+  <!-- Logomark - Monochrome -->
+  <g transform="translate(12, 16)">
+    <circle cx="34" cy="34" r="28" fill="none" stroke="#1A1F1C" stroke-width="4"/>
+    <circle cx="34" cy="34" r="10" fill="#1A1F1C"/>
+    <line x1="50" y1="50" x2="66" y2="66" stroke="#1A1F1C" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="66" cy="66" r="3.5" fill="#1A1F1C"/>
+  </g>
+  
+  <!-- Wordmark - Monochrome -->
+  <g transform="translate(95, 56)">
+    <text x="0" y="0" font-family="'SF Pro Display', 'Helvetica Neue', 'Arial', sans-serif" font-size="34" font-weight="500" fill="#1A1F1C" letter-spacing="-0.5">
+      Syn
+    </text>
+    <text x="55" y="0" font-family="'SF Pro Display', 'Helvetica Neue', 'Arial', sans-serif" font-size="34" font-weight="300" fill="#1A1F1C" letter-spacing="-0.5">
+      Quanta
+    </text>
+  </g>
+  
+  <!-- Tagline -->
+  <text x="96" y="76" font-family="'SF Pro Display', 'Helvetica Neue', 'Arial', sans-serif" font-size="9" font-weight="500" fill="#4A524C" letter-spacing="2.5">
+    TECHNOLOGIES
+  </text>
+</svg>

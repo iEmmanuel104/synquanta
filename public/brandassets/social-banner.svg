@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" width="1500" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bannerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B4332"/>
+      <stop offset="50%" style="stop-color:#2D6A4F"/>
+      <stop offset="100%" style="stop-color:#40916C"/>
+    </linearGradient>
+    
+    <!-- Accent Gradient -->
+    <linearGradient id="accentGradBanner" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#74C69D"/>
+      <stop offset="100%" style="stop-color:#95D5B2"/>
+    </linearGradient>
+    
+    <!-- Subtle Pattern -->
+    <pattern id="gridPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="30" cy="30" r="0.8" fill="rgba(255,255,255,0.08)"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1500" height="500" fill="url(#bannerBg)"/>
+  
+  <!-- Pattern Overlay -->
+  <rect width="1500" height="500" fill="url(#gridPattern)"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="1400" cy="100" r="250" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <circle cx="1400" cy="100" r="350" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <circle cx="100" cy="400" r="150" fill="rgba(64,145,108,0.15)"/>
+  
+  <!-- Subtle accent lines -->
+  <line x1="0" y1="380" x2="300" y2="380" stroke="url(#accentGradBanner)" stroke-width="1" opacity="0.3"/>
+  <line x1="0" y1="400" x2="200" y2="400" stroke="url(#accentGradBanner)" stroke-width="1" opacity="0.2"/>
+  
+  <!-- Logo Section -->
+  <g transform="translate(150, 155)">
+    <!-- Logomark -->
+    <circle cx="55" cy="55" r="42" fill="none" stroke="white" stroke-width="5" opacity="0.95"/>
+    <circle cx="55" cy="55" r="16" fill="white"/>
+    <line x1="80" y1="80" x2="108" y2="108" stroke="url(#accentGradBanner)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="108" cy="108" r="5" fill="url(#accentGradBanner)"/>
+  </g>
+  
+  <!-- Wordmark -->
+  <g transform="translate(295, 205)">
+    <text x="0" y="50" font-family="'SF Pro Display', 'Helvetica Neue', 'Arial', sans-serif" font-size="58" fill="white" letter-spacing="-1">
+      <tspan font-weight="500">Syn</tspan><tspan font-weight="300" fill="#E8F0EB">Quanta</tspan>
+    </text>
+    <text x="3" y="80" font-family="'SF Pro Display', 'Helvetica Neue', 'Arial', sans-serif" font-size="12" font-weight="500" fill="rgba(255,255,255,0.5)" letter-spacing="3.5">
+      TECHNOLOGIES
+    </text>
+  </g>
+  
+  <!-- Tagline -->
+  <text x="150" y="420" font-family="'SF Pro Display', 'Helvetica Neue', 'Arial', sans-serif" font-size="18" font-weight="300" fill="rgba(255,255,255,0.75)" letter-spacing="0.3">
+    Modern Digital Solutions · Web · Mobile · AI · Blockchain
+  </text>
+  
+  <!-- Website -->
+  <text x="1350" y="450" text-anchor="end" font-family="'SF Pro Display', 'Helvetica Neue', 'Arial', sans-serif" font-size="15" font-weight="500" fill="#74C69D" letter-spacing="0.5">
+    synquanta.com
+  </text>
+</svg>

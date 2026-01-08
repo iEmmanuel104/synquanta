@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynQuanta Technologies - Brand Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Primary Colors - Professional Green Palette */
+            --forest-deep: #1B4332;
+            --forest-primary: #2D6A4F;
+            --sage-medium: #40916C;
+            --sage-light: #52B788;
+            --mint-soft: #74C69D;
+            --mint-pale: #95D5B2;
+            --cream-green: #D8F3DC;
+            
+            /* Neutral Colors */
+            --charcoal: #1A1F1C;
+            --dark-gray: #2D332F;
+            --medium-gray: #74796E;
+            --light-gray: #95A097;
+            --off-white: #F8FAF9;
+            --pure-white: #FFFFFF;
+            
+            /* Semantic Colors */
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --info: #3B82F6;
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            --space-3xl: 6rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            color: var(--charcoal);
+            background: var(--off-white);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--forest-deep) 0%, var(--forest-primary) 50%, var(--sage-medium) 100%);
+            color: var(--pure-white);
+            padding: var(--space-3xl) var(--space-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -15%;
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(116, 198, 157, 0.15);
+            border-radius: 50%;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(82, 183, 136, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.03em;
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            opacity: 0.85;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+        
+        .hero .badge {
+            display: inline-block;
+            background: rgba(116, 198, 157, 0.2);
+            border: 1px solid var(--mint-soft);
+            color: var(--mint-pale);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: var(--pure-white);
+            border-bottom: 1px solid var(--cream-green);
+            padding: var(--space-md) var(--space-xl);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.8125rem;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav a:hover {
+            background: var(--cream-green);
+            color: var(--forest-deep);
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: var(--space-2xl) var(--space-xl);
+        }
+        
+        section {
+            margin-bottom: var(--space-3xl);
+            scroll-margin-top: 100px;
+        }
+        
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--forest-deep);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--sage-light);
+            display: inline-block;
+            letter-spacing: -0.02em;
+        }
+        
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--forest-primary);
+            margin-bottom: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+        
+        p {
+            margin-bottom: var(--space-md);
+            color: var(--dark-gray);
+            line-height: 1.7;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--pure-white);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            box-shadow: 0 2px 12px rgba(27, 67, 50, 0.06);
+            border: 1px solid var(--cream-green);
+            margin-bottom: var(--space-lg);
+        }
+        
+        /* Color Palette Grid */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .color-swatch {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .color-swatch .preview {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .color-swatch .info {
+            background: var(--pure-white);
+            padding: var(--space-sm);
+        }
+        
+        .color-swatch .name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--charcoal);
+            margin-bottom: 2px;
+        }
+        
+        .color-swatch .hex {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+        }
+        
+        .color-swatch .usage {
+            font-size: 0.7rem;
+            color: var(--light-gray);
+            margin-top: 6px;
+        }
+        
+        /* Typography Showcase */
+        .type-sample {
+            margin: var(--space-lg) 0;
+            padding: var(--space-lg);
+            background: var(--pure-white);
+            border-radius: 10px;
+            border: 1px solid var(--cream-green);
+        }
+        
+        .type-sample .label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--sage-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .type-sample.display {
+            font-size: 2.75rem;
+            font-weight: 600;
+            color: var(--forest-deep);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+        
+        .type-sample.heading {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--forest-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .type-sample.body {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            line-height: 1.7;
+        }
+        
+        .type-sample.mono {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--charcoal);
+            background: var(--cream-green);
+        }
+        
+        /* Logo Display */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .logo-card {
+            border-radius: 12px;
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+        }
+        
+        .logo-card.light {
+            background: var(--off-white);
+            border: 1px solid var(--cream-green);
+        }
+        
+        .logo-card.dark {
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--dark-gray) 100%);
+        }
+        
+        .logo-card.gradient {
+            background: linear-gradient(135deg, var(--forest-deep) 0%, var(--sage-medium) 100%);
+        }
+        
+        .logo-card svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .logo-card .caption {
+            margin-top: var(--space-md);
+            font-size: 0.8125rem;
+            color: var(--medium-gray);
+            text-align: center;
+        }
+        
+        .logo-card.dark .caption,
+        .logo-card.gradient .caption {
+            color: var(--light-gray);
+        }
+        
+        /* Guidelines */
+        .guidelines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .guideline-item {
+            padding: var(--space-md);
+            border-radius: 10px;
+            border: 1.5px solid;
+        }
+        
+        .guideline-item.do {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.04);
+        }
+        
+        .guideline-item.dont {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.04);
+        }
+        
+        .guideline-item .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .guideline-item.do .badge {
+            background: var(--success);
+            color: white;
+        }
+        
+        .guideline-item.dont .badge {
+            background: var(--error);
+            color: white;
+        }
+        
+        .guideline-item p {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: var(--charcoal);
+            color: var(--light-gray);
+            padding: var(--space-lg);
+            border-radius: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            overflow-x: auto;
+            margin: var(--space-md) 0;
+            line-height: 1.6;
+        }
+        
+        .code-block .comment {
+            color: var(--medium-gray);
+        }
+        
+        .code-block .property {
+            color: var(--mint-soft);
+        }
+        
+        .code-block .value {
+            color: var(--mint-pale);
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-lg) 0;
+            font-size: 0.875rem;
+        }
+        
+        th, td {
+            padding: var(--space-sm) var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--cream-green);
+        }
+        
+        th {
+            background: var(--cream-green);
+            font-weight: 600;
+            color: var(--forest-deep);
+            font-size: 0.8125rem;
+        }
+        
+        /* Brand Values */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .value-card {
+            background: var(--pure-white);
+            padding: var(--space-lg);
+            border-radius: 10px;
+            border-left: 3px solid var(--sage-light);
+            box-shadow: 0 2px 8px rgba(27, 67, 50, 0.04);
+        }
+        
+        .value-card h4 {
+            color: var(--forest-deep);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .value-card p {
+            font-size: 0.8125rem;
+            color: var(--medium-gray);
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--light-gray);
+            padding: var(--space-2xl) var(--space-xl);
+            text-align: center;
+        }
+        
+        footer .logo {
+            margin-bottom: var(--space-md);
+        }
+        
+        footer p {
+            color: var(--medium-gray);
+            font-size: 0.8125rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            main {
+                padding: var(--space-xl) var(--space-md);
+            }
+            
+            .type-sample.display {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <header class="hero">
+        <span class="badge">Brand Guidelines v2.0</span>
+        <h1>SynQuanta Technologies</h1>
+        <p>A comprehensive guide to our visual identity and brand standards</p>
+    </header>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#brand-overview">Overview</a>
+            <a href="#logo">Logo</a>
+            <a href="#colors">Colors</a>
+            <a href="#typography">Typography</a>
+            <a href="#usage">Usage</a>
+            <a href="#applications">Applications</a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Brand Overview -->
+        <section id="brand-overview">
+            <h2>Brand Overview</h2>
+            
+            <div class="card">
+                <h3>About SynQuanta Technologies</h3>
+                <p>SynQuanta Technologies Ltd is a technology company focused on the design, development, and delivery of modern digital solutions. We work across web, mobile, and emerging technologies to help individuals, startups, and organizations turn ideas into reliable, scalable products.</p>
+                <p>Our expertise spans software engineering, application development, system architecture, and advanced technologies such as artificial intelligence and blockchain. We approach every project with a strong emphasis on quality, security, and long-term sustainability.</p>
+            </div>
+            
+            <h3>Brand Values</h3>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h4>🎯 Quality</h4>
+                    <p>Every solution we deliver is crafted with meticulous attention to detail.</p>
+                </div>
+                <div class="value-card">
+                    <h4>🔒 Security</h4>
+                    <p>We prioritize security at every level of development.</p>
+                </div>
+                <div class="value-card">
+                    <h4>🌱 Sustainability</h4>
+                    <p>We build solutions designed for long-term success.</p>
+                </div>
+                <div class="value-card">
+                    <h4>💡 Innovation</h4>
+                    <p>We embrace emerging technologies and creative approaches.</p>
+                </div>
+                <div class="value-card">
+                    <h4>🤝 Collaboration</h4>
+                    <p>We work closely with clients to deliver measurable value.</p>
+                </div>
+                <div class="value-card">
+                    <h4>⚡ Reliability</h4>
+                    <p>Clients depend on us for consistent, dependable results.</p>
+                </div>
+            </div>
+            
+            <h3>Brand Name Breakdown</h3>
+            <div class="card">
+                <p><strong>Syn</strong> — Derived from "synthesis" and "synergy." Represents the bringing together of ideas, technologies, and people to create something greater than the sum of its parts.</p>
+                <p><strong>Quanta</strong> — From "quantum" and "quantifiable." Represents precision, measurability, and cutting-edge technological capability.</p>
+            </div>
+        </section>
+        
+        <!-- Logo Section -->
+        <section id="logo">
+            <h2>Logo</h2>
+            
+            <h3>Primary Logo</h3>
+            <p>The SynQuanta logo combines a refined logomark with a clean, modern wordmark. The design emphasizes precision, professionalism, and forward-thinking innovation.</p>
+            
+            <div class="logo-grid">
+                <div class="logo-card light">
+                    <svg viewBox="0 0 400 100" width="300" height="75">
+                        <defs>
+                            <linearGradient id="pg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1B4332"/>
+                                <stop offset="100%" style="stop-color:#2D6A4F"/>
+                            </linearGradient>
+                            <linearGradient id="ag1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#40916C"/>
+                                <stop offset="100%" style="stop-color:#52B788"/>
+                            </linearGradient>
+                        </defs>
+                        <g transform="translate(12, 16)">
+                            <circle cx="34" cy="34" r="28" fill="none" stroke="url(#pg1)" stroke-width="4"/>
+                            <circle cx="34" cy="34" r="10" fill="url(#pg1)"/>
+                            <line x1="50" y1="50" x2="66" y2="66" stroke="url(#ag1)" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="66" cy="66" r="3.5" fill="url(#ag1)"/>
+                        </g>
+                        <g transform="translate(95, 56)">
+                            <text x="0" y="0" font-family="'Inter', sans-serif" font-size="34" font-weight="500" fill="#1B4332" letter-spacing="-0.5">Syn</text>
+                            <text x="55" y="0" font-family="'Inter', sans-serif" font-size="34" font-weight="300" fill="#2D6A4F" letter-spacing="-0.5">Quanta</text>
+                        </g>
+                        <text x="96" y="76" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="#74796E" letter-spacing="2.5">TECHNOLOGIES</text>
+                    </svg>
+                    <span class="caption">Primary Logo — Light Background</span>
+                </div>
+                
+                <div class="logo-card dark">
+                    <svg viewBox="0 0 400 100" width="300" height="75">
+                        <defs>
+                            <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FFFFFF"/>
+                                <stop offset="100%" style="stop-color:#F0F4F1"/>
+                            </linearGradient>
+                            <linearGradient id="ag2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#52B788"/>
+                                <stop offset="100%" style="stop-color:#74C69D"/>
+                            </linearGradient>
+                        </defs>
+                        <g transform="translate(12, 16)">
+                            <circle cx="34" cy="34" r="28" fill="none" stroke="url(#lg1)" stroke-width="4"/>
+                            <circle cx="34" cy="34" r="10" fill="url(#lg1)"/>
+                            <line x1="50" y1="50" x2="66" y2="66" stroke="url(#ag2)" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="66" cy="66" r="3.5" fill="url(#ag2)"/>
+                        </g>
+                        <g transform="translate(95, 56)">
+                            <text x="0" y="0" font-family="'Inter', sans-serif" font-size="34" font-weight="500" fill="#FFFFFF" letter-spacing="-0.5">Syn</text>
+                            <text x="55" y="0" font-family="'Inter', sans-serif" font-size="34" font-weight="300" fill="#E8F0EB" letter-spacing="-0.5">Quanta</text>
+                        </g>
+                        <text x="96" y="76" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="#95A097" letter-spacing="2.5">TECHNOLOGIES</text>
+                    </svg>
+                    <span class="caption">White Logo — Dark Background</span>
+                </div>
+            </div>
+            
+            <h3>Logomark</h3>
+            <p>The logomark can be used independently for favicons, app icons, and contexts where the brand is already established.</p>
+            
+            <div class="logo-grid">
+                <div class="logo-card light">
+                    <svg viewBox="0 0 100 100" width="80" height="80">
+                        <defs>
+                            <linearGradient id="pg2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1B4332"/>
+                                <stop offset="100%" style="stop-color:#2D6A4F"/>
+                            </linearGradient>
+                            <linearGradient id="ag3" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#40916C"/>
+                                <stop offset="100%" style="stop-color:#52B788"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="46" cy="46" r="34" fill="none" stroke="url(#pg2)" stroke-width="5"/>
+                        <circle cx="46" cy="46" r="13" fill="url(#pg2)"/>
+                        <line x1="66" y1="66" x2="86" y2="86" stroke="url(#ag3)" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="86" cy="86" r="4.5" fill="url(#ag3)"/>
+                    </svg>
+                    <span class="caption">Logomark — Standard</span>
+                </div>
+                
+                <div class="logo-card gradient">
+                    <svg viewBox="0 0 100 100" width="80" height="80">
+                        <defs>
+                            <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FFFFFF"/>
+                                <stop offset="100%" style="stop-color:#F0F4F1"/>
+                            </linearGradient>
+                            <linearGradient id="ag4" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#74C69D"/>
+                                <stop offset="100%" style="stop-color:#95D5B2"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="46" cy="46" r="34" fill="none" stroke="url(#lg2)" stroke-width="5"/>
+                        <circle cx="46" cy="46" r="13" fill="url(#lg2)"/>
+                        <line x1="66" y1="66" x2="86" y2="86" stroke="url(#ag4)" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="86" cy="86" r="4.5" fill="url(#ag4)"/>
+                    </svg>
+                    <span class="caption">Logomark — On Brand Gradient</span>
+                </div>
+            </div>
+            
+            <h3>Logo Symbolism</h3>
+            <div class="card">
+                <p><strong>The Outer Ring</strong> — Represents completeness, the quantum field, and the comprehensive scope of our solutions.</p>
+                <p><strong>The Inner Core</strong> — Represents the fundamental building blocks—the "quanta"—of digital solutions. A solid foundation.</p>
+                <p><strong>The Diagonal Line + Node</strong> — Represents forward momentum, innovation, growth, and the distributed nature of modern systems.</p>
+            </div>
+            
+            <h3>Minimum Size</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Logo Version</th>
+                        <th>Print (mm)</th>
+                        <th>Digital (px)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Full Logo (Horizontal)</td>
+                        <td>30mm width</td>
+                        <td>120px width</td>
+                    </tr>
+                    <tr>
+                        <td>Logomark Only</td>
+                        <td>10mm</td>
+                        <td>24px</td>
+                    </tr>
+                    <tr>
+                        <td>Favicon</td>
+                        <td>N/A</td>
+                        <td>16px</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Colors Section -->
+        <section id="colors">
+            <h2>Color Palette</h2>
+            
+            <h3>Primary Colors</h3>
+            <p>Our primary palette features sophisticated forest green tones that communicate trust, growth, sustainability, and professional maturity.</p>
+            
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="preview" style="background: #1B4332;">
+                        <span style="color: white; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Forest Deep</div>
+                        <div class="hex">#1B4332</div>
+                        <div class="usage">Primary brand, headers, CTAs</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="preview" style="background: #2D6A4F;">
+                        <span style="color: white; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Forest Primary</div>
+                        <div class="hex">#2D6A4F</div>
+                        <div class="usage">Secondary elements, hover states</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="preview" style="background: #40916C;">
+                        <span style="color: white; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Sage Medium</div>
+                        <div class="hex">#40916C</div>
+                        <div class="usage">Accents, interactive elements</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="preview" style="background: #D8F3DC;">
+                        <span style="color: #1B4332; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Cream Green</div>
+                        <div class="hex">#D8F3DC</div>
+                        <div class="usage">Backgrounds, borders</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Accent Colors</h3>
+            <p>Our accent palette provides lighter, energetic tones for highlights and interactive states.</p>
+            
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="preview" style="background: #52B788;">
+                        <span style="color: white; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Sage Light</div>
+                        <div class="hex">#52B788</div>
+                        <div class="usage">Primary accent, success</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="preview" style="background: #74C69D;">
+                        <span style="color: #1B4332; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Mint Soft</div>
+                        <div class="hex">#74C69D</div>
+                        <div class="usage">Links, highlights</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="preview" style="background: #95D5B2;">
+                        <span style="color: #1B4332; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Mint Pale</div>
+                        <div class="hex">#95D5B2</div>
+                        <div class="usage">Glows, subtle accents</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Neutral Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="preview" style="background: #1A1F1C;">
+                        <span style="color: white; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Charcoal</div>
+                        <div class="hex">#1A1F1C</div>
+                        <div class="usage">Primary text, dark bg</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="preview" style="background: #74796E;">
+                        <span style="color: white; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Medium Gray</div>
+                        <div class="hex">#74796E</div>
+                        <div class="usage">Secondary text</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="preview" style="background: #F8FAF9;">
+                        <span style="color: #1A1F1C; font-weight: 500;">Aa</span>
+                    </div>
+                    <div class="info">
+                        <div class="name">Off White</div>
+                        <div class="hex">#F8FAF9</div>
+                        <div class="usage">Page backgrounds</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Brand Gradient</h3>
+            <div class="card" style="background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #40916C 100%); height: 120px; display: flex; align-items: center; justify-content: center;">
+                <span style="color: white; font-family: var(--font-mono); font-size: 13px;">linear-gradient(135deg, #1B4332, #2D6A4F, #40916C)</span>
+            </div>
+            
+            <h3>CSS Variables</h3>
+            <div class="code-block">
+<span class="comment">/* SynQuanta Brand Colors */</span>
+:root {
+    <span class="comment">/* Primary */</span>
+    <span class="property">--forest-deep</span>: <span class="value">#1B4332</span>;
+    <span class="property">--forest-primary</span>: <span class="value">#2D6A4F</span>;
+    <span class="property">--sage-medium</span>: <span class="value">#40916C</span>;
+    <span class="property">--cream-green</span>: <span class="value">#D8F3DC</span>;
+    
+    <span class="comment">/* Accent */</span>
+    <span class="property">--sage-light</span>: <span class="value">#52B788</span>;
+    <span class="property">--mint-soft</span>: <span class="value">#74C69D</span>;
+    <span class="property">--mint-pale</span>: <span class="value">#95D5B2</span>;
+    
+    <span class="comment">/* Neutral */</span>
+    <span class="property">--charcoal</span>: <span class="value">#1A1F1C</span>;
+    <span class="property">--medium-gray</span>: <span class="value">#74796E</span>;
+    <span class="property">--off-white</span>: <span class="value">#F8FAF9</span>;
+}
+            </div>
+        </section>
+        
+        <!-- Typography Section -->
+        <section id="typography">
+            <h2>Typography</h2>
+            
+            <h3>Primary Font: Inter</h3>
+            <p>Inter is our primary typeface. It's a clean, highly legible sans-serif designed for screen readability—perfect for a modern, professional tech company.</p>
+            
+            <div class="type-sample display">
+                <div class="label">Display / 44px / SemiBold</div>
+                Innovation Through Technology
+            </div>
+            
+            <div class="type-sample heading">
+                <div class="label">Heading / 28px / SemiBold</div>
+                Building Solutions That Scale
+            </div>
+            
+            <div class="type-sample body">
+                <div class="label">Body / 16px / Regular</div>
+                SynQuanta Technologies is committed to building solutions that are practical, innovative, and aligned with real-world business needs. We approach every project with a strong emphasis on quality, security, and long-term sustainability.
+            </div>
+            
+            <h3>Monospace Font: JetBrains Mono</h3>
+            <div class="type-sample mono">
+                <div class="label" style="color: var(--forest-primary);">Mono / 14px / Regular</div>
+                const synquanta = { quality: true, innovation: true };
+            </div>
+            
+            <h3>Type Scale</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Style</th>
+                        <th>Size</th>
+                        <th>Weight</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Display</td>
+                        <td>44px / 2.75rem</td>
+                        <td>600</td>
+                        <td>Hero headlines</td>
+                    </tr>
+                    <tr>
+                        <td>H1</td>
+                        <td>36px / 2.25rem</td>
+                        <td>600</td>
+                        <td>Page titles</td>
+                    </tr>
+                    <tr>
+                        <td>H2</td>
+                        <td>28px / 1.75rem</td>
+                        <td>600</td>
+                        <td>Section headers</td>
+                    </tr>
+                    <tr>
+                        <td>H3</td>
+                        <td>20px / 1.25rem</td>
+                        <td>600</td>
+                        <td>Subsections</td>
+                    </tr>
+                    <tr>
+                        <td>Body</td>
+                        <td>16px / 1rem</td>
+                        <td>400</td>
+                        <td>Paragraphs</td>
+                    </tr>
+                    <tr>
+                        <td>Small</td>
+                        <td>14px / 0.875rem</td>
+                        <td>400</td>
+                        <td>Captions, meta</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Usage Guidelines -->
+        <section id="usage">
+            <h2>Usage Guidelines</h2>
+            
+            <h3>Logo Do's and Don'ts</h3>
+            <div class="guidelines-grid">
+                <div class="guideline-item do">
+                    <span class="badge">✓ Do</span>
+                    <p>Use approved logo files from the brand kit</p>
+                </div>
+                <div class="guideline-item do">
+                    <span class="badge">✓ Do</span>
+                    <p>Maintain adequate clear space around the logo</p>
+                </div>
+                <div class="guideline-item do">
+                    <span class="badge">✓ Do</span>
+                    <p>Use the white logo on dark backgrounds</p>
+                </div>
+                <div class="guideline-item do">
+                    <span class="badge">✓ Do</span>
+                    <p>Scale the logo proportionally</p>
+                </div>
+                <div class="guideline-item dont">
+                    <span class="badge">✗ Don't</span>
+                    <p>Stretch or distort the logo</p>
+                </div>
+                <div class="guideline-item dont">
+                    <span class="badge">✗ Don't</span>
+                    <p>Change the logo colors arbitrarily</p>
+                </div>
+                <div class="guideline-item dont">
+                    <span class="badge">✗ Don't</span>
+                    <p>Add effects like shadows or outlines</p>
+                </div>
+                <div class="guideline-item dont">
+                    <span class="badge">✗ Don't</span>
+                    <p>Place on busy or clashing backgrounds</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Applications -->
+        <section id="applications">
+            <h2>Applications</h2>
+            
+            <h3>Digital Applications</h3>
+            <div class="card">
+                <p><strong>Website:</strong> Use the primary logo on white/light backgrounds in the header. The logomark can be used as the favicon.</p>
+                <p><strong>Social Media:</strong> Use the stacked logo or logomark for profile images. Maintain brand colors in cover images.</p>
+                <p><strong>Email Signatures:</strong> Use the horizontal logo at 200px width maximum.</p>
+                <p><strong>App Icon:</strong> Use the logomark on a Forest Deep or gradient background.</p>
+            </div>
+            
+            <h3>File Formats</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Use Case</th>
+                        <th>Format</th>
+                        <th>File</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Web, Digital</td>
+                        <td>SVG</td>
+                        <td>synquanta-logo-primary.svg</td>
+                    </tr>
+                    <tr>
+                        <td>Dark Backgrounds</td>
+                        <td>SVG</td>
+                        <td>synquanta-logo-white.svg</td>
+                    </tr>
+                    <tr>
+                        <td>Social Media</td>
+                        <td>SVG/PNG</td>
+                        <td>social-profile-image.svg</td>
+                    </tr>
+                    <tr>
+                        <td>Favicon</td>
+                        <td>SVG/ICO</td>
+                        <td>synquanta-favicon.svg</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="card">
+                <p>For brand-related inquiries or to request additional assets:</p>
+                <p><strong>Email:</strong> <a href="mailto:info@synquanta.com" style="color: var(--sage-medium);">info@synquanta.com</a></p>
+                <p><strong>Website:</strong> <a href="https://synquanta.com" style="color: var(--sage-medium);">synquanta.com</a></p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="logo">
+            <svg viewBox="0 0 180 45" width="150" height="38">
+                <defs>
+                    <linearGradient id="footerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFFFFF"/>
+                        <stop offset="100%" style="stop-color:#F0F4F1"/>
+                    </linearGradient>
+                    <linearGradient id="footerAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#74C69D"/>
+                        <stop offset="100%" style="stop-color:#95D5B2"/>
+                    </linearGradient>
+                </defs>
+                <g transform="translate(5, 6)">
+                    <circle cx="16" cy="16" r="12" fill="none" stroke="url(#footerGrad)" stroke-width="2"/>
+                    <circle cx="16" cy="16" r="5" fill="url(#footerGrad)"/>
+                    <line x1="24" y1="24" x2="32" y2="32" stroke="url(#footerAccent)" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="32" cy="32" r="2" fill="url(#footerAccent)"/>
+                </g>
+                <g transform="translate(48, 26)">
+                    <text x="0" y="0" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#FFFFFF" letter-spacing="-0.3">Syn</text>
+                    <text x="30" y="0" font-family="'Inter', sans-serif" font-size="17" font-weight="300" fill="#E8F0EB" letter-spacing="-0.3">Quanta</text>
+                </g>
+            </svg>
+        </div>
+        <p>© 2026 SynQuanta Technologies Ltd. All rights reserved.</p>
+        <p style="margin-top: 6px; font-size: 11px;">Brand Guidelines v2.0 — January 2026</p>
+    </footer>
+</body>
+</html>

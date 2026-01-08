@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import "./brand.css";
+
+/* Custom theme configuration for Tailwind v4 */
+@theme {
+  /* Colors */
+  --color-forest-deep: var(--sq-forest-deep);
+  --color-forest-primary: var(--sq-forest-primary);
+  --color-sage-medium: var(--sq-sage-medium);
+  --color-sage-light: var(--sq-sage-light);
+  --color-mint-soft: var(--sq-mint-soft);
+  --color-mint-pale: var(--sq-mint-pale);
+  --color-cream-green: var(--sq-cream-green);
+  --color-neutral-charcoal: var(--sq-charcoal);
+  --color-neutral-dark-gray: var(--sq-dark-gray);
+  --color-neutral-medium-gray: var(--sq-medium-gray);
+  --color-neutral-light-gray: var(--sq-light-gray);
+  --color-neutral-off-white: var(--sq-off-white);
+
+  /* Font families */
+  --font-primary: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows */
+  --shadow-sq: var(--sq-shadow-md);
+  --shadow-sq-lg: var(--sq-shadow-lg);
+  --shadow-sq-xl: var(--sq-shadow-xl);
+
+  /* Border radius */
+  --radius-sq: var(--sq-radius-md);
+  --radius-sq-lg: var(--sq-radius-lg);
+  --radius-sq-xl: var(--sq-radius-xl);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--sq-font-primary);
+    color: var(--sq-charcoal);
+    background-color: var(--sq-off-white);
+    line-height: var(--sq-leading-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Focus visible styles for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--sq-sage-light);
+    outline-offset: 2px;
+  }
+
+  /* Selection styling */
+  ::selection {
+    background-color: var(--sq-cream-green);
+    color: var(--sq-forest-deep);
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Container utility */
+  .container-custom {
+    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  /* Section padding utility */
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+}

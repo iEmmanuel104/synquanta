@@ -1,0 +1,273 @@
+/**
+ * SynQuanta Technologies - Brand CSS Variables
+ * Version: 2.0 - Professional Green Palette
+ * Date: January 2026
+ */
+
+:root {
+    /* ========================================
+       PRIMARY COLORS - Professional Green
+       ======================================== */
+    
+    /* Forest Deep - Primary brand color */
+    --sq-forest-deep: #1B4332;
+    --sq-forest-deep-rgb: 27, 67, 50;
+    
+    /* Forest Primary - Secondary brand color */
+    --sq-forest-primary: #2D6A4F;
+    --sq-forest-primary-rgb: 45, 106, 79;
+    
+    /* Sage Medium - Tertiary brand color */
+    --sq-sage-medium: #40916C;
+    --sq-sage-medium-rgb: 64, 145, 108;
+    
+    /* Cream Green - Light brand shade */
+    --sq-cream-green: #D8F3DC;
+    --sq-cream-green-rgb: 216, 243, 220;
+    
+    
+    /* ========================================
+       ACCENT COLORS
+       ======================================== */
+    
+    /* Sage Light - Primary accent */
+    --sq-sage-light: #52B788;
+    --sq-sage-light-rgb: 82, 183, 136;
+    
+    /* Mint Soft - Secondary accent */
+    --sq-mint-soft: #74C69D;
+    --sq-mint-soft-rgb: 116, 198, 157;
+    
+    /* Mint Pale - Highlight accent */
+    --sq-mint-pale: #95D5B2;
+    --sq-mint-pale-rgb: 149, 213, 178;
+    
+    
+    /* ========================================
+       NEUTRAL COLORS
+       ======================================== */
+    
+    /* Charcoal - Primary text */
+    --sq-charcoal: #1A1F1C;
+    --sq-charcoal-rgb: 26, 31, 28;
+    
+    /* Dark Gray - Secondary dark */
+    --sq-dark-gray: #2D332F;
+    --sq-dark-gray-rgb: 45, 51, 47;
+    
+    /* Medium Gray - Secondary text */
+    --sq-medium-gray: #74796E;
+    --sq-medium-gray-rgb: 116, 121, 110;
+    
+    /* Light Gray - Tertiary text */
+    --sq-light-gray: #95A097;
+    --sq-light-gray-rgb: 149, 160, 151;
+    
+    /* Off White - Page background */
+    --sq-off-white: #F8FAF9;
+    --sq-off-white-rgb: 248, 250, 249;
+    
+    /* Pure White */
+    --sq-white: #FFFFFF;
+    --sq-white-rgb: 255, 255, 255;
+    
+    
+    /* ========================================
+       SEMANTIC COLORS
+       ======================================== */
+    
+    --sq-success: #10B981;
+    --sq-warning: #F59E0B;
+    --sq-error: #EF4444;
+    --sq-info: #3B82F6;
+    
+    
+    /* ========================================
+       GRADIENTS
+       ======================================== */
+    
+    /* Primary brand gradient */
+    --sq-gradient-primary: linear-gradient(135deg, var(--sq-forest-deep) 0%, var(--sq-forest-primary) 50%, var(--sq-sage-medium) 100%);
+    
+    /* Accent gradient */
+    --sq-gradient-accent: linear-gradient(90deg, var(--sq-sage-medium) 0%, var(--sq-sage-light) 100%);
+    
+    /* Light gradient */
+    --sq-gradient-light: linear-gradient(135deg, var(--sq-mint-soft) 0%, var(--sq-mint-pale) 100%);
+    
+    
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    
+    /* Font Families */
+    --sq-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --sq-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    
+    /* Font Sizes */
+    --sq-text-xs: 0.75rem;     /* 12px */
+    --sq-text-sm: 0.875rem;    /* 14px */
+    --sq-text-base: 1rem;      /* 16px */
+    --sq-text-lg: 1.125rem;    /* 18px */
+    --sq-text-xl: 1.25rem;     /* 20px */
+    --sq-text-2xl: 1.5rem;     /* 24px */
+    --sq-text-3xl: 1.75rem;    /* 28px */
+    --sq-text-4xl: 2.25rem;    /* 36px */
+    --sq-text-5xl: 2.75rem;    /* 44px */
+    
+    /* Font Weights */
+    --sq-font-light: 300;
+    --sq-font-normal: 400;
+    --sq-font-medium: 500;
+    --sq-font-semibold: 600;
+    --sq-font-bold: 700;
+    
+    /* Line Heights */
+    --sq-leading-tight: 1.1;
+    --sq-leading-snug: 1.25;
+    --sq-leading-normal: 1.5;
+    --sq-leading-relaxed: 1.6;
+    --sq-leading-loose: 1.7;
+    
+    /* Letter Spacing */
+    --sq-tracking-tight: -0.03em;
+    --sq-tracking-normal: 0;
+    --sq-tracking-wide: 0.05em;
+    --sq-tracking-wider: 0.1em;
+    
+    
+    /* ========================================
+       SPACING
+       ======================================== */
+    
+    --sq-space-xs: 0.5rem;     /* 8px */
+    --sq-space-sm: 1rem;       /* 16px */
+    --sq-space-md: 1.5rem;     /* 24px */
+    --sq-space-lg: 2rem;       /* 32px */
+    --sq-space-xl: 3rem;       /* 48px */
+    --sq-space-2xl: 4rem;      /* 64px */
+    --sq-space-3xl: 6rem;      /* 96px */
+    
+    
+    /* ========================================
+       BORDER RADIUS
+       ======================================== */
+    
+    --sq-radius-sm: 4px;
+    --sq-radius-md: 8px;
+    --sq-radius-lg: 10px;
+    --sq-radius-xl: 12px;
+    --sq-radius-2xl: 16px;
+    --sq-radius-full: 9999px;
+    
+    
+    /* ========================================
+       SHADOWS
+       ======================================== */
+    
+    --sq-shadow-sm: 0 1px 2px rgba(var(--sq-forest-deep-rgb), 0.04);
+    --sq-shadow-md: 0 2px 8px rgba(var(--sq-forest-deep-rgb), 0.06);
+    --sq-shadow-lg: 0 4px 16px rgba(var(--sq-forest-deep-rgb), 0.08);
+    --sq-shadow-xl: 0 8px 32px rgba(var(--sq-forest-deep-rgb), 0.12);
+    
+    
+    /* ========================================
+       TRANSITIONS
+       ======================================== */
+    
+    --sq-transition-fast: 150ms ease;
+    --sq-transition-normal: 200ms ease;
+    --sq-transition-slow: 300ms ease;
+}
+
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Background Colors */
+.sq-bg-primary { background-color: var(--sq-forest-deep); }
+.sq-bg-secondary { background-color: var(--sq-forest-primary); }
+.sq-bg-accent { background-color: var(--sq-sage-light); }
+.sq-bg-light { background-color: var(--sq-off-white); }
+.sq-bg-cream { background-color: var(--sq-cream-green); }
+.sq-bg-dark { background-color: var(--sq-charcoal); }
+.sq-bg-gradient { background: var(--sq-gradient-primary); }
+
+/* Text Colors */
+.sq-text-primary { color: var(--sq-forest-deep); }
+.sq-text-secondary { color: var(--sq-forest-primary); }
+.sq-text-accent { color: var(--sq-sage-light); }
+.sq-text-body { color: var(--sq-charcoal); }
+.sq-text-muted { color: var(--sq-medium-gray); }
+.sq-text-light { color: var(--sq-white); }
+
+/* Border Colors */
+.sq-border-primary { border-color: var(--sq-forest-deep); }
+.sq-border-accent { border-color: var(--sq-sage-light); }
+.sq-border-light { border-color: var(--sq-cream-green); }
+
+
+/* ========================================
+   COMPONENT STYLES
+   ======================================== */
+
+/* Button - Primary */
+.sq-btn-primary {
+    background: var(--sq-gradient-primary);
+    color: var(--sq-white);
+    padding: var(--sq-space-xs) var(--sq-space-md);
+    border-radius: var(--sq-radius-md);
+    border: none;
+    font-family: var(--sq-font-primary);
+    font-weight: var(--sq-font-medium);
+    font-size: var(--sq-text-sm);
+    cursor: pointer;
+    transition: var(--sq-transition-normal);
+    box-shadow: var(--sq-shadow-sm);
+}
+
+.sq-btn-primary:hover {
+    box-shadow: var(--sq-shadow-md);
+    transform: translateY(-1px);
+}
+
+/* Button - Secondary */
+.sq-btn-secondary {
+    background: transparent;
+    color: var(--sq-forest-deep);
+    padding: var(--sq-space-xs) var(--sq-space-md);
+    border-radius: var(--sq-radius-md);
+    border: 1.5px solid var(--sq-forest-deep);
+    font-family: var(--sq-font-primary);
+    font-weight: var(--sq-font-medium);
+    font-size: var(--sq-text-sm);
+    cursor: pointer;
+    transition: var(--sq-transition-normal);
+}
+
+.sq-btn-secondary:hover {
+    background: var(--sq-forest-deep);
+    color: var(--sq-white);
+}
+
+/* Card */
+.sq-card {
+    background: var(--sq-white);
+    border-radius: var(--sq-radius-xl);
+    padding: var(--sq-space-lg);
+    box-shadow: var(--sq-shadow-md);
+    border: 1px solid var(--sq-cream-green);
+}
+
+/* Badge */
+.sq-badge {
+    display: inline-block;
+    background: rgba(var(--sq-sage-light-rgb), 0.15);
+    color: var(--sq-forest-primary);
+    padding: 4px 12px;
+    border-radius: var(--sq-radius-full);
+    font-size: var(--sq-text-xs);
+    font-weight: var(--sq-font-medium);
+    letter-spacing: var(--sq-tracking-wide);
+}
