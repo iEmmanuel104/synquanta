@@ -13,6 +13,27 @@ export const Header = () => {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
+  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    closeMobileMenu();
+
+    // Small delay to allow menu to close before scrolling
+    setTimeout(() => {
+      const targetId = href.replace('#', '');
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  };
+
   return (
     <>
       {/* Skip to content link for accessibility */}
@@ -90,7 +111,7 @@ export const Header = () => {
                       <a
                         href={link.href}
                         className="block py-2 text-lg text-neutral-charcoal hover:text-forest-primary transition-colors font-medium"
-                        onClick={closeMobileMenu}
+                        onClick={(e) => handleMobileNavClick(e, link.href)}
                       >
                         {link.label}
                       </a>
@@ -102,9 +123,13 @@ export const Header = () => {
                     transition={{ delay: navLinks.length * 0.1 }}
                     className="pt-4"
                   >
-                    <Button href="#contact" className="w-full" onClick={closeMobileMenu}>
+                    <a
+                      href="#contact"
+                      className="block w-full text-center px-6 py-3 bg-gradient-to-r from-forest-deep via-forest-primary to-sage-medium text-white font-medium rounded-sq shadow-sq"
+                      onClick={(e) => handleMobileNavClick(e, '#contact')}
+                    >
                       Get Started
-                    </Button>
+                    </a>
                   </motion.li>
                 </ul>
               </nav>
