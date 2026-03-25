@@ -35,7 +35,7 @@ export const Values = () => {
           const IconComponent = iconMap[value.icon];
           return (
             <Card key={value.id} className="text-center group">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-forest-deep to-sage-medium flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-forest-deep to-sage-medium flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(82,183,136,0.3)] transition-all duration-300">
                 {IconComponent && (
                   <IconComponent className="w-7 h-7 text-white" />
                 )}

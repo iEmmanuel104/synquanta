@@ -27,6 +27,7 @@ const iconMap: Record<string, LucideIcon> = {
 export const Services = () => {
   return (
     <Section id="services" className="scroll-mt-20">
+      <div className="section-divider mb-12" />
       <SectionHeading
         title="What We Do"
         subtitle="We deliver end-to-end digital solutions across multiple technology domains"
@@ -37,9 +38,9 @@ export const Services = () => {
           const IconComponent = iconMap[service.icon];
           return (
             <Card key={service.id} className="group">
-              <div className="w-12 h-12 rounded-sq-lg bg-cream-green flex items-center justify-center mb-4 group-hover:bg-sage-light/20 transition-colors duration-300">
+              <div className="w-12 h-12 rounded-sq-lg bg-cream-green flex items-center justify-center mb-4 group-hover:bg-forest-deep group-hover:scale-110 transition-all duration-300">
                 {IconComponent && (
-                  <IconComponent className="w-6 h-6 text-forest-primary" />
+                  <IconComponent className="w-6 h-6 text-forest-primary group-hover:text-white transition-colors duration-300" />
                 )}
               </div>
               <h3 className="text-lg font-semibold text-forest-deep mb-2">

@@ -81,4 +81,22 @@
   .section-padding {
     @apply py-16 md:py-24 lg:py-32;
   }
+
+  /* Dot grid background pattern */
+  .bg-dot-grid {
+    background-image: radial-gradient(circle, rgba(82,183,136,0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* White dot grid for dark backgrounds */
+  .bg-dot-grid-white {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Section divider gradient line */
+  .section-divider {
+    @apply h-px w-full max-w-2xl mx-auto;
+    background: linear-gradient(to right, transparent, rgba(82,183,136,0.3), transparent);
+  }
 }

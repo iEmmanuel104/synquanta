@@ -48,9 +48,10 @@ export const About = () => {
 
           {/* Mission */}
           <FadeIn delay={0.3}>
-            <div className="mt-8 p-6 bg-white rounded-sq-xl border border-sage-light/20 shadow-sq">
-              <h3 className="text-forest-primary font-semibold mb-2">Our Mission</h3>
-              <p className="text-neutral-charcoal italic">
+            <div className="mt-8 p-6 bg-white rounded-sq-xl border border-sage-light/20 shadow-sq relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-forest-primary to-sage-light" />
+              <h3 className="text-forest-primary font-semibold mb-2 pl-3">Our Mission</h3>
+              <p className="text-neutral-charcoal italic pl-3">
                 "Building solutions that are practical, innovative, and aligned with real-world business needs."
               </p>
             </div>
@@ -65,7 +66,7 @@ export const About = () => {
             </h3>
 
             <div className="space-y-6">
-              <div>
+              <div className="pl-4 border-l-4 border-forest-primary">
                 <h4 className="text-lg font-semibold text-forest-primary mb-2">
                   Syn<span className="text-sage-light">—</span>
                 </h4>
@@ -74,7 +75,7 @@ export const About = () => {
                 </p>
               </div>
 
-              <div>
+              <div className="pl-4 border-l-4 border-sage-medium">
                 <h4 className="text-lg font-semibold text-forest-primary mb-2">
                   Quanta<span className="text-sage-light">—</span>
                 </h4>

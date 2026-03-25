@@ -79,7 +79,7 @@ export const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-3 text-sm text-white/70">
-              <li>Founded: 2026</li>
+              <li>Founded: 2025</li>
               <li>Serving clients globally</li>
               <li>Modern digital solutions</li>
             </ul>

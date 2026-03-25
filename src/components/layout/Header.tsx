@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Logo } from '../ui/Logo';
-import { Button } from '../ui/Button';
 import { navLinks } from '../../constants';
 import { useScrollPosition } from '../../hooks';
 
@@ -53,8 +52,8 @@ export const Header = () => {
       >
         <nav className="container-custom" aria-label="Main navigation">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
-            <Logo />
+            {/* Logo - white when over dark hero, default when scrolled */}
+            <Logo variant={isScrolled ? undefined : 'white'} />
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
@@ -63,21 +62,39 @@ export const Header = () => {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-neutral-charcoal hover:text-forest-primary transition-colors duration-200 font-medium"
+                      className={`transition-colors duration-200 font-medium ${
+                        isScrolled
+                          ? 'text-neutral-charcoal hover:text-forest-primary'
+                          : 'text-white/80 hover:text-white'
+                      }`}
                     >
                       {link.label}
                     </a>
                   </li>
                 ))}
               </ul>
-              <Button href="#contact" size="sm">
+              <motion.a
+                href="#contact"
+                className={`inline-flex items-center justify-center font-medium rounded-sq px-4 py-2 text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2 ${
+                  isScrolled
+                    ? 'bg-gradient-to-r from-forest-deep via-forest-primary to-sage-medium text-white shadow-sq hover:shadow-sq-lg'
+                    : 'bg-white text-forest-deep hover:bg-cream-green'
+                }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              >
                 Get Started
-              </Button>
+              </motion.a>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 text-forest-deep hover:bg-cream-green rounded-sq transition-colors"
+              className={`lg:hidden p-2 rounded-sq transition-colors ${
+                isScrolled
+                  ? 'text-forest-deep hover:bg-cream-green'
+                  : 'text-white hover:bg-white/10'
+              }`}
               onClick={toggleMobileMenu}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"

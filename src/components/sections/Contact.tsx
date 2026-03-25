@@ -39,7 +39,7 @@ export const Contact = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {contactInfo.map((item, index) => (
             <FadeIn key={item.label} delay={index * 0.1}>
-              <div className="bg-white rounded-sq-xl p-6 lg:p-8 text-center shadow-sq border border-cream-green hover:shadow-sq-lg transition-shadow duration-300">
+              <div className="relative bg-white rounded-sq-xl p-6 lg:p-8 text-center shadow-sq border border-cream-green hover:shadow-sq-lg transition-shadow duration-300 overflow-hidden after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-forest-primary after:to-sage-light hover:after:w-full after:transition-all after:duration-500">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-forest-deep to-sage-medium flex items-center justify-center mx-auto mb-4">
                   <item.icon className="w-6 h-6 text-white" />
                 </div>
@@ -75,7 +75,7 @@ export const Contact = () => {
             </p>
             <a
               href="mailto:info@synquanta.com"
-              className="inline-flex items-center gap-2 text-xl font-semibold text-forest-deep hover:text-forest-primary transition-colors"
+              className="inline-flex items-center gap-2 text-xl font-semibold text-forest-deep hover:text-forest-primary transition-colors px-6 py-3 bg-cream-green/50 rounded-sq-xl hover:bg-cream-green transition-all duration-300"
             >
               <Mail className="w-5 h-5" />
               info@synquanta.com
