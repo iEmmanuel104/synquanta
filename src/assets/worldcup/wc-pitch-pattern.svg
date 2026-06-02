@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" fill="none">
+  
+  <defs>
+    <pattern id="sqwc-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="none"></rect>
+      <rect x="0" y="0" width="60" height="60" stroke="rgba(82,183,136,0.16)" stroke-width="1"></rect>
+      <path d="M0 0 A60 60 0 0 1 60 60" stroke="rgba(82,183,136,0.22)" stroke-width="1" fill="none"></path>
+      <path d="M60 0 A60 60 0 0 0 0 60" stroke="rgba(200,161,75,0.20)" stroke-width="1" fill="none"></path>
+      <circle cx="0" cy="0" r="3" fill="rgba(82,183,136,0.30)"></circle>
+      <circle cx="60" cy="60" r="3" fill="rgba(200,161,75,0.30)"></circle>
+    </pattern>
+  </defs>
+  <rect width="240" height="240" fill="url(#sqwc-grid)"></rect>
+</svg>

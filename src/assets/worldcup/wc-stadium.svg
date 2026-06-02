@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" width="480" height="200" fill="none">
+  
+  <defs>
+    <linearGradient id="stadGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E6C772" stop-opacity="0.35"></stop>
+      <stop offset="100%" stop-color="#E6C772" stop-opacity="0"></stop>
+    </linearGradient>
+    <linearGradient id="stadBowl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#52B788" stop-opacity="0.9"></stop>
+      <stop offset="100%" stop-color="#1B4332" stop-opacity="0.95"></stop>
+    </linearGradient>
+  </defs>
+  
+  <polygon points="70,46 96,46 150,150 40,150" fill="url(#stadGlow)"></polygon>
+  <polygon points="410,46 384,46 330,150 440,150" fill="url(#stadGlow)"></polygon>
+  
+  <g stroke="#74C69D" stroke-width="3" stroke-linecap="round">
+    <line x1="83" y1="46" x2="83" y2="150"></line>
+    <line x1="397" y1="46" x2="397" y2="150"></line>
+  </g>
+  <g fill="#95D5B2">
+    <rect x="68" y="34" width="30" height="16" rx="3"></rect>
+    <rect x="382" y="34" width="30" height="16" rx="3"></rect>
+  </g>
+  
+  <path d="M40 150 Q240 96 440 150 L440 178 Q240 130 40 178 Z" fill="url(#stadBowl)"></path>
+  <ellipse cx="240" cy="150" rx="150" ry="26" fill="none" stroke="#74C69D" stroke-width="2" stroke-opacity="0.7"></ellipse>
+  <ellipse cx="240" cy="150" rx="96" ry="16" fill="#1B4332"></ellipse>
+  
+  <ellipse cx="240" cy="150" rx="70" ry="11" fill="#2D6A4F"></ellipse>
+  <line x1="240" y1="139" x2="240" y2="161" stroke="#D8F3DC" stroke-width="1.5" stroke-opacity="0.8"></line>
+  <circle cx="240" cy="150" r="7" fill="none" stroke="#D8F3DC" stroke-width="1.5" stroke-opacity="0.8"></circle>
+</svg>

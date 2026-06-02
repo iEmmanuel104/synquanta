@@ -17,6 +17,13 @@
   --color-neutral-light-gray: var(--sq-light-gray);
   --color-neutral-off-white: var(--sq-off-white);
 
+  /* World Cup campaign colors */
+  --color-wc-gold: var(--sq-wc-gold);
+  --color-wc-gold-bright: var(--sq-wc-gold-bright);
+  --color-wc-blue-deep: var(--sq-wc-blue-deep);
+  --color-wc-blue-mid: var(--sq-wc-blue-mid);
+  --color-wc-blue-bright: var(--sq-wc-blue-bright);
+
   /* Font families */
   --font-primary: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -98,5 +105,55 @@
   .section-divider {
     @apply h-px w-full max-w-2xl mx-auto;
     background: linear-gradient(to right, transparent, rgba(82,183,136,0.3), transparent);
+  }
+
+  /* ========================================
+     WORLD CUP FLAGSHIP
+     ======================================== */
+
+  /* Pitch-night gradient band — flagship banner + card */
+  .wc-band {
+    position: relative;
+    overflow: hidden;
+    background: var(--sq-gradient-pitchnight);
+  }
+
+  /* Pitch pattern overlay (host grid art) */
+  .wc-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/worldcup/wc-pitch-pattern.svg');
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  /* Gold flag ring around the flagship card */
+  .wc-flag-ring {
+    box-shadow: 0 0 0 1px rgba(200, 161, 75, 0.5), var(--sq-shadow-gold);
+  }
+
+  /* Gold "Built for the 2026 surge" chip */
+  .wc-gold-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: linear-gradient(90deg, rgba(200,161,75,0.18), rgba(230,199,114,0.14));
+    border: 1px solid rgba(200, 161, 75, 0.5);
+    color: var(--sq-wc-gold-bright);
+    border-radius: 9999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* Gold gradient CTA button */
+  .btn-gold {
+    background: var(--sq-gradient-gold);
+    color: var(--sq-charcoal);
+    box-shadow: var(--sq-shadow-gold);
+  }
+  .btn-gold:hover {
+    box-shadow: 0 12px 40px rgba(200, 161, 75, 0.32);
   }
 }

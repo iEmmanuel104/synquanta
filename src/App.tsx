@@ -2,6 +2,8 @@ import { Header, Footer } from './components/layout';
 import {
   Hero,
   Services,
+  WorldCupFlagship,
+  ForBusinesses,
   About,
   Values,
   CallToAction,
@@ -15,6 +17,8 @@ function App() {
       <main id="main-content">
         <Hero />
         <Services />
+        <WorldCupFlagship />
+        <ForBusinesses />
         <About />
         <Values />
         <CallToAction />

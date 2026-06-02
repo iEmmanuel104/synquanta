@@ -3,7 +3,21 @@
     "allow": [
       "Bash(tree:*)",
       "Bash(npm run build:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "mcp__plugin_playwright_playwright__browser_run_code",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "Bash(python3:*)",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "Bash(claude mcp:*)",
+      "Bash(head:*)",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "Bash(pkill:*)",
+      "Bash(ls:*)",
+      "Bash(node:*)",
+      "Bash(playwright:*)",
+      "Bash(npx:*)",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_evaluate"
     ]
   }
 }

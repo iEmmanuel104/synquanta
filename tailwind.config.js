@@ -19,6 +19,13 @@ export default {
         cream: {
           green: 'var(--sq-cream-green)',
         },
+        wc: {
+          gold: 'var(--sq-wc-gold)',
+          'gold-bright': 'var(--sq-wc-gold-bright)',
+          'blue-deep': 'var(--sq-wc-blue-deep)',
+          'blue-mid': 'var(--sq-wc-blue-mid)',
+          'blue-bright': 'var(--sq-wc-blue-bright)',
+        },
         neutral: {
           charcoal: 'var(--sq-charcoal)',
           'dark-gray': 'var(--sq-dark-gray)',
@@ -35,6 +42,11 @@ export default {
         sq: 'var(--sq-shadow-md)',
         'sq-lg': 'var(--sq-shadow-lg)',
         'sq-xl': 'var(--sq-shadow-xl)',
+        gold: 'var(--sq-shadow-gold)',
+      },
+      backgroundImage: {
+        'gradient-gold': 'var(--sq-gradient-gold)',
+        'gradient-pitchnight': 'var(--sq-gradient-pitchnight)',
       },
       borderRadius: {
         sq: 'var(--sq-radius-md)',

@@ -73,6 +73,28 @@
 
 
     /* ========================================
+       WORLD CUP CAMPAIGN COLORS (2026 surge)
+       ======================================== */
+
+    /* Champion gold — flagship cue */
+    --sq-wc-gold: #C8A14B;
+    --sq-wc-gold-rgb: 200, 161, 75;
+
+    /* Gold highlight / glow */
+    --sq-wc-gold-bright: #E6C772;
+    --sq-wc-gold-bright-rgb: 230, 199, 114;
+
+    /* Host blue — deep */
+    --sq-wc-blue-deep: #1A3C6E;
+
+    /* Host blue — mid */
+    --sq-wc-blue-mid: #2E5FA3;
+
+    /* Host blue — bright (pitch-night) */
+    --sq-wc-blue-bright: #4D8BD6;
+
+
+    /* ========================================
        SEMANTIC COLORS
        ======================================== */
 
@@ -94,6 +116,12 @@
 
     /* Light gradient */
     --sq-gradient-light: linear-gradient(135deg, var(--sq-mint-soft) 0%, var(--sq-mint-pale) 100%);
+
+    /* World Cup gold gradient — flagship CTA / icons */
+    --sq-gradient-gold: linear-gradient(120deg, #C8A14B 0%, #E6C772 100%);
+
+    /* World Cup pitch-night gradient — flagship banner / card */
+    --sq-gradient-pitchnight: linear-gradient(160deg, #1A1F1C 0%, #1A3C6E 60%, #2E5FA3 100%);
 
 
     /* ========================================
@@ -169,6 +197,9 @@
     --sq-shadow-md: 0 2px 8px rgba(27, 67, 50, 0.06);
     --sq-shadow-lg: 0 4px 16px rgba(27, 67, 50, 0.08);
     --sq-shadow-xl: 0 8px 32px rgba(27, 67, 50, 0.12);
+
+    /* World Cup gold glow shadow */
+    --sq-shadow-gold: 0 8px 32px rgba(200, 161, 75, 0.22);
 
 
     /* ========================================

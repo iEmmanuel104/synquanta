@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" width="200" height="260" fill="none">
+  
+  <defs>
+    <linearGradient id="cupGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F4E2A0"></stop>
+      <stop offset="42%" stop-color="#E6C772"></stop>
+      <stop offset="100%" stop-color="#B8893A"></stop>
+    </linearGradient>
+    <linearGradient id="cupSheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFF6DC" stop-opacity="0.9"></stop>
+      <stop offset="55%" stop-color="#FFF6DC" stop-opacity="0"></stop>
+    </linearGradient>
+    <linearGradient id="baseGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E6C772"></stop>
+      <stop offset="100%" stop-color="#A87C32"></stop>
+    </linearGradient>
+  </defs>
+
+  
+  <path d="M52 86 C20 92 18 132 56 140" fill="none" stroke="url(#cupGold)" stroke-width="11" stroke-linecap="round"></path>
+  <path d="M148 86 C180 92 182 132 144 140" fill="none" stroke="url(#cupGold)" stroke-width="11" stroke-linecap="round"></path>
+
+  
+  <path d="M46 78 L154 78 L132 150 Q100 166 68 150 Z" fill="url(#cupGold)"></path>
+  
+  <ellipse cx="100" cy="78" rx="56" ry="13" fill="url(#cupGold)"></ellipse>
+  <ellipse cx="100" cy="77" rx="46" ry="8.5" fill="#A87C32"></ellipse>
+  
+  <path d="M58 80 L86 80 L74 146 Q66 150 60 146 Z" fill="url(#cupSheen)" opacity="0.7"></path>
+  
+  <path d="M100 96 l5.3 10.8 11.9 1.7 -8.6 8.4 2 11.9 -10.6 -5.6 -10.6 5.6 2 -11.9 -8.6 -8.4 11.9 -1.7 Z" fill="#FFF6DC" opacity="0.92"></path>
+
+  
+  <path d="M88 162 L112 162 L108 182 L92 182 Z" fill="url(#baseGold)"></path>
+  <ellipse cx="100" cy="186" rx="16" ry="6" fill="url(#baseGold)"></ellipse>
+  
+  <path d="M76 188 L124 188 L118 206 L82 206 Z" fill="url(#baseGold)"></path>
+  <rect x="64" y="208" width="72" height="16" rx="3" fill="url(#cupGold)"></rect>
+  <rect x="56" y="226" width="88" height="14" rx="3" fill="url(#baseGold)"></rect>
+</svg>
