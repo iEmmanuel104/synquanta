@@ -1,4 +1,4 @@
-import { ArrowUp, Mail, MapPin, Globe } from 'lucide-react';
+import { ArrowUp, Mail, Globe } from 'lucide-react';
 import { Logo } from '../ui/Logo';
 import { navLinks, services } from '../../constants';
 
@@ -34,10 +34,12 @@ export const Footer = () => {
                 <Globe size={16} />
                 synquanta.com
               </a>
+              {/* Location intentionally hidden — we serve clients globally.
               <span className="flex items-center gap-2 text-white/70">
                 <MapPin size={16} />
                 Nigeria
               </span>
+              */}
             </div>
           </div>
 
