@@ -9,7 +9,7 @@ export const ContactPage = () => {
       <PageHero
         eyebrow="Let's talk"
         title="Tell us about your business"
-        subtitle="Share a few details and we'll come back with a research-led plan — free, within one business day."
+        subtitle="Share a few details and we'll come back with a research-led plan and a tailored quote — as soon as possible."
         image="/images/contact-texture.jpg"
       />
       <Contact hideHeading />

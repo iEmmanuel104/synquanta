@@ -96,8 +96,7 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
             <div className="wc-pattern" style={{ opacity: 0.35 }} aria-hidden="true" />
             <div className="relative z-10">
               <span className="wc-gold-chip mb-5">
-                <span className="sq-livedot h-[7px] w-[7px] rounded-full bg-wc-gold-bright" /> Replies within 1
-                business day
+                <span className="sq-livedot h-[7px] w-[7px] rounded-full bg-wc-gold-bright" /> Fast replies
               </span>
               <h3 className="mb-3.5 text-2xl font-semibold leading-snug tracking-tight text-white">
                 No pressure, no script — just a clear look at what we'd build with you.
@@ -135,10 +134,10 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
                 </div>
                 <h3 className="mb-2 text-2xl font-semibold text-forest-deep">You're in the right place 🎉</h3>
                 <p className="max-w-sm text-base leading-relaxed text-neutral-medium-gray">
-                  Thanks{form.name ? `, ${form.name.split(' ')[0]}` : ''} — we'll research{' '}
-                  {form.company || 'your business'} and send your free report to{' '}
-                  <span className="font-medium text-forest-primary">{form.email}</span> within one business
-                  day.
+                  Thanks{form.name ? `, ${form.name.split(' ')[0]}` : ''} — we'll review{' '}
+                  {form.company || 'your project'} and get back to{' '}
+                  <span className="font-medium text-forest-primary">{form.email}</span> as soon as
+                  possible.
                 </p>
                 <button
                   onClick={() => {

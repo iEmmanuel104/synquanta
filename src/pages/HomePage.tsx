@@ -1,8 +1,9 @@
 import {
   Hero,
   ServicesTeaser,
-  FlagshipTeaser,
+  GlobalReach,
   WelcomeBand,
+  FlagshipTeaser,
   CallToAction,
 } from '../components/sections';
 import { usePageTitle } from '../lib/usePageTitle';
@@ -13,6 +14,7 @@ export const HomePage = () => {
     <>
       <Hero />
       <ServicesTeaser />
+      <GlobalReach />
       <WelcomeBand />
       <FlagshipTeaser />
       <CallToAction />

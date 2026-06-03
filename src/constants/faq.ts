@@ -39,6 +39,6 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'How do we get started?',
-    a: 'Tell us about your project on the contact page. We reply within one business day with a research-led plan and a tailored quote.',
+    a: 'Tell us about your project on the contact page. We reply as soon as possible with a research-led plan and a tailored quote.',
   },
 ];

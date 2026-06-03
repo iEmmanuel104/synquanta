@@ -1,14 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import createGlobe, { type Marker } from 'cobe';
-import { GLOBE_CITIES } from '../../constants/hostCities';
+import { GLOBE_CITIES, type GlobeCity } from '../../constants/hostCities';
 import { useInView } from '../../hooks';
 
 // Brand colours as cobe's [r,g,b] 0–1 triples.
 const FOREST_DEEP: [number, number, number] = [0.105, 0.263, 0.196]; // #1B4332
 const SAGE: [number, number, number] = [0.34, 0.78, 0.57]; // glow tint
-const MAJOR: [number, number, number] = [0.46, 0.94, 0.67]; // brighter green — host cities (US · Canada · Mexico)
-const WORLD: [number, number, number] = [0.3, 0.6, 0.47]; // dimmer green — worldwide reach
-const BASE_SIZE = 0.042; // every dot the same size; majors differ by shade only
+const MAJOR: [number, number, number] = [0.46, 0.94, 0.67]; // brighter green
+const WORLD: [number, number, number] = [0.3, 0.6, 0.47]; // dimmer green
+const BASE_SIZE = 0.042;
 
 interface PulseMarker {
   location: [number, number];
@@ -34,25 +34,34 @@ export const hasWebGL = (): boolean => {
   }
 };
 
-const baseMarkers: PulseMarker[] = GLOBE_CITIES.map((c, i) => ({
-  location: [c.lat, c.lng],
-  color: c.tier === 'global' ? WORLD : MAJOR,
-  phase: (i % 8) * 0.85, // de-sync so the dots twinkle rather than blink together
-}));
-const initialMarkers: Marker[] = baseMarkers.map((m) => ({
-  location: m.location,
-  size: BASE_SIZE,
-  color: m.color,
-}));
+interface GlobeProps {
+  className?: string;
+  /** Marker set to plot — defaults to the full city list. */
+  cities?: GlobeCity[];
+  ariaLabel?: string;
+}
 
-
-export const Globe = ({ className }: { className?: string }) => {
+export const Globe = ({
+  className,
+  cities = GLOBE_CITIES,
+  ariaLabel = 'Interactive spinning globe of the places we build for',
+}: GlobeProps) => {
   const [containerRef, seen] = useInView(0.12);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const phi = useRef(0);
   const drag = useRef(0); // accumulated drag rotation (radians)
   const pointerStart = useRef<number | null>(null);
   const dragBase = useRef(0);
+
+  const baseMarkers = useMemo<PulseMarker[]>(
+    () =>
+      cities.map((c, i) => ({
+        location: [c.lat, c.lng],
+        color: c.tier === 'global' ? WORLD : MAJOR,
+        phase: (i % 8) * 0.85, // de-sync so the dots twinkle rather than blink together
+      })),
+    [cities],
+  );
 
   useEffect(() => {
     const container = containerRef.current;
@@ -63,6 +72,12 @@ export const Globe = ({ className }: { className?: string }) => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let w = container.offsetWidth || 480;
     let raf = 0;
+
+    const initialMarkers: Marker[] = baseMarkers.map((m) => ({
+      location: m.location,
+      size: BASE_SIZE,
+      color: m.color,
+    }));
 
     const globe = createGlobe(canvas, {
       devicePixelRatio: dpr,
@@ -105,7 +120,7 @@ export const Globe = ({ className }: { className?: string }) => {
       ro.disconnect();
       globe.destroy();
     };
-  }, [seen, containerRef]);
+  }, [seen, containerRef, baseMarkers]);
 
   const onDown = (e: React.PointerEvent) => {
     pointerStart.current = e.clientX;
@@ -130,7 +145,7 @@ export const Globe = ({ className }: { className?: string }) => {
         onPointerUp={onUp}
         onPointerOut={onUp}
         onPointerMove={onMove}
-        aria-label="Spinning globe of 2026 World Cup host cities"
+        aria-label={ariaLabel}
         style={{
           width: '100%',
           height: '100%',

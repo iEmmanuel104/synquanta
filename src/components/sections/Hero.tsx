@@ -28,7 +28,7 @@ export const Hero = () => {
           decoding="async"
           className="h-full w-full object-cover opacity-30 md:mix-blend-screen"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/50 via-transparent to-neutral-off-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/45 via-forest-deep/10 to-forest-deep/35" />
       </div>
 
       {/* Content */}
