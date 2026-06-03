@@ -43,11 +43,4 @@ export const services: Service[] = [
     description:
       'Decentralized applications, smart contracts, and blockchain integration services.',
   },
-  {
-    id: 'api-development',
-    icon: 'Plug',
-    title: 'API Development & Integrations',
-    description:
-      'Robust APIs and seamless third-party integrations to connect your systems.',
-  },
 ];

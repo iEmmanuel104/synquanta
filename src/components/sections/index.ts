@@ -1,8 +1,9 @@
 export { Hero } from './Hero';
 export { Services } from './Services';
-export { WorldCupFlagship } from './WorldCupFlagship';
-export { ForBusinesses } from './ForBusinesses';
-export { About } from './About';
+export { Products } from './Products';
+export { CoverageBand } from './CoverageBand';
+export { Intel } from './Intel';
+export { WelcomeBand } from './WelcomeBand';
 export { Values } from './Values';
 export { CallToAction } from './CallToAction';
 export { Contact } from './Contact';

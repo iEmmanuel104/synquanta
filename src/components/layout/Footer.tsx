@@ -17,7 +17,7 @@ export const Footer = () => {
           <div className="lg:col-span-1">
             <Logo variant="white" className="mb-6" />
             <p className="text-white/70 text-sm leading-relaxed mb-6">
-              Building solutions that are practical, innovative, and aligned with real-world business needs.
+              We research your business first, then build exactly what moves the needle before the world arrives.
             </p>
             <div className="flex flex-col gap-3 text-sm">
               <a
@@ -81,9 +81,9 @@ export const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-3 text-sm text-white/70">
-              <li>Founded: 2025</li>
-              <li>Serving clients globally</li>
-              <li>Modern digital solutions</li>
+              <li>Serving the USA</li>
+              <li>Every 2026 host city</li>
+              <li>Research-led growth</li>
             </ul>
           </div>
         </div>

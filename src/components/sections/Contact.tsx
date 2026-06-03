@@ -1,26 +1,45 @@
 import { useState } from 'react';
-import { Mail, Globe, Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, AlertCircle, ChevronDown } from 'lucide-react';
 import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { FadeIn } from '../animations/FadeIn';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
-const channels = [
-  { icon: Mail, label: 'Email us', value: 'info@synquanta.com', href: 'mailto:info@synquanta.com' },
-  { icon: Globe, label: 'Visit', value: 'synquanta.com', href: 'https://synquanta.com' },
+const methods = [
+  { icon: Mail, label: 'Email us', value: 'info@synquanta.com' },
+  { icon: Phone, label: 'Call us', value: 'Mon–Fri, 9–6 local' },
+  { icon: MapPin, label: 'Where we serve', value: 'Local businesses, every host city' },
 ];
 
-const field =
-  'w-full rounded-sq-xl border border-cream-green bg-white px-4 py-3 text-forest-deep placeholder:text-neutral-light-gray outline-none transition-all duration-200 focus:border-sage-medium focus:ring-4 focus:ring-sage-light/20';
+const needOptions = [
+  'World Cup Revenue Optimization',
+  'A faster, mobile-first website',
+  'Getting found on Google maps',
+  'More reviews & bookings',
+  'Something else',
+];
+
+const fieldCls =
+  'w-full rounded-sq-lg border-[1.5px] border-cream-green bg-neutral-off-white px-3.5 py-3 text-[15px] text-forest-deep placeholder:text-neutral-light-gray outline-none transition-all duration-200 focus:border-sage-medium focus:bg-white focus:ring-4 focus:ring-sage-light/20';
 
 export const Contact = () => {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState('');
-  const [form, setForm] = useState({ name: '', email: '', company: '', message: '', website: '' });
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    need: needOptions[0],
+    message: '',
+    website: '', // honeypot
+  });
 
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set =
+    (k: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+      setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,10 +47,27 @@ export const Contact = () => {
     setStatus('sending');
     setError('');
     try {
+      // Compose a single message body the existing /api/contact endpoint expects.
+      const composedMessage = [
+        `Need: ${form.need}`,
+        form.phone ? `Phone: ${form.phone}` : null,
+        '',
+        form.message,
+      ]
+        .filter((l) => l !== null)
+        .join('\n')
+        .trim();
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          message: composedMessage,
+          website: form.website,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Could not send your message.');
@@ -43,106 +79,199 @@ export const Contact = () => {
   };
 
   return (
-    <Section id="contact" variant="light" className="scroll-mt-20">
-      <SectionHeading title="Get In Touch" subtitle="Have a project in mind? Tell us about it — we usually reply within a day." />
+    <Section id="contact" className="scroll-mt-20">
+      <SectionHeading
+        title="Tell us about your business"
+        subtitle="Share a few details and we'll come back with a research-led plan — the same report we'd build before calling you, free."
+      />
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 items-start">
-        {/* Left — invitation + channels */}
-        <FadeIn className="lg:col-span-2">
-          <div className="lg:sticky lg:top-28">
-            <h3 className="text-2xl font-semibold text-forest-deep mb-3">Let's build something that pays for itself.</h3>
-            <p className="text-neutral-medium-gray leading-relaxed mb-8">
-              Whether it's a website rebuild, an automation, or the World Cup revenue push — send a few details and we'll come back with a clear, no-pressure next step.
-            </p>
-            <div className="space-y-3">
-              {channels.map((c) => (
-                <a
-                  key={c.label}
-                  href={c.href}
-                  target={c.href.startsWith('http') ? '_blank' : undefined}
-                  rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group flex items-center gap-4 rounded-sq-xl bg-white border border-cream-green p-4 shadow-sq hover:shadow-sq-lg hover:border-sage-light transition-all duration-300"
-                >
-                  <span className="w-11 h-11 shrink-0 rounded-full bg-gradient-to-br from-forest-deep to-sage-medium flex items-center justify-center">
-                    <c.icon className="w-5 h-5 text-white" />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs uppercase tracking-wide text-neutral-medium-gray">{c.label}</span>
-                    <span className="block font-semibold text-forest-deep group-hover:text-forest-primary transition-colors truncate">{c.value}</span>
-                  </span>
-                </a>
-              ))}
+      <div className="grid grid-cols-1 items-stretch gap-7 lg:grid-cols-[0.92fr_1.08fr]">
+        {/* Left — dark reassurance aside */}
+        <FadeIn>
+          <div className="wc-band relative flex h-full flex-col justify-center overflow-hidden rounded-sq-2xl p-8 shadow-sq-lg sm:p-9">
+            <div className="wc-pattern" style={{ opacity: 0.35 }} aria-hidden="true" />
+            <div className="relative z-10">
+              <span className="wc-gold-chip mb-5">
+                <span className="sq-livedot h-[7px] w-[7px] rounded-full bg-wc-gold-bright" /> Replies within 1
+                business day
+              </span>
+              <h3 className="mb-3.5 text-2xl font-semibold leading-snug tracking-tight text-white">
+                No pressure, no script — just a clear look at what's costing you covers.
+              </h3>
+              <p className="mb-7 text-[15.5px] leading-relaxed text-white/70">
+                You'll get a plain-English report with your revenue-at-risk number and the exact fixes —
+                before the 2026 surge arrives.
+              </p>
+              <div className="flex flex-col gap-4">
+                {methods.map((m) => (
+                  <div key={m.label} className="flex items-center gap-3.5">
+                    <div className="contact-chip">
+                      <m.icon size={18} />
+                    </div>
+                    <div>
+                      <div className="text-[13px] text-white/55">{m.label}</div>
+                      <div className="text-[15px] font-semibold text-white">{m.value}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </FadeIn>
 
-        {/* Right — the form */}
-        <FadeIn delay={0.1} className="lg:col-span-3">
-          <div className="relative bg-white rounded-sq-2xl p-6 sm:p-8 lg:p-10 shadow-sq-lg border border-cream-green overflow-hidden">
+        {/* Right — the working form card */}
+        <FadeIn delay={0.1}>
+          <div className="relative overflow-hidden rounded-sq-2xl border border-cream-green bg-white p-6 shadow-sq-lg sm:p-8 lg:p-9">
             <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-forest-primary via-sage-medium to-sage-light" />
 
             {status === 'sent' ? (
-              <div className="py-10 text-center">
-                <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-cream-green flex items-center justify-center">
-                  <CheckCircle2 className="w-8 h-8 text-forest-primary" />
+              <div className="flex min-h-[380px] flex-col items-center justify-center py-8 text-center">
+                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-cream-green">
+                  <CheckCircle2 className="h-8 w-8 text-forest-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-forest-deep mb-2">Message sent — thank you!</h3>
-                <p className="text-neutral-medium-gray max-w-sm mx-auto">
-                  We've got it and will reply to <span className="font-medium text-forest-primary">{form.email}</span> shortly. Talk soon.
+                <h3 className="mb-2 text-2xl font-semibold text-forest-deep">You're in the right place 🎉</h3>
+                <p className="max-w-sm text-base leading-relaxed text-neutral-medium-gray">
+                  Thanks{form.name ? `, ${form.name.split(' ')[0]}` : ''} — we'll research{' '}
+                  {form.company || 'your business'} and send your free report to{' '}
+                  <span className="font-medium text-forest-primary">{form.email}</span> within one business
+                  day.
                 </p>
                 <button
-                  onClick={() => { setForm({ name: '', email: '', company: '', message: '', website: '' }); setStatus('idle'); }}
-                  className="mt-6 text-sm font-medium text-forest-primary hover:text-forest-deep transition-colors"
+                  onClick={() => {
+                    setForm({
+                      name: '',
+                      email: '',
+                      company: '',
+                      phone: '',
+                      need: needOptions[0],
+                      message: '',
+                      website: '',
+                    });
+                    setStatus('idle');
+                  }}
+                  className="mt-6 inline-flex items-center justify-center rounded-sq border-2 border-forest-deep px-4 py-2 text-sm font-medium text-forest-deep transition-colors hover:bg-forest-deep hover:text-white"
                 >
-                  Send another message
+                  Send another
                 </button>
               </div>
             ) : (
-              <form onSubmit={submit} className="space-y-5" noValidate>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <label className="block">
-                    <span className="block text-sm font-medium text-forest-deep mb-1.5">Name</span>
-                    <input className={field} value={form.name} onChange={set('name')} placeholder="Jane Doe" autoComplete="name" required />
+              <form onSubmit={submit} noValidate>
+                <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                  <label className="mb-4 flex flex-col gap-[7px]">
+                    <span className="text-[13px] font-semibold text-neutral-charcoal">Your name</span>
+                    <input
+                      className={fieldCls}
+                      value={form.name}
+                      onChange={set('name')}
+                      placeholder="Jordan Lee"
+                      autoComplete="name"
+                      required
+                    />
                   </label>
-                  <label className="block">
-                    <span className="block text-sm font-medium text-forest-deep mb-1.5">Email</span>
-                    <input className={field} type="email" value={form.email} onChange={set('email')} placeholder="jane@business.com" autoComplete="email" required />
+                  <label className="mb-4 flex flex-col gap-[7px]">
+                    <span className="text-[13px] font-semibold text-neutral-charcoal">Business name</span>
+                    <input
+                      className={fieldCls}
+                      value={form.company}
+                      onChange={set('company')}
+                      placeholder="Burritos California"
+                      autoComplete="organization"
+                    />
                   </label>
                 </div>
-                <label className="block">
-                  <span className="block text-sm font-medium text-forest-deep mb-1.5">Business <span className="text-neutral-light-gray font-normal">(optional)</span></span>
-                  <input className={field} value={form.company} onChange={set('company')} placeholder="Your business name" autoComplete="organization" />
+                <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                  <label className="mb-4 flex flex-col gap-[7px]">
+                    <span className="text-[13px] font-semibold text-neutral-charcoal">Email</span>
+                    <input
+                      className={fieldCls}
+                      type="email"
+                      value={form.email}
+                      onChange={set('email')}
+                      placeholder="you@business.com"
+                      autoComplete="email"
+                      required
+                    />
+                  </label>
+                  <label className="mb-4 flex flex-col gap-[7px]">
+                    <span className="text-[13px] font-semibold text-neutral-charcoal">Phone</span>
+                    <input
+                      className={fieldCls}
+                      type="tel"
+                      value={form.phone}
+                      onChange={set('phone')}
+                      placeholder="(206) 555-0142"
+                      autoComplete="tel"
+                    />
+                  </label>
+                </div>
+                <label className="mb-4 flex flex-col gap-[7px]">
+                  <span className="text-[13px] font-semibold text-neutral-charcoal">
+                    What do you need help with?
+                  </span>
+                  <div className="relative">
+                    <select
+                      className={`${fieldCls} cursor-pointer appearance-none pr-10`}
+                      value={form.need}
+                      onChange={set('need')}
+                    >
+                      {needOptions.map((o) => (
+                        <option key={o}>{o}</option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      size={18}
+                      className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-medium-gray"
+                    />
+                  </div>
                 </label>
-                <label className="block">
-                  <span className="block text-sm font-medium text-forest-deep mb-1.5">How can we help?</span>
-                  <textarea className={`${field} min-h-[140px] resize-y`} value={form.message} onChange={set('message')} placeholder="A sentence or two about what you're after…" required />
+                <label className="mb-4 flex flex-col gap-[7px]">
+                  <span className="text-[13px] font-semibold text-neutral-charcoal">
+                    Anything we should know? <span className="font-normal text-neutral-light-gray">(optional)</span>
+                  </span>
+                  <textarea
+                    className={`${fieldCls} min-h-[84px] resize-y`}
+                    rows={3}
+                    value={form.message}
+                    onChange={set('message')}
+                    placeholder="Tell us about your business and goals…"
+                  />
                 </label>
 
                 {/* Honeypot — hidden from humans */}
                 <input
-                  type="text" tabIndex={-1} autoComplete="off" value={form.website} onChange={set('website')}
-                  className="hidden" aria-hidden="true"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={set('website')}
+                  className="hidden"
+                  aria-hidden="true"
                 />
 
                 {status === 'error' && (
-                  <div className="flex items-start gap-2 rounded-sq-xl bg-red-50 border border-red-100 px-4 py-3 text-sm text-red-700">
-                    <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" /> <span>{error}</span>
+                  <div className="mb-4 flex items-start gap-2 rounded-sq-lg border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> <span>{error}</span>
                   </div>
                 )}
 
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-sq-xl bg-gradient-to-r from-forest-deep to-sage-medium px-7 py-3.5 font-semibold text-white shadow-sq transition-all duration-300 hover:shadow-sq-lg hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:hover:translate-y-0"
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-sq-lg bg-gradient-to-r from-forest-deep to-sage-medium px-7 py-3.5 text-[17px] font-semibold text-white shadow-sq transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sq-lg active:translate-y-0 disabled:opacity-70 disabled:hover:translate-y-0"
                 >
                   {status === 'sending' ? (
-                    <><Loader2 className="w-5 h-5 animate-spin" /> Sending…</>
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" /> Sending…
+                    </>
                   ) : (
-                    <>Send message <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" /></>
+                    <>
+                      Get my free research review{' '}
+                      <Send className="h-[18px] w-[18px] transition-transform group-hover:translate-x-0.5" />
+                    </>
                   )}
                 </button>
-                <p className="text-xs text-neutral-light-gray">
-                  Prefer email? <a href="mailto:info@synquanta.com" className="text-forest-primary hover:underline">info@synquanta.com</a>
+                <p className="mt-3.5 text-center text-[12.5px] text-neutral-medium-gray">
+                  No spam. We only reach out about your report.
                 </p>
               </form>
             )}

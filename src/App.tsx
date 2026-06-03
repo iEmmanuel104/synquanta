@@ -2,9 +2,10 @@ import { Header, Footer } from './components/layout';
 import {
   Hero,
   Services,
-  WorldCupFlagship,
-  ForBusinesses,
-  About,
+  Products,
+  CoverageBand,
+  Intel,
+  WelcomeBand,
   Values,
   CallToAction,
   Contact,
@@ -17,9 +18,10 @@ function App() {
       <main id="main-content">
         <Hero />
         <Services />
-        <WorldCupFlagship />
-        <ForBusinesses />
-        <About />
+        <Products />
+        <CoverageBand />
+        <Intel />
+        <WelcomeBand />
         <Values />
         <CallToAction />
         <Contact />

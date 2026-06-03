@@ -4,9 +4,9 @@ import { AnimatedGrid } from '../ui/AnimatedGrid';
 import { FloatingCodeCard } from '../ui/FloatingCodeCard';
 
 const stats = [
-  { value: '7+', label: 'Services' },
-  { value: '3+', label: 'Tech Domains' },
-  { value: '2025', label: 'Founded' },
+  { value: '1,970', label: 'Businesses researched' },
+  { value: '11', label: 'US host cities' },
+  { value: '7.8 km', label: 'Avg. to a host stadium' },
 ];
 
 export const Hero = () => {
@@ -45,7 +45,7 @@ export const Hero = () => {
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   />
                 )}
-                Since 2025 &middot; Nigeria
+                Built for the 2026 World Cup surge
               </motion.span>
 
               {/* Main Headline */}
@@ -55,10 +55,10 @@ export const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
-                Modern Digital
+                We research first.
                 <br />
                 <span className="bg-gradient-to-r from-sage-light via-mint-soft to-mint-pale bg-clip-text text-transparent">
-                  Solutions
+                  Then we build.
                 </span>
               </motion.h1>
 
@@ -69,8 +69,8 @@ export const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                SynQuanta Technologies delivers innovative software solutions across web, mobile, and emerging technologies.
-                We turn ideas into reliable, scalable products.
+                SynQuanta studies your business deeply — then builds the website and growth system that wins
+                matchday traffic. Custom-made for local businesses near every host city.
               </motion.p>
 
               {/* CTAs */}
@@ -87,16 +87,16 @@ export const Hero = () => {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  Get Started
+                  See what we'd build for you
                 </motion.a>
                 <motion.a
-                  href="#services"
+                  href="#products"
                   className="inline-flex items-center justify-center font-medium rounded-sq px-8 py-4 text-lg bg-transparent text-white border-2 border-white/30 hover:bg-white/10 hover:border-white/50 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  Learn More
+                  Explore services
                 </motion.a>
               </motion.div>
 
@@ -115,8 +115,8 @@ export const Hero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 + i * 0.1, duration: 0.4 }}
                   >
-                    <p className="text-2xl font-bold text-white">{stat.value}</p>
-                    <p className="text-sm text-white/50">{stat.label}</p>
+                    <p className="font-mono text-2xl font-semibold text-white tracking-[-0.01em]">{stat.value}</p>
+                    <p className="mt-1 max-w-[150px] text-[13.5px] leading-snug text-white/50">{stat.label}</p>
                   </motion.div>
                 ))}
               </motion.div>
