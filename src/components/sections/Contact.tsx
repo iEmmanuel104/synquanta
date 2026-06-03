@@ -8,15 +8,17 @@ type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 const methods = [
   { icon: Mail, label: 'Email us', value: 'info@synquanta.com' },
-  { icon: Phone, label: 'Call us', value: 'Mon–Fri, 9–6 local' },
-  { icon: MapPin, label: 'Where we serve', value: 'Local businesses, every host city' },
+  { icon: Phone, label: 'Call us', value: 'Mon–Fri, 9–6' },
+  { icon: MapPin, label: 'Who we work with', value: 'Startups & businesses, worldwide' },
 ];
 
 const needOptions = [
+  'A web app or platform',
+  'A mobile app (iOS / Android)',
+  'Custom software',
+  'AI & automation',
+  'Bring my idea to life',
   'World Cup Revenue Optimization',
-  'A faster, mobile-first website',
-  'Getting found on Google maps',
-  'More reviews & bookings',
   'Something else',
 ];
 
@@ -82,8 +84,8 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
     <Section id="contact" className="scroll-mt-20">
       {!hideHeading && (
         <SectionHeading
-          title="Tell us about your business"
-          subtitle="Share a few details and we'll come back with a research-led plan — the same report we'd build before calling you, free."
+          title="Tell us about your project"
+          subtitle="Share a few details and we'll come back with a research-led plan and a tailored quote."
         />
       )}
 
@@ -98,11 +100,11 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
                 business day
               </span>
               <h3 className="mb-3.5 text-2xl font-semibold leading-snug tracking-tight text-white">
-                No pressure, no script — just a clear look at what's costing you covers.
+                No pressure, no script — just a clear look at what we'd build with you.
               </h3>
               <p className="mb-7 text-[15.5px] leading-relaxed text-white/70">
-                You'll get a plain-English report with your revenue-at-risk number and the exact fixes —
-                before the 2026 surge arrives.
+                Tell us where you are — an idea, a rough spec, or a live product — and we'll come back with
+                a plain-English plan and a tailored quote.
               </p>
               <div className="flex flex-col gap-4">
                 {methods.map((m) => (

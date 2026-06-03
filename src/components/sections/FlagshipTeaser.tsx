@@ -28,13 +28,14 @@ export const FlagshipTeaser = () => {
 
         <div className="relative z-10 grid items-center gap-8 p-8 sm:p-12 lg:grid-cols-[1.1fr_0.9fr] lg:p-16">
           <FadeIn>
+            <p className="sq-eyebrow mb-3 text-mint-pale">A featured product</p>
             <span className="wc-gold-chip mb-5">Built for the 2026 surge</span>
             <h2 className="mb-4 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl">
               Win the World Cup crowd before kickoff
             </h2>
             <p className="mb-6 max-w-xl text-lg leading-relaxed text-white/75">
-              Our flagship turns deep local research into matchday revenue for businesses near every
-              2026 host city — across the USA, Canada and Mexico.
+              World Cup Revenue Optimization is one of our products — it turns deep local research into
+              matchday revenue for businesses near every 2026 host city across the USA, Canada and Mexico.
             </p>
             <ul className="mb-8 flex flex-col gap-3">
               {points.map((b) => (
@@ -45,7 +46,7 @@ export const FlagshipTeaser = () => {
               ))}
             </ul>
             <Button href="/products" className="btn-gold border-0 font-semibold">
-              Explore products
+              Explore this product
               <ArrowRight size={18} className="ml-2" />
             </Button>
           </FadeIn>

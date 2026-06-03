@@ -38,7 +38,6 @@ interface Product {
   name: string;
   outcome: string;
   bullets: string[];
-  price: string;
   cta: string;
 }
 
@@ -53,8 +52,7 @@ const products: Product[] = [
       'Mobile-first rebuild, 85+ PageSpeed',
       'Automated review velocity program',
     ],
-    price: 'from $1,500',
-    cta: 'Book the flagship',
+    cta: 'Request a quote',
   },
   {
     flagship: false,
@@ -66,8 +64,7 @@ const products: Product[] = [
       'Online booking & contact built in',
       'Designed to convert tourist traffic',
     ],
-    price: 'custom',
-    cta: 'See details',
+    cta: 'Request a quote',
   },
   {
     flagship: false,
@@ -79,8 +76,7 @@ const products: Product[] = [
       'Keyword & citation targeting',
       'Competitor positioning reports',
     ],
-    price: 'custom',
-    cta: 'See details',
+    cta: 'Request a quote',
   },
 ];
 
@@ -111,8 +107,7 @@ const FlagshipCard = ({ p, delay }: { p: Product; delay: number }) => (
             </li>
           ))}
         </ul>
-        <div className="mt-auto flex flex-wrap items-center justify-between gap-3">
-          <span className="font-mono text-lg font-semibold text-wc-gold-bright">{p.price}</span>
+        <div className="mt-auto">
           <Button href="/contact" className="btn-gold border-0 font-semibold">
             {p.cta}
           </Button>
@@ -143,8 +138,7 @@ const StandardCard = ({ p, delay, index }: { p: Product; delay: number; index: n
             </li>
           ))}
         </ul>
-        <div className="mt-auto flex items-center justify-between gap-3">
-          <span className="font-mono text-[15px] font-semibold text-neutral-medium-gray">{p.price}</span>
+        <div className="mt-auto">
           <Button href="/contact" variant="secondary" size="sm">
             {p.cta}
           </Button>

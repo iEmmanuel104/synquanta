@@ -26,6 +26,7 @@
 
   /* Font families */
   --font-primary: 'Inter', system-ui, sans-serif;
+  --font-display: 'Clash Display', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Shadows */
@@ -51,6 +52,13 @@
     line-height: var(--sq-leading-normal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Distinctive display face for the big headings; body stays Inter. */
+  h1,
+  h2 {
+    font-family: var(--sq-font-display);
+    letter-spacing: -0.02em;
   }
 
   /* Focus visible styles for accessibility */
@@ -105,6 +113,55 @@
   .section-divider {
     @apply h-px w-full max-w-2xl mx-auto;
     background: linear-gradient(to right, transparent, rgba(82,183,136,0.3), transparent);
+  }
+
+  /* ========================================
+     CUSTOM BACKGROUND DESIGN SYSTEM
+     Atmosphere + depth so sections feel composed, not flat.
+     ======================================== */
+
+  /* Soft green aurora mesh for light sections */
+  .bg-aurora-soft {
+    background-color: var(--sq-off-white);
+    background-image:
+      radial-gradient(55% 55% at 12% 8%, rgba(82, 183, 136, 0.10), transparent 60%),
+      radial-gradient(50% 50% at 92% 16%, rgba(149, 213, 178, 0.14), transparent 62%),
+      radial-gradient(48% 55% at 50% 108%, rgba(64, 145, 108, 0.08), transparent 60%);
+  }
+
+  /* Cream-toned variant for alternating bands */
+  .bg-aurora-cream {
+    background-color: var(--sq-cream-green);
+    background-image:
+      radial-gradient(60% 60% at 10% 0%, rgba(255, 255, 255, 0.6), transparent 55%),
+      radial-gradient(50% 50% at 95% 30%, rgba(82, 183, 136, 0.12), transparent 60%);
+  }
+
+  /* Dark forest mesh for footer / dark bands */
+  .bg-mesh-forest {
+    background-color: var(--sq-forest-deep);
+    background-image:
+      radial-gradient(50% 65% at 10% -5%, rgba(82, 183, 136, 0.20), transparent 55%),
+      radial-gradient(45% 55% at 90% 6%, rgba(45, 106, 79, 0.40), transparent 60%),
+      radial-gradient(70% 60% at 50% 115%, rgba(10, 26, 18, 0.55), transparent 62%);
+  }
+
+  /* Faint film-grain overlay — kills the flat "rendered" look.
+     Use on an absolutely-positioned child inside a relative parent. */
+  .grain-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+    mix-blend-mode: soft-light;
+  }
+
+  /* Hairline gradient edge for stacked sections */
+  .hairline-top {
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(to right, transparent, rgba(82, 183, 136, 0.28), transparent) 1;
   }
 
   /* ========================================

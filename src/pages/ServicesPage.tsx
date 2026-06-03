@@ -1,5 +1,5 @@
 import { PageHero } from '../components/ui';
-import { Services, Values, Intel, CallToAction } from '../components/sections';
+import { Services, Values, CallToAction } from '../components/sections';
 import { usePageTitle } from '../lib/usePageTitle';
 
 export const ServicesPage = () => {
@@ -7,14 +7,13 @@ export const ServicesPage = () => {
   return (
     <>
       <PageHero
-        eyebrow="What we build"
-        title="Services that move the needle"
-        subtitle="From research-led websites to custom software, AI and distributed systems — end-to-end digital solutions, built to win."
+        eyebrow="What we do"
+        title="From idea to launch — we design, build & ship"
+        subtitle="Platforms, web & mobile products, custom software, AI and more. We don't just build websites — we help teams bring real products to life."
         image="/images/services-workspace.jpg"
       />
       <Services />
       <Values />
-      <Intel />
       <CallToAction />
     </>
   );

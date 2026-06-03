@@ -1,6 +1,8 @@
 export interface Service {
   id: string;
   icon: string;
+  /** Storyset illustration path under /illustrations. */
+  illustration: string;
   title: string;
   description: string;
 }

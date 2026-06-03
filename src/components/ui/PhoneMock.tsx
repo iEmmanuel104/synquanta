@@ -16,15 +16,15 @@ export const PhoneMock = () => {
         <div className="phone-screen">
           <div className="ps-top">
             <span className="ps-dot" />
-            <span className="ps-brand">El Sol Cantina</span>
+            <span className="ps-brand">Northwind</span>
             <span className="ps-menu">
               <Menu size={14} />
             </span>
           </div>
           <div className="ps-hero">
-            <span className="ps-tag">Open · Book a table</span>
-            <div className="ps-h1">Tacos &amp; cold cerveza, 2 min from the stadium</div>
-            <div className="ps-cta">Reserve now</div>
+            <span className="ps-tag">Live · v2.0</span>
+            <div className="ps-h1">Everything your team needs, in one place</div>
+            <div className="ps-cta">Get started</div>
           </div>
           <div className="ps-row">
             <div className="ps-card" />
@@ -34,7 +34,7 @@ export const PhoneMock = () => {
           <div className="ps-reviews">
             <span className="ps-stars">★★★★★</span>
             <span className="sq-mono" style={{ fontSize: 11, color: 'var(--sq-medium-gray)' }}>
-              4.8 · 2,140
+              4.9 · 1,280
             </span>
           </div>
         </div>

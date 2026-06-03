@@ -1,4 +1,4 @@
-import { ArrowUp, Mail, Globe } from 'lucide-react';
+import { ArrowUp, Mail, Globe, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
 import { navLinks, services } from '../../constants';
@@ -11,28 +11,29 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-forest-deep text-white">
-      <div className="container-custom py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+    <footer className="relative overflow-hidden bg-mesh-forest text-white">
+      <div className="grain-overlay" aria-hidden="true" />
+      <div className="container-custom relative z-10 py-16 lg:py-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <Link to="/" aria-label="SynQuanta home" className="inline-flex mb-6">
+            <Link to="/" aria-label="SynQuanta home" className="mb-6 inline-flex">
               <Logo variant="white" />
             </Link>
-            <p className="text-white/70 text-sm leading-relaxed mb-6">
-              We research your business first, then build exactly what moves the needle before the world arrives.
+            <p className="mb-6 text-sm leading-relaxed text-white/70">
+              We research first — then design, build and ship the products that move teams forward.
             </p>
             <div className="flex flex-col gap-3 text-sm">
               <a
                 href="mailto:info@synquanta.com"
-                className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 py-1 text-white/70 transition-colors hover:text-white"
               >
                 <Mail size={16} />
                 info@synquanta.com
               </a>
               <a
                 href="https://synquanta.com"
-                className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 py-1 text-white/70 transition-colors hover:text-white"
               >
                 <Globe size={16} />
                 synquanta.com
@@ -42,13 +43,13 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-3">
+            <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
+            <ul className="space-y-1.5">
               {navLinks.map((link) => (
                 <li key={link.to}>
                   <Link
                     to={link.to}
-                    className="text-white/70 hover:text-white transition-colors text-sm"
+                    className="inline-block py-1 text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -59,13 +60,13 @@ export const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
-            <ul className="space-y-3">
+            <h3 className="mb-4 text-lg font-semibold">Services</h3>
+            <ul className="space-y-1.5">
               {services.slice(0, 5).map((service) => (
                 <li key={service.id}>
                   <Link
                     to="/services"
-                    className="text-white/70 hover:text-white transition-colors text-sm"
+                    className="inline-block py-1 text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {service.title.split(' ').slice(0, 2).join(' ')}
                   </Link>
@@ -74,30 +75,45 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Company Info */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
-            <ul className="space-y-3 text-sm text-white/70">
-              <li>Serving the USA, Canada &amp; Mexico</li>
-              <li>Every 2026 host city</li>
-              <li>Research-led growth</li>
-            </ul>
+          {/* Start a project CTA */}
+          <div className="rounded-sq-xl border border-white/10 bg-white/[0.04] p-6">
+            <h3 className="mb-2 text-lg font-semibold">Start a project</h3>
+            <p className="mb-5 text-sm leading-relaxed text-white/70">
+              Have an idea or a product to scale? Let's bring it to life.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-sq bg-white px-4 py-2.5 text-sm font-semibold text-forest-deep transition-colors hover:bg-cream-green"
+            >
+              Get in touch
+              <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/60 text-sm">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+          <p className="text-sm text-white/60">
             &copy; {currentYear} SynQuanta Technologies Ltd. All rights reserved.
           </p>
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm group"
-            aria-label="Back to top"
-          >
-            Back to top
-            <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
-          </button>
+          <div className="flex items-center gap-5">
+            <a
+              href="https://storyset.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-white/40 transition-colors hover:text-white/70"
+            >
+              Illustrations by Storyset
+            </a>
+            <button
+              onClick={scrollToTop}
+              className="group flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
+              aria-label="Back to top"
+            >
+              Back to top
+              <ArrowUp size={16} className="transition-transform group-hover:-translate-y-1" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>

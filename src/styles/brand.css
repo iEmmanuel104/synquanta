@@ -130,6 +130,7 @@
 
     /* Font Families */
     --sq-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --sq-font-display: 'Clash Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --sq-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 
     /* Font Sizes */

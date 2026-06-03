@@ -17,17 +17,17 @@ const steps: Step[] = [
   {
     icon: Search,
     title: 'We research',
-    description: 'We study your site speed, reviews, maps ranking and nearby competitors.',
+    description: 'We study your users, your market and the competition — the data behind every decision.',
   },
   {
     icon: FileText,
-    title: 'We report',
-    description: 'You get a plain-English plan with the exact revenue at stake — no jargon.',
+    title: 'We design',
+    description: 'We map the product and design the experience, so what we build is right the first time.',
   },
   {
     icon: Hammer,
     title: 'We build',
-    description: 'We build only what moves the needle, custom-made for your business.',
+    description: 'We engineer fast, reliable web and mobile products — and ship them to launch.',
   },
 ];
 
@@ -38,14 +38,14 @@ export const WelcomeBand = () => {
         {/* Text content */}
         <div>
           <FadeIn>
-            <p className="sq-eyebrow mb-4">For local businesses</p>
+            <p className="sq-eyebrow mb-4">How we work</p>
             <h2 className="mb-5 text-3xl font-semibold leading-tight tracking-tight text-forest-deep md:text-4xl lg:text-[40px]">
-              Got a call from us? You're in the right place.
+              We research, design, and build — in that order.
             </h2>
             <p className="mb-6 max-w-xl text-lg leading-relaxed text-neutral-medium-gray">
-              We're not a cold call with a sales pitch. Before we ever reached out, we researched your
-              business the way a World Cup tourist would find you — and we already know what's costing
-              you covers.
+              Every engagement starts with research, never a template. We learn your users, your market
+              and your goals, then design and build exactly what moves the needle — whether that's a new
+              platform, a mobile app, or an idea you're taking from zero to one.
             </p>
 
             <StaggerContainer className="mb-8 flex flex-col gap-3.5">
@@ -66,7 +66,7 @@ export const WelcomeBand = () => {
             </StaggerContainer>
 
             <Button href="/contact" variant="primary" size="md">
-              See what we'd build for you
+              Request a quote
             </Button>
           </FadeIn>
         </div>

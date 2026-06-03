@@ -7,12 +7,6 @@ import { AnimatedText } from '../animations/AnimatedText';
 
 const MotionLink = motion.create(Link);
 
-const stats = [
-  { value: '1,970', label: 'Businesses researched' },
-  { value: '11', label: 'US host cities' },
-  { value: '7.8 km', label: 'Avg. to a host stadium' },
-];
-
 export const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
 
@@ -32,7 +26,7 @@ export const Hero = () => {
           alt=""
           loading="eager"
           decoding="async"
-          className="h-full w-full object-cover opacity-30 mix-blend-screen"
+          className="h-full w-full object-cover opacity-30 md:mix-blend-screen"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/50 via-transparent to-neutral-off-white" />
       </div>
@@ -61,7 +55,7 @@ export const Hero = () => {
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   />
                 )}
-                Built for the 2026 World Cup surge
+                A research-led product studio
               </motion.span>
 
               {/* Main Headline */}
@@ -89,8 +83,8 @@ export const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                SynQuanta studies your business deeply — then builds the website and growth system that wins
-                matchday traffic. Custom-made for local businesses near every host city.
+                We design platforms, build web &amp; mobile products, and bring startup ideas to life —
+                researched first, then engineered to launch. Custom-made for ambitious teams everywhere.
               </motion.p>
 
               {/* CTAs */}
@@ -107,7 +101,7 @@ export const Hero = () => {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  See what we'd build for you
+                  Request a quote
                 </MotionLink>
                 <MotionLink
                   to="/services"
@@ -118,27 +112,6 @@ export const Hero = () => {
                 >
                   Explore services
                 </MotionLink>
-              </motion.div>
-
-              {/* Stats Row */}
-              <motion.div
-                className="flex flex-wrap items-center justify-center lg:justify-start gap-8 mt-12 pt-8 border-t border-white/10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.6 }}
-              >
-                {stats.map((stat, i) => (
-                  <motion.div
-                    key={stat.label}
-                    className="text-center lg:text-left"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 + i * 0.1, duration: 0.4 }}
-                  >
-                    <p className="font-mono text-2xl font-semibold text-white tracking-[-0.01em]">{stat.value}</p>
-                    <p className="mt-1 max-w-[150px] text-[13.5px] leading-snug text-white/50">{stat.label}</p>
-                  </motion.div>
-                ))}
               </motion.div>
             </motion.div>
           </div>

@@ -1,18 +1,19 @@
 import { PageHero } from '../components/ui';
-import { Products, CoverageBand, CallToAction } from '../components/sections';
+import { Products, Intel, CoverageBand, CallToAction } from '../components/sections';
 import { usePageTitle } from '../lib/usePageTitle';
 
 export const ProductsPage = () => {
-  usePageTitle('Products | SynQuanta Technologies');
+  usePageTitle('World Cup Revenue Optimization | SynQuanta Technologies');
   return (
     <>
       <PageHero
-        eyebrow="Built for the 2026 surge"
-        title="Productized growth for the World Cup"
-        subtitle="Three ways we turn deep local research into matchday revenue — across every host city in the USA, Canada and Mexico."
+        eyebrow="Featured product · World Cup 2026"
+        title="World Cup Revenue Optimization"
+        subtitle="One of our products: we turn deep local research into matchday revenue for businesses across every 2026 host city in the USA, Canada and Mexico."
         image="/images/products-stadium.jpg"
       />
       <Products />
+      <Intel />
       <CoverageBand />
       <CallToAction />
     </>

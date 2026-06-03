@@ -1,7 +1,6 @@
 import {
   Hero,
   ServicesTeaser,
-  WorkTeaser,
   FlagshipTeaser,
   WelcomeBand,
   CallToAction,
@@ -9,14 +8,13 @@ import {
 import { usePageTitle } from '../lib/usePageTitle';
 
 export const HomePage = () => {
-  usePageTitle('SynQuanta Technologies | Research-led growth for local business');
+  usePageTitle('SynQuanta Technologies | We design platforms & build products');
   return (
     <>
       <Hero />
       <ServicesTeaser />
-      <WorkTeaser />
-      <FlagshipTeaser />
       <WelcomeBand />
+      <FlagshipTeaser />
       <CallToAction />
     </>
   );

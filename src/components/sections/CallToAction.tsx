@@ -36,13 +36,14 @@ export const CallToAction = () => {
         <div className="relative z-10">
           <FadeIn>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 tracking-tight">
-              Ready Before Kickoff?
+              Ready to build something great?
             </h2>
           </FadeIn>
 
           <FadeIn delay={0.1}>
             <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              Let's review your business and show you exactly what we'd build to win the 2026 surge.
+              Tell us what you're building and we'll come back with a clear plan and a tailored quote —
+              usually within one business day.
             </p>
           </FadeIn>
 
@@ -54,15 +55,15 @@ export const CallToAction = () => {
                 size="lg"
                 className="bg-white text-forest-deep hover:bg-cream-green hover:text-forest-deep border-white"
               >
-                Book a 15-min review
+                Request a quote
               </Button>
               <Button
-                href="/products"
+                href="/portfolio"
                 variant="secondary"
                 size="lg"
                 className="bg-transparent text-white border-white/30 hover:bg-white/10 hover:text-white"
               >
-                See the flagship
+                See our work
               </Button>
             </div>
           </FadeIn>

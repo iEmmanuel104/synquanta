@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { useIsMobile } from '../../hooks';
 
 const circuitPaths = [
   'M 100 100 L 300 100 L 300 250 L 500 250',
@@ -28,6 +29,10 @@ const nodes = [
 
 export const AnimatedGrid = () => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
+  // On mobile (or reduced-motion) render the cheap static version and skip the
+  // GPU-heavy animated blur blobs — the main source of mobile jank.
+  const lite = shouldReduceMotion || isMobile;
 
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -52,7 +57,7 @@ export const AnimatedGrid = () => {
       >
         {/* Circuit Paths - more visible on dark bg */}
         {circuitPaths.map((d, i) =>
-          shouldReduceMotion ? (
+          lite ? (
             <path
               key={i}
               d={d}
@@ -86,7 +91,7 @@ export const AnimatedGrid = () => {
 
         {/* Connection Nodes - brighter on dark bg */}
         {nodes.map((node, i) =>
-          shouldReduceMotion ? (
+          lite ? (
             <circle
               key={i}
               cx={node.cx}
@@ -120,8 +125,8 @@ export const AnimatedGrid = () => {
         )}
       </svg>
 
-      {/* Gradient mesh blobs - more visible on dark bg */}
-      {!shouldReduceMotion && (
+      {/* Gradient mesh blobs - desktop only (GPU-heavy blur) */}
+      {!lite && (
         <>
           <motion.div
             className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full blur-[120px]"
