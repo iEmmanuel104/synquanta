@@ -62,17 +62,18 @@ export const Hero = () => {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white tracking-[-0.02em] leading-[1.1] mb-6">
                 <AnimatedText
                   as="span"
-                  text="We research first."
+                  text="We bring ideas"
                   light
                   delay={0.3}
                   className="block"
                 />
                 <AnimatedText
                   as="span"
-                  text="Then we build."
+                  text="to life."
                   light
                   delay={0.55}
-                  className="block bg-gradient-to-r from-sage-light via-mint-soft to-mint-pale bg-clip-text text-transparent"
+                  className="block"
+                  gradientClass="bg-gradient-to-r from-sage-light via-mint-soft to-mint-pale bg-clip-text text-transparent"
                 />
               </h1>
 
@@ -83,8 +84,8 @@ export const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                We design platforms, build web &amp; mobile products, and bring startup ideas to life —
-                researched first, then engineered to launch. Custom-made for ambitious teams everywhere.
+                We design platforms, build web &amp; mobile products, and help startups go from first
+                sketch to launch — researched first, then engineered to last.
               </motion.p>
 
               {/* CTAs */}

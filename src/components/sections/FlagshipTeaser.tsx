@@ -12,8 +12,8 @@ const points = [
 /** World Cup flagship highlight on the home page → links to the Products page. */
 export const FlagshipTeaser = () => {
   return (
-    <Section className="!py-0">
-      <div className="relative overflow-hidden rounded-sq-2xl">
+    <Section className="bg-aurora-soft">
+      <div className="relative overflow-hidden rounded-sq-2xl shadow-sq-xl">
         {/* Stadium backdrop */}
         <div className="absolute inset-0" aria-hidden="true">
           <img
@@ -30,7 +30,7 @@ export const FlagshipTeaser = () => {
           <FadeIn>
             <p className="sq-eyebrow mb-3 text-mint-pale">A featured product</p>
             <span className="wc-gold-chip mb-5">Built for the 2026 surge</span>
-            <h2 className="mb-4 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl">
+            <h2 className="mb-4 text-3xl font-semibold leading-[1.18] text-white md:text-4xl">
               Win the World Cup crowd before kickoff
             </h2>
             <p className="mb-6 max-w-xl text-lg leading-relaxed text-white/75">
@@ -45,7 +45,7 @@ export const FlagshipTeaser = () => {
                 </li>
               ))}
             </ul>
-            <Button href="/products" className="btn-gold border-0 font-semibold">
+            <Button href="/products" variant="gold" className="border-0 font-semibold">
               Explore this product
               <ArrowRight size={18} className="ml-2" />
             </Button>

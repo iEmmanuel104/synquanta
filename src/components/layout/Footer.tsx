@@ -65,7 +65,7 @@ export const Footer = () => {
               {services.slice(0, 5).map((service) => (
                 <li key={service.id}>
                   <Link
-                    to="/services"
+                    to="/services#services"
                     className="inline-block py-1 text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {service.title.split(' ').slice(0, 2).join(' ')}

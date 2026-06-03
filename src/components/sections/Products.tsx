@@ -108,7 +108,7 @@ const FlagshipCard = ({ p, delay }: { p: Product; delay: number }) => (
           ))}
         </ul>
         <div className="mt-auto">
-          <Button href="/contact" className="btn-gold border-0 font-semibold">
+          <Button href="/contact" variant="gold" className="border-0 font-semibold">
             {p.cta}
           </Button>
         </div>

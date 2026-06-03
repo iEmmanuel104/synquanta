@@ -54,11 +54,14 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Distinctive display face for the big headings; body stays Inter. */
+  /* Distinctive display face for the big headings; body stays Inter.
+     Clash Display runs tight — ease the letter tracking and add a little
+     word-spacing so multi-word headings stay legible (word gaps don't collapse). */
   h1,
   h2 {
     font-family: var(--sq-font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.005em;
+    word-spacing: 0.06em;
   }
 
   /* Focus visible styles for accessibility */
@@ -204,14 +207,17 @@
     letter-spacing: 0.02em;
   }
 
-  /* Gold gradient CTA button */
+  /* Gold gradient CTA button — bright champagne gold so it pops on dark/green
+     surfaces. !important wins over the Button's primary green-gradient utilities
+     (utilities load after this layer). */
   .btn-gold {
-    background: var(--sq-gradient-gold);
-    color: var(--sq-charcoal);
-    box-shadow: var(--sq-shadow-gold);
+    background: linear-gradient(120deg, #E6C772 0%, #F2DC9C 100%) !important;
+    background-image: linear-gradient(120deg, #E6C772 0%, #F2DC9C 100%) !important;
+    color: var(--sq-charcoal) !important;
+    box-shadow: 0 8px 28px rgba(230, 199, 114, 0.38);
   }
   .btn-gold:hover {
-    box-shadow: 0 12px 40px rgba(200, 161, 75, 0.32);
+    box-shadow: 0 12px 40px rgba(230, 199, 114, 0.5);
   }
 
   /* ========================================

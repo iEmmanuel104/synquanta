@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const MotionLink = motion.create(Link);
 
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'gold';
   size?: 'sm' | 'md' | 'lg';
   children: ReactNode;
   href?: string;
@@ -34,6 +34,7 @@ export const Button = ({
     secondary:
       'bg-transparent text-forest-deep border-2 border-forest-deep hover:bg-forest-deep hover:text-white',
     ghost: 'bg-transparent text-forest-primary hover:bg-cream-green',
+    gold: 'bg-gradient-to-br from-[#E6C772] to-[#F2DC9C] text-neutral-charcoal shadow-[0_8px_28px_rgba(230,199,114,0.42)] hover:shadow-[0_12px_40px_rgba(230,199,114,0.55)]',
   };
 
   const sizes = {

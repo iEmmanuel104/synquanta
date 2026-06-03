@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { createElement } from 'react';
+import { createElement, Fragment } from 'react';
 import { EASE_OUT, DUR, VIEWPORT } from '../../lib/motion';
 
 interface AnimatedTextProps {
@@ -9,6 +9,12 @@ interface AnimatedTextProps {
   delay?: number;
   /** Slightly larger blur on light-on-dark text reads better; cosmetic only. */
   light?: boolean;
+  /**
+   * Gradient/clip classes (e.g. bg-gradient-to-r ... bg-clip-text text-transparent).
+   * Applied per-word so `background-clip:text` clips to the actual glyphs — putting
+   * it on the container fails because the words sit in inline-block spans.
+   */
+  gradientClass?: string;
 }
 
 const containerVariants = (delay: number) => ({
@@ -42,13 +48,15 @@ export const AnimatedText = ({
   as = 'span',
   delay = 0,
   light = false,
+  gradientClass,
 }: AnimatedTextProps) => {
   const shouldReduceMotion = useReducedMotion();
   const words = text.split(' ');
 
   if (shouldReduceMotion) {
-    // Plain accessible text node, no per-word motion.
-    return createElement(as, { className }, text);
+    // Plain accessible text node — gradient (if any) goes on the element itself,
+    // which holds the text directly so background-clip:text works.
+    return createElement(as, { className: gradientClass ? `${className ?? ''} ${gradientClass}` : className }, text);
   }
 
   const MotionTag = motion[as];
@@ -63,16 +71,18 @@ export const AnimatedText = ({
       variants={containerVariants(delay)}
     >
       {words.map((word, i) => (
-        <span key={`${word}-${i}`} aria-hidden="true" className="inline-block">
-          <motion.span
-            className="inline-block"
-            style={light ? { willChange: 'transform, filter, opacity' } : undefined}
-            variants={wordVariants}
-          >
-            {word}
-          </motion.span>
-          {i < words.length - 1 ? ' ' : ''}
-        </span>
+        <Fragment key={`${word}-${i}`}>
+          <span aria-hidden="true" className="inline-block">
+            <motion.span
+              className={`inline-block ${gradientClass ?? ''}`}
+              style={light ? { willChange: 'transform, filter, opacity' } : undefined}
+              variants={wordVariants}
+            >
+              {word}
+            </motion.span>
+          </span>
+          {i < words.length - 1 ? ' ' : ''}
+        </Fragment>
       ))}
     </MotionTag>
   );

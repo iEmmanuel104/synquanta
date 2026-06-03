@@ -7,8 +7,10 @@ export const CallToAction = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <Section variant="gradient">
-      <div className="relative text-center py-8 lg:py-12 overflow-hidden">
+    <Section className="bg-aurora-soft">
+      {/* Self-contained gradient card on a light section — keeps it visually
+          separate from the flagship band above and the footer below. */}
+      <div className="relative overflow-hidden rounded-sq-2xl bg-gradient-to-br from-forest-deep via-forest-primary to-sage-medium px-6 py-14 text-center shadow-sq-xl lg:py-20">
         {/* Dot grid texture overlay */}
         <div className="absolute inset-0 bg-dot-grid-white pointer-events-none" />
 
