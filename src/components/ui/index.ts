@@ -5,3 +5,6 @@ export { FloatingCodeCard } from './FloatingCodeCard';
 export { Logo } from './Logo';
 export { PhoneMock } from './PhoneMock';
 export { SectionHeading } from './SectionHeading';
+export { PageHero } from './PageHero';
+export { Accordion } from './Accordion';
+export { Lightbox } from './Lightbox';

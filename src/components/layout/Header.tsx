@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
 import { navLinks } from '../../constants';
 import { useScrollPosition } from '../../hooks';
@@ -8,30 +9,15 @@ import { useScrollPosition } from '../../hooks';
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isScrolled = useScrollPosition(50);
+  const { pathname } = useLocation();
 
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  // Transparent-over-dark only on the home hero; every other page (and the home
+  // page once scrolled) gets the solid header.
+  const onHome = pathname === '/';
+  const solid = isScrolled || !onHome;
+
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
-
-  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    closeMobileMenu();
-
-    // Small delay to allow menu to close before scrolling
-    setTimeout(() => {
-      const targetId = href.replace('#', '');
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }, 100);
-  };
+  const toggleMobileMenu = () => setIsMobileMenuOpen((v) => !v);
 
   return (
     <>
@@ -45,55 +31,58 @@ export const Header = () => {
 
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sq'
-            : 'bg-transparent'
+          solid ? 'bg-white/95 backdrop-blur-md shadow-sq' : 'bg-transparent'
         }`}
       >
         <nav className="container-custom" aria-label="Main navigation">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo - white when over dark hero, default when scrolled */}
-            <Logo variant={isScrolled ? undefined : 'white'} />
+            {/* Logo - white when over dark hero, default when solid */}
+            <Link to="/" aria-label="SynQuanta home" className="flex items-center">
+              <Logo variant={solid ? undefined : 'white'} />
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               <ul className="flex items-center gap-8">
                 {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className={`transition-colors duration-200 font-medium ${
-                        isScrolled
-                          ? 'text-neutral-charcoal hover:text-forest-primary'
-                          : 'text-white/80 hover:text-white'
-                      }`}
+                  <li key={link.to}>
+                    <NavLink
+                      to={link.to}
+                      className={({ isActive }) =>
+                        `transition-colors duration-200 font-medium ${
+                          solid
+                            ? isActive
+                              ? 'text-forest-primary'
+                              : 'text-neutral-charcoal hover:text-forest-primary'
+                            : isActive
+                              ? 'text-white'
+                              : 'text-white/80 hover:text-white'
+                        }`
+                      }
                     >
                       {link.label}
-                    </a>
+                    </NavLink>
                   </li>
                 ))}
               </ul>
-              <motion.a
-                href="#contact"
-                className={`inline-flex items-center justify-center font-medium rounded-sq px-4 py-2 text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2 ${
-                  isScrolled
-                    ? 'bg-gradient-to-r from-forest-deep via-forest-primary to-sage-medium text-white shadow-sq hover:shadow-sq-lg'
-                    : 'bg-white text-forest-deep hover:bg-cream-green'
-                }`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-              >
-                Get Started
-              </motion.a>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  to="/contact"
+                  className={`inline-flex items-center justify-center font-medium rounded-sq px-4 py-2 text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2 ${
+                    solid
+                      ? 'bg-gradient-to-r from-forest-deep via-forest-primary to-sage-medium text-white shadow-sq hover:shadow-sq-lg'
+                      : 'bg-white text-forest-deep hover:bg-cream-green'
+                  }`}
+                >
+                  Get Started
+                </Link>
+              </motion.div>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               className={`lg:hidden p-2 rounded-sq transition-colors ${
-                isScrolled
-                  ? 'text-forest-deep hover:bg-cream-green'
-                  : 'text-white hover:bg-white/10'
+                solid ? 'text-forest-deep hover:bg-cream-green' : 'text-white hover:bg-white/10'
               }`}
               onClick={toggleMobileMenu}
               aria-expanded={isMobileMenuOpen}
@@ -120,33 +109,39 @@ export const Header = () => {
                 <ul className="flex flex-col gap-4">
                   {navLinks.map((link, index) => (
                     <motion.li
-                      key={link.href}
+                      key={link.to}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.08 }}
                     >
-                      <a
-                        href={link.href}
-                        className="block py-2 text-lg text-neutral-charcoal hover:text-forest-primary transition-colors font-medium"
-                        onClick={(e) => handleMobileNavClick(e, link.href)}
+                      <NavLink
+                        to={link.to}
+                        onClick={closeMobileMenu}
+                        className={({ isActive }) =>
+                          `block py-2 text-lg transition-colors font-medium ${
+                            isActive
+                              ? 'text-forest-primary'
+                              : 'text-neutral-charcoal hover:text-forest-primary'
+                          }`
+                        }
                       >
                         {link.label}
-                      </a>
+                      </NavLink>
                     </motion.li>
                   ))}
                   <motion.li
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: navLinks.length * 0.1 }}
+                    transition={{ delay: navLinks.length * 0.08 }}
                     className="pt-4"
                   >
-                    <a
-                      href="#contact"
+                    <Link
+                      to="/contact"
+                      onClick={closeMobileMenu}
                       className="block w-full text-center px-6 py-3 bg-gradient-to-r from-forest-deep via-forest-primary to-sage-medium text-white font-medium rounded-sq shadow-sq"
-                      onClick={(e) => handleMobileNavClick(e, '#contact')}
                     >
                       Get Started
-                    </a>
+                    </Link>
                   </motion.li>
                 </ul>
               </nav>

@@ -65,7 +65,7 @@ export const WelcomeBand = () => {
               ))}
             </StaggerContainer>
 
-            <Button href="#contact" variant="primary" size="md">
+            <Button href="/contact" variant="primary" size="md">
               See what we'd build for you
             </Button>
           </FadeIn>

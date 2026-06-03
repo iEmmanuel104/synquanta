@@ -113,7 +113,7 @@ const FlagshipCard = ({ p, delay }: { p: Product; delay: number }) => (
         </ul>
         <div className="mt-auto flex flex-wrap items-center justify-between gap-3">
           <span className="font-mono text-lg font-semibold text-wc-gold-bright">{p.price}</span>
-          <Button href="#contact" className="btn-gold border-0 font-semibold">
+          <Button href="/contact" className="btn-gold border-0 font-semibold">
             {p.cta}
           </Button>
         </div>
@@ -145,7 +145,7 @@ const StandardCard = ({ p, delay, index }: { p: Product; delay: number; index: n
         </ul>
         <div className="mt-auto flex items-center justify-between gap-3">
           <span className="font-mono text-[15px] font-semibold text-neutral-medium-gray">{p.price}</span>
-          <Button href="#contact" variant="secondary" size="sm">
+          <Button href="/contact" variant="secondary" size="sm">
             {p.cta}
           </Button>
         </div>

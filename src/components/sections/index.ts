@@ -7,3 +7,7 @@ export { WelcomeBand } from './WelcomeBand';
 export { Values } from './Values';
 export { CallToAction } from './CallToAction';
 export { Contact } from './Contact';
+export { ServicesTeaser } from './ServicesTeaser';
+export { WorkTeaser } from './WorkTeaser';
+export { FlagshipTeaser } from './FlagshipTeaser';
+export { PortfolioGrid } from './PortfolioGrid';

@@ -1,4 +1,5 @@
 import { ArrowUp, Mail, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
 import { navLinks, services } from '../../constants';
 
@@ -15,7 +16,9 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <Logo variant="white" className="mb-6" />
+            <Link to="/" aria-label="SynQuanta home" className="inline-flex mb-6">
+              <Logo variant="white" />
+            </Link>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
               We research your business first, then build exactly what moves the needle before the world arrives.
             </p>
@@ -34,12 +37,6 @@ export const Footer = () => {
                 <Globe size={16} />
                 synquanta.com
               </a>
-              {/* Location intentionally hidden — we serve clients globally.
-              <span className="flex items-center gap-2 text-white/70">
-                <MapPin size={16} />
-                Nigeria
-              </span>
-              */}
             </div>
           </div>
 
@@ -48,13 +45,13 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-3">
               {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -66,12 +63,12 @@ export const Footer = () => {
             <ul className="space-y-3">
               {services.slice(0, 5).map((service) => (
                 <li key={service.id}>
-                  <a
-                    href="#services"
+                  <Link
+                    to="/services"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     {service.title.split(' ').slice(0, 2).join(' ')}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -81,7 +78,7 @@ export const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-3 text-sm text-white/70">
-              <li>Serving the USA</li>
+              <li>Serving the USA, Canada &amp; Mexico</li>
               <li>Every 2026 host city</li>
               <li>Research-led growth</li>
             </ul>
@@ -99,10 +96,7 @@ export const Footer = () => {
             aria-label="Back to top"
           >
             Back to top
-            <ArrowUp
-              size={16}
-              className="group-hover:-translate-y-1 transition-transform"
-            />
+            <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
           </button>
         </div>
       </div>

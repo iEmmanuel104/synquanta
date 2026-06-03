@@ -23,7 +23,7 @@ const needOptions = [
 const fieldCls =
   'w-full rounded-sq-lg border-[1.5px] border-cream-green bg-neutral-off-white px-3.5 py-3 text-[15px] text-forest-deep placeholder:text-neutral-light-gray outline-none transition-all duration-200 focus:border-sage-medium focus:bg-white focus:ring-4 focus:ring-sage-light/20';
 
-export const Contact = () => {
+export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {}) => {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState('');
   const [form, setForm] = useState({
@@ -80,10 +80,12 @@ export const Contact = () => {
 
   return (
     <Section id="contact" className="scroll-mt-20">
-      <SectionHeading
-        title="Tell us about your business"
-        subtitle="Share a few details and we'll come back with a research-led plan — the same report we'd build before calling you, free."
-      />
+      {!hideHeading && (
+        <SectionHeading
+          title="Tell us about your business"
+          subtitle="Share a few details and we'll come back with a research-led plan — the same report we'd build before calling you, free."
+        />
+      )}
 
       <div className="grid grid-cols-1 items-stretch gap-7 lg:grid-cols-[0.92fr_1.08fr]">
         {/* Left — dark reassurance aside */}

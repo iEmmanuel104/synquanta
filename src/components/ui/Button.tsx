@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
+
+const MotionLink = motion.create(Link);
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost';
@@ -42,6 +45,21 @@ export const Button = ({
   const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
   if (href) {
+    // Internal route → client-side <Link>; external / hash / mailto → plain anchor.
+    const isInternal = href.startsWith('/') && !href.startsWith('//');
+    if (isInternal) {
+      return (
+        <MotionLink
+          to={href}
+          className={combinedClassName}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        >
+          {children}
+        </MotionLink>
+      );
+    }
     return (
       <motion.a
         href={href}

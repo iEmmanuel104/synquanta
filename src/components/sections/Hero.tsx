@@ -1,8 +1,11 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { AnimatedGrid } from '../ui/AnimatedGrid';
 import { FloatingCodeCard } from '../ui/FloatingCodeCard';
 import { AnimatedText } from '../animations/AnimatedText';
+
+const MotionLink = motion.create(Link);
 
 const stats = [
   { value: '1,970', label: 'Businesses researched' },
@@ -14,13 +17,25 @@ export const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
 
   const scrollToServices = () => {
-    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('explore')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Animated Technical Background (dark) */}
       <AnimatedGrid />
+
+      {/* Aurora photographic accent — glows through the dark grid */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <img
+          src="/images/hero-abstract.jpg"
+          alt=""
+          loading="eager"
+          decoding="async"
+          className="h-full w-full object-cover opacity-30 mix-blend-screen"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/50 via-transparent to-neutral-off-white" />
+      </div>
 
       {/* Content */}
       <div className="container-custom relative z-10 pt-24 pb-16 lg:pt-28 lg:pb-24">
@@ -85,24 +100,24 @@ export const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
-                <motion.a
-                  href="#contact"
+                <MotionLink
+                  to="/contact"
                   className="inline-flex items-center justify-center font-medium rounded-sq px-8 py-4 text-lg bg-white text-forest-deep hover:bg-cream-green shadow-sq-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   See what we'd build for you
-                </motion.a>
-                <motion.a
-                  href="#products"
+                </MotionLink>
+                <MotionLink
+                  to="/services"
                   className="inline-flex items-center justify-center font-medium rounded-sq px-8 py-4 text-lg bg-transparent text-white border-2 border-white/30 hover:bg-white/10 hover:border-white/50 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   Explore services
-                </motion.a>
+                </MotionLink>
               </motion.div>
 
               {/* Stats Row */}

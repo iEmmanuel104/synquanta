@@ -49,7 +49,7 @@ export const CallToAction = () => {
           <FadeIn delay={0.2}>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button
-                href="#contact"
+                href="/contact"
                 variant="secondary"
                 size="lg"
                 className="bg-white text-forest-deep hover:bg-cream-green hover:text-forest-deep border-white"
@@ -57,7 +57,7 @@ export const CallToAction = () => {
                 Book a 15-min review
               </Button>
               <Button
-                href="#products"
+                href="/products"
                 variant="secondary"
                 size="lg"
                 className="bg-transparent text-white border-white/30 hover:bg-white/10 hover:text-white"
