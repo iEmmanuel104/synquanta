@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { AnimatedGrid } from '../ui/AnimatedGrid';
 import { FloatingCodeCard } from '../ui/FloatingCodeCard';
+import { AnimatedText } from '../animations/AnimatedText';
 
 const stats = [
   { value: '1,970', label: 'Businesses researched' },
@@ -49,18 +50,22 @@ export const Hero = () => {
               </motion.span>
 
               {/* Main Headline */}
-              <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white tracking-[-0.02em] leading-[1.1] mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-              >
-                We research first.
-                <br />
-                <span className="bg-gradient-to-r from-sage-light via-mint-soft to-mint-pale bg-clip-text text-transparent">
-                  Then we build.
-                </span>
-              </motion.h1>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white tracking-[-0.02em] leading-[1.1] mb-6">
+                <AnimatedText
+                  as="span"
+                  text="We research first."
+                  light
+                  delay={0.3}
+                  className="block"
+                />
+                <AnimatedText
+                  as="span"
+                  text="Then we build."
+                  light
+                  delay={0.55}
+                  className="block bg-gradient-to-r from-sage-light via-mint-soft to-mint-pale bg-clip-text text-transparent"
+                />
+              </h1>
 
               {/* Subheadline */}
               <motion.p

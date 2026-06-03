@@ -3,6 +3,7 @@ import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Button } from '../ui/Button';
 import { FadeIn } from '../animations/FadeIn';
+import { AnimatedIcon } from '../ui/AnimatedIcon';
 
 /** Gold ball mark — trademark-safe original art ported from the design kit. */
 const GoldBall = ({ size = 16 }: { size?: number }) => (
@@ -121,14 +122,17 @@ const FlagshipCard = ({ p, delay }: { p: Product; delay: number }) => (
   </FadeIn>
 );
 
-const StandardCard = ({ p, delay }: { p: Product; delay: number }) => {
+const StandardCard = ({ p, delay, index }: { p: Product; delay: number; index: number }) => {
   const Icon = p.icon;
   return (
     <FadeIn delay={delay} className="flex">
       <div className="flex w-full flex-col rounded-sq-xl border border-cream-green bg-white p-7 shadow-sq transition-all duration-200 hover:-translate-y-1.5 hover:shadow-sq-xl sm:p-8">
-        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-sq-lg bg-cream-green text-forest-primary">
+        <AnimatedIcon
+          index={index}
+          className="mb-4 flex h-12 w-12 items-center justify-center rounded-sq-lg bg-cream-green text-forest-primary"
+        >
           <Icon className="h-[22px] w-[22px]" aria-hidden="true" />
-        </div>
+        </AnimatedIcon>
         <h3 className="mb-2.5 text-xl font-semibold text-neutral-charcoal">{p.name}</h3>
         <p className="mb-4.5 text-sm leading-relaxed text-neutral-medium-gray">{p.outcome}</p>
         <ul className="mb-5 flex flex-col gap-2.5">
@@ -162,7 +166,7 @@ export const Products = () => {
           p.flagship ? (
             <FlagshipCard key={p.name} p={p} delay={i * 0.09} />
           ) : (
-            <StandardCard key={p.name} p={p} delay={i * 0.09} />
+            <StandardCard key={p.name} p={p} delay={i * 0.09} index={i} />
           )
         )}
       </div>

@@ -1,4 +1,4 @@
-import { FadeIn } from '../animations';
+import { FadeIn, AnimatedText } from '../animations';
 
 interface SectionHeadingProps {
   title: string;
@@ -19,11 +19,12 @@ export const SectionHeading = ({
 
   return (
     <FadeIn className={`mb-12 lg:mb-16 ${alignment}`}>
-      <h2
+      <AnimatedText
+        as="h2"
+        text={title}
+        light={light}
         className={`text-3xl md:text-4xl lg:text-5xl font-semibold ${titleColor} tracking-tight`}
-      >
-        {title}
-      </h2>
+      />
       {subtitle && (
         <p
           className={`mt-4 text-lg md:text-xl ${subtitleColor} max-w-3xl ${

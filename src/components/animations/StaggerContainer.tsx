@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { ReactNode } from 'react';
+import { EASE_OUT, DUR, STAGGER, VIEWPORT } from '../../lib/motion';
 
 interface StaggerContainerProps {
   children: ReactNode;
@@ -9,7 +10,7 @@ interface StaggerContainerProps {
 
 export const StaggerContainer = ({
   children,
-  staggerDelay = 0.1,
+  staggerDelay = STAGGER.base,
   className,
 }: StaggerContainerProps) => {
   const shouldReduceMotion = useReducedMotion();
@@ -22,7 +23,7 @@ export const StaggerContainer = ({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={VIEWPORT}
       variants={{
         hidden: {},
         visible: {
@@ -43,6 +44,6 @@ export const staggerItemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: 'easeOut' as const },
+    transition: { duration: DUR.fast, ease: EASE_OUT },
   },
 };

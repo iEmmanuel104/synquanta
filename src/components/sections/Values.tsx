@@ -11,6 +11,7 @@ import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { StaggerContainer } from '../animations/StaggerContainer';
+import { AnimatedIcon } from '../ui/AnimatedIcon';
 import { values } from '../../constants';
 
 const iconMap: Record<string, LucideIcon> = {
@@ -31,15 +32,18 @@ export const Values = () => {
       />
 
       <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        {values.map((value) => {
+        {values.map((value, i) => {
           const IconComponent = iconMap[value.icon];
           return (
             <Card key={value.id} className="text-center group">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-forest-deep to-sage-medium flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(82,183,136,0.3)] transition-all duration-300">
+              <AnimatedIcon
+                index={i}
+                className="w-14 h-14 rounded-full bg-gradient-to-br from-forest-deep to-sage-medium flex items-center justify-center mx-auto mb-4"
+              >
                 {IconComponent && (
                   <IconComponent className="w-7 h-7 text-white" />
                 )}
-              </div>
+              </AnimatedIcon>
               <h3 className="text-xl font-semibold text-forest-deep mb-2">
                 {value.title}
               </h3>

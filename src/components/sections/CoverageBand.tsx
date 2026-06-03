@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { useInView } from '../../hooks';
+import { Globe, hasWebGL, prefersReducedMotion } from '../ui/Globe';
 
 interface HostCity {
   c: string;
@@ -126,6 +128,8 @@ const HostCitiesMap = () => {
 };
 
 export const CoverageBand = () => {
+  // Globe by default; fall back to the static SVG map for reduced-motion / no-WebGL.
+  const [flat] = useState(() => prefersReducedMotion() || !hasWebGL());
   return (
     <section id="coverage" className="coverage-sec scroll-mt-20">
       <div className="wc-pattern" style={{ opacity: 0.3 }} aria-hidden="true" />
@@ -134,9 +138,15 @@ export const CoverageBand = () => {
         <SectionHeading
           light
           title="Ready in every host city before the world arrives"
-          subtitle="The 2026 surge touches eleven US metros. We've mapped the businesses, the competitors and the stadiums in each one."
+          subtitle="The 2026 surge spans 16 host cities across the USA, Canada and Mexico. We've mapped the businesses, the competitors and the stadiums in each one."
         />
-        <HostCitiesMap />
+        {flat ? (
+          <HostCitiesMap />
+        ) : (
+          <div className="globe-stage" aria-hidden="false">
+            <Globe className="globe-canvas" />
+          </div>
+        )}
         <div className="coverage-stats">
           {stats.map(([v, l]) => (
             <div key={l} className="cov-stat">

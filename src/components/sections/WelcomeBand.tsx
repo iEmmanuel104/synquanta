@@ -4,6 +4,7 @@ import { Button } from '../ui/Button';
 import { PhoneMock } from '../ui/PhoneMock';
 import { FadeIn } from '../animations/FadeIn';
 import { StaggerContainer, staggerItemVariants } from '../animations/StaggerContainer';
+import { AnimatedIcon } from '../ui/AnimatedIcon';
 import { motion } from 'framer-motion';
 
 interface Step {
@@ -48,11 +49,14 @@ export const WelcomeBand = () => {
             </p>
 
             <StaggerContainer className="mb-8 flex flex-col gap-3.5">
-              {steps.map((step) => (
+              {steps.map((step, i) => (
                 <motion.div key={step.title} variants={staggerItemVariants} className="flex items-start gap-3.5">
-                  <div className="flex h-[42px] w-[42px] flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-sage-medium to-sage-light text-white shadow-sq">
+                  <AnimatedIcon
+                    index={i}
+                    className="flex h-[42px] w-[42px] flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-sage-medium to-sage-light text-white shadow-sq"
+                  >
                     <step.icon className="h-[18px] w-[18px]" aria-hidden="true" />
-                  </div>
+                  </AnimatedIcon>
                   <div>
                     <h3 className="mb-0.5 text-[16.5px] font-semibold text-forest-deep">{step.title}</h3>
                     <p className="text-sm leading-relaxed text-neutral-medium-gray">{step.description}</p>
