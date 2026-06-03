@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SynQuanta Brand Kit — Orbit Atom</title>
+<link rel="icon" type="image/svg+xml" href="orbit-atom-favicon.svg" />
+<style>
+  @font-face { font-family:'Inter'; src:url('../fonts/Inter-Variable.ttf') format('truetype'); font-weight:300 700; font-display:swap; }
+  @font-face { font-family:'JetBrains Mono'; src:url('../fonts/JetBrainsMono-Variable.ttf') format('truetype'); font-weight:300 700; font-display:swap; }
+  :root{
+    --forest-deep:#1B4332; --forest-primary:#2D6A4F; --sage-medium:#40916C;
+    --sage-light:#52B788; --mint-soft:#74C69D; --mint-pale:#95D5B2;
+    --cream-green:#D8F3DC; --charcoal:#1A1F1C; --medium-gray:#74796E;
+    --off-white:#F8FAF9; --white:#fff; --border:#E4EDE8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter',-apple-system,sans-serif; background:var(--off-white); color:var(--charcoal); -webkit-font-smoothing:antialiased; line-height:1.6;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 32px;}
+  code, .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* hero */
+  .hero{background:radial-gradient(800px 380px at 80% -10%, rgba(82,183,136,.18), transparent 60%), linear-gradient(150deg,#1B4332,#122F22); color:#fff; padding:72px 0 80px;}
+  .hero .eyebrow{font-size:12px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--mint-pale); margin-bottom:20px;}
+  .hero h1{font-size:40px; font-weight:600; letter-spacing:-.025em; line-height:1.12;}
+  .hero h1 .g{background:linear-gradient(100deg,#74C69D,#95D5B2); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero p{margin-top:16px; max-width:54ch; color:rgba(255,255,255,.74); font-size:16.5px;}
+  .hero-mark{margin-top:44px; display:inline-flex; align-items:center; gap:22px; padding:26px 34px; border:1px solid rgba(255,255,255,.12); border-radius:18px; background:rgba(255,255,255,.04); backdrop-filter:blur(8px);}
+  .hero-mark img{width:74px; height:74px;}
+  .hero-mark .wm{font-size:38px; letter-spacing:-.025em; line-height:1;}
+  .hero-mark .wm .s{font-weight:600;} .hero-mark .wm .q{font-weight:400; color:#E8F0EB;}
+  .hero-mark .tech{margin-top:8px; font-size:10px; font-weight:600; letter-spacing:.34em; color:#95A097;}
+
+  section{padding:66px 0;}
+  .sec-head{margin-bottom:34px;}
+  .sec-head .divider{width:50px; height:3px; border-radius:99px; background:linear-gradient(90deg,var(--sage-light),var(--mint-soft)); margin-bottom:18px;}
+  .sec-head h2{font-size:26px; font-weight:600; letter-spacing:-.02em;}
+  .sec-head p{margin-top:8px; color:var(--medium-gray); font-size:15.5px;}
+
+  .grid{display:grid; gap:20px;}
+  .g3{grid-template-columns:repeat(3,1fr);} .g4{grid-template-columns:repeat(4,1fr);} .g2{grid-template-columns:1fr 1fr;}
+  .card{background:var(--white); border:1px solid var(--border); border-radius:16px; box-shadow:0 2px 8px rgba(27,67,50,.06); overflow:hidden;}
+  .pad{padding:40px 28px;}
+  .center{display:flex; align-items:center; justify-content:center;}
+  .foot{border-top:1px solid var(--border); padding:13px 18px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .foot .name{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--charcoal);}
+  .foot .sz{font-size:12px; color:var(--medium-gray);}
+  .tag{font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--sage-medium);}
+  .dark{background:linear-gradient(150deg,#1B4332,#122F22);}
+  .soft{background:var(--cream-green);}
+
+  .row{display:flex; align-items:flex-end; gap:34px; flex-wrap:wrap;}
+  .ico{display:flex; flex-direction:column; align-items:center; gap:10px;}
+  .ico .lbl{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--medium-gray);}
+
+  pre{background:#10271D; color:#D8F3DC; border-radius:12px; padding:18px 20px; overflow:auto; font-size:13px; line-height:1.7;}
+  pre .c{color:#74C69D;}
+  .swatches{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .sw{border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff;}
+  .sw .chip{height:76px;} .sw .meta{padding:10px 12px;}
+  .sw .meta .nm{font-size:13px; font-weight:600;} .sw .meta .hx{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--medium-gray);}
+
+  footer{padding:46px 0 64px; color:var(--medium-gray); font-size:13.5px;}
+  @media(max-width:880px){ .g3,.g4{grid-template-columns:1fr 1fr;} .g2{grid-template-columns:1fr;} .swatches{grid-template-columns:1fr 1fr;} .hero h1{font-size:30px;} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Brand kit · Orbit Atom</div>
+    <h1>The SynQuanta <span class="g">asset kit</span>.</h1>
+    <p>Everything you need to ship the logo — scalable SVGs, an animated mark, and PNG rasters at every size: favicons, app icons, avatar, lockups, and a social card. One forest-and-sage system.</p>
+    <div class="hero-mark">
+      <img src="orbit-atom-animated.svg" alt="SynQuanta animated logomark" />
+      <span style="display:flex; flex-direction:column;">
+        <span class="wm"><span class="s">Syn</span><span class="q">Quanta</span></span>
+        <span class="tech">TECHNOLOGIES</span>
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- LOGOMARK -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div class="divider"></div><h2>Logomark</h2><p>The standalone Orbit Atom. Transparent SVG — drop it anywhere.</p></div>
+    <div class="grid g4">
+      <div class="card"><div class="pad center" style="height:200px;"><img src="orbit-atom-logomark.svg" style="width:120px;height:120px;" alt=""></div><div class="foot"><span class="name">logomark.svg</span><span class="tag">Color</span></div></div>
+      <div class="card"><div class="pad center dark" style="height:200px;"><img src="orbit-atom-logomark-white.svg" style="width:120px;height:120px;" alt=""></div><div class="foot"><span class="name">logomark-white.svg</span><span class="tag">Reversed</span></div></div>
+      <div class="card"><div class="pad center" style="height:200px;"><img src="orbit-atom-logomark-mono.svg" style="width:120px;height:120px;" alt=""></div><div class="foot"><span class="name">logomark-mono.svg</span><span class="tag">Mono</span></div></div>
+      <div class="card"><div class="pad center soft" style="height:200px;"><img src="orbit-atom-animated.svg" style="width:120px;height:120px;" alt=""></div><div class="foot"><span class="name">animated.svg</span><span class="tag">Animated</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCKUPS -->
+<section style="background:linear-gradient(180deg,#fff,var(--off-white));">
+  <div class="wrap">
+    <div class="sec-head"><div class="divider"></div><h2>Lockups</h2><p>Horizontal signature and stacked variant. Wordmark set in Inter.</p></div>
+    <div class="grid g2">
+      <div class="card"><div class="pad center" style="height:170px;"><img src="orbit-atom-logo-primary.svg" style="width:86%;" alt=""></div><div class="foot"><span class="name">logo-primary.svg</span><span class="sz">+ png/logo-primary-1600w.png</span></div></div>
+      <div class="card"><div class="pad center dark" style="height:170px;"><img src="orbit-atom-logo-white.svg" style="width:86%;" alt=""></div><div class="foot"><span class="name">logo-white.svg</span><span class="sz">+ png/logo-white-1600w.png</span></div></div>
+      <div class="card"><div class="pad center" style="height:170px;"><img src="orbit-atom-logo-mono.svg" style="width:86%;" alt=""></div><div class="foot"><span class="name">logo-mono.svg</span><span class="tag">Mono</span></div></div>
+      <div class="card"><div class="pad center soft" style="height:170px;"><img src="orbit-atom-logo-stacked.svg" style="height:138px;" alt=""></div><div class="foot"><span class="name">logo-stacked.svg</span><span class="tag">Stacked</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ICONS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div class="divider"></div><h2>Icons &amp; avatars</h2><p>App icon, favicon, and social avatar — exported as PNG at every size you'll need.</p></div>
+    <div class="grid g3">
+      <div class="card"><div class="pad center" style="height:210px;"><div class="row" style="justify-content:center;">
+        <div class="ico"><img src="png/app-icon-512.png" style="width:96px;height:96px;border-radius:21%;" alt=""><span class="lbl">512 · 192 · 180</span></div>
+      </div></div><div class="foot"><span class="name">app-icon-*.png</span><span class="sz">1024→180</span></div></div>
+
+      <div class="card"><div class="pad center" style="height:210px;"><div class="row" style="justify-content:center; align-items:center;">
+        <div class="ico"><img src="png/favicon-64.png" style="width:64px;height:64px;border-radius:14px;" alt=""><span class="lbl">64</span></div>
+        <div class="ico"><img src="png/favicon-48.png" style="width:48px;height:48px;border-radius:11px;" alt=""><span class="lbl">48</span></div>
+        <div class="ico"><img src="png/favicon-32.png" style="width:32px;height:32px;border-radius:7px;" alt=""><span class="lbl">32</span></div>
+        <div class="ico"><img src="png/favicon-16.png" style="width:16px;height:16px;border-radius:4px;" alt=""><span class="lbl">16</span></div>
+      </div></div><div class="foot"><span class="name">favicon-*.png</span><span class="sz">+ .svg</span></div></div>
+
+      <div class="card"><div class="pad center" style="height:210px;"><div class="ico"><img src="png/avatar-512.png" style="width:108px;height:108px;border-radius:50%;" alt=""><span class="lbl">avatar · 512</span></div></div><div class="foot"><span class="name">avatar-512.png</span><span class="tag">Social</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL CARD -->
+<section style="background:var(--off-white);">
+  <div class="wrap">
+    <div class="sec-head"><div class="divider"></div><h2>Social card</h2><p>Open-graph / share image, 1200 × 630.</p></div>
+    <div class="card"><div class="center" style="padding:24px;"><img src="png/og-image-1200x630.png" style="width:100%; max-width:760px; border-radius:10px;" alt=""></div><div class="foot"><span class="name">png/og-image-1200x630.png</span><span class="sz">1200 × 630</span></div></div>
+  </div>
+</section>
+
+<!-- USAGE -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div class="divider"></div><h2>Drop-in usage</h2><p>Copy-paste into the project.</p></div>
+    <div class="grid g2">
+      <div>
+        <div class="tag" style="margin-bottom:10px;">Favicon &amp; app icons</div>
+        <pre><code>&lt;link rel=<span class="c">"icon"</span> type=<span class="c">"image/svg+xml"</span> href=<span class="c">"brand-kit/orbit-atom-favicon.svg"</span>&gt;
+&lt;link rel=<span class="c">"icon"</span> sizes=<span class="c">"32x32"</span> href=<span class="c">"brand-kit/png/favicon-32.png"</span>&gt;
+&lt;link rel=<span class="c">"apple-touch-icon"</span> href=<span class="c">"brand-kit/png/app-icon-180.png"</span>&gt;
+&lt;meta property=<span class="c">"og:image"</span> content=<span class="c">"brand-kit/png/og-image-1200x630.png"</span>&gt;</code></pre>
+      </div>
+      <div>
+        <div class="tag" style="margin-bottom:10px;">Animated mark</div>
+        <pre><code><span class="c">&lt;!-- plays in &lt;img&gt;, respects reduced-motion --&gt;</span>
+&lt;img src=<span class="c">"brand-kit/orbit-atom-animated.svg"</span>
+     width=<span class="c">"48"</span> height=<span class="c">"48"</span> alt=<span class="c">"SynQuanta"</span>&gt;
+
+<span class="c">/* inline lockup */</span>
+&lt;img src=<span class="c">"brand-kit/orbit-atom-logo-primary.svg"</span> height=<span class="c">"40"</span>&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PALETTE -->
+<section style="background:linear-gradient(180deg,var(--off-white),#fff);">
+  <div class="wrap">
+    <div class="sec-head"><div class="divider"></div><h2>Core palette</h2><p>The only colors used across every asset.</p></div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#1B4332;"></div><div class="meta"><div class="nm">Forest deep</div><div class="hx">#1B4332</div></div></div>
+      <div class="sw"><div class="chip" style="background:#2D6A4F;"></div><div class="meta"><div class="nm">Forest primary</div><div class="hx">#2D6A4F</div></div></div>
+      <div class="sw"><div class="chip" style="background:#40916C;"></div><div class="meta"><div class="nm">Sage medium</div><div class="hx">#40916C</div></div></div>
+      <div class="sw"><div class="chip" style="background:#52B788;"></div><div class="meta"><div class="nm">Sage light</div><div class="hx">#52B788</div></div></div>
+      <div class="sw"><div class="chip" style="background:#74C69D;"></div><div class="meta"><div class="nm">Mint soft</div><div class="hx">#74C69D</div></div></div>
+      <div class="sw"><div class="chip" style="background:#95D5B2;"></div><div class="meta"><div class="nm">Mint pale</div><div class="hx">#95D5B2</div></div></div>
+      <div class="sw"><div class="chip" style="background:#D8F3DC;"></div><div class="meta"><div class="nm">Cream green</div><div class="hx">#D8F3DC</div></div></div>
+      <div class="sw"><div class="chip" style="background:#1A1F1C;"></div><div class="meta"><div class="nm">Charcoal</div><div class="hx">#1A1F1C</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    All assets live in <code>/brand-kit</code> — SVG (scalable + animated) and <code>/brand-kit/png</code> (rasters).<br />
+    Mark geometry &amp; wordmark set in Inter · numerals in JetBrains Mono · exact SynQuanta palette.
+  </div>
+</footer>
+
+</body>
+</html>
