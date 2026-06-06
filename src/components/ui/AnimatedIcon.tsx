@@ -1,6 +1,6 @@
 import { motion, useReducedMotion, type Transition } from 'framer-motion';
 import { ReactNode } from 'react';
-import { EASE_OUT, DUR, VIEWPORT } from '../../lib/motion';
+import { EASE_OUT, DUR } from '../../lib/motion';
 
 interface AnimatedIconProps {
   /** Icon element(s) to render inside the chip. */
@@ -26,14 +26,15 @@ export const AnimatedIcon = ({ children, className, index = 0 }: AnimatedIconPro
   const revealTransition: Transition = { duration: DUR.base, ease: EASE_OUT };
 
   if (shouldReduceMotion) {
-    // Reveal still allowed (transform/opacity, instant under reduced-motion via
-    // framer's own handling), but no looping idle/hover motion.
+    // Reveal on mount (not whileInView): these chips sit inside a variant-driven
+    // StaggerContainer, and a nested whileInView observer can fail to fire there
+    // — leaving the icon stuck at opacity:0 (was invisible on mobile). animate
+    // guarantees the icon always ends visible.
     return (
       <motion.div
         className={className}
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={VIEWPORT}
+        animate={{ opacity: 1 }}
         transition={revealTransition}
       >
         {children}
@@ -49,8 +50,7 @@ export const AnimatedIcon = ({ children, className, index = 0 }: AnimatedIconPro
     <motion.div
       className={className}
       initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
-      whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-      viewport={VIEWPORT}
+      animate={{ opacity: 1, scale: 1, rotate: 0 }}
       transition={revealTransition}
       whileHover={{
         y: -3,

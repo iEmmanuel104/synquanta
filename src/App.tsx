@@ -10,13 +10,16 @@ const PortfolioPage = lazy(() => import('./pages/PortfolioPage').then((m) => ({ 
 const FaqPage = lazy(() => import('./pages/FaqPage').then((m) => ({ default: m.FaqPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })));
 
-/** Lightweight branded fallback while a page chunk loads. */
+/**
+ * Branded fallback while a page chunk loads — the self-animating Orbit Atom
+ * mark instead of a generic spinner. Chunks are tiny + immutably cached, so this
+ * is rarely seen and never lingers; the logo simply keeps the brand on screen
+ * for the brief first-load handoff.
+ */
 const PageLoader = () => (
   <div className="flex min-h-screen items-center justify-center bg-neutral-off-white">
-    <div
-      className="h-8 w-8 animate-spin rounded-full border-2 border-cream-green border-t-forest-primary"
-      aria-label="Loading"
-    />
+    <img src="/brand-kit/orbit-atom-animated.svg" alt="" width={64} height={64} className="h-16 w-16" />
+    <span className="sr-only">Loading</span>
   </div>
 );
 
