@@ -15,27 +15,34 @@ interface AnimatedTextProps {
    * it on the container fails because the words sit in inline-block spans.
    */
   gradientClass?: string;
+  /**
+   * Compressed timing for above-the-fold text that animates on page load
+   * (the hero). The user has already waited through the network + JS mount —
+   * the reveal should finish fast. Scroll-triggered reveals keep the default,
+   * more theatrical pace.
+   */
+  quick?: boolean;
 }
 
-const containerVariants = (delay: number) => ({
+const containerVariants = (delay: number, stagger: number) => ({
   hidden: {},
   visible: {
     transition: {
       delayChildren: delay,
-      staggerChildren: 0.045,
+      staggerChildren: stagger,
     },
   },
 });
 
-const wordVariants = {
+const wordVariants = (duration: number) => ({
   hidden: { opacity: 0, y: 18, filter: 'blur(4px)' },
   visible: {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: DUR.fast, ease: EASE_OUT },
+    transition: { duration, ease: EASE_OUT },
   },
-};
+});
 
 /**
  * Reveals a heading word-by-word with a cohesive stagger. The full string
@@ -49,9 +56,12 @@ export const AnimatedText = ({
   delay = 0,
   light = false,
   gradientClass,
+  quick = false,
 }: AnimatedTextProps) => {
   const shouldReduceMotion = useReducedMotion();
   const words = text.split(' ');
+  const stagger = quick ? 0.03 : 0.045;
+  const duration = quick ? 0.28 : DUR.fast;
 
   if (shouldReduceMotion) {
     // Plain accessible text node — gradient (if any) goes on the element itself,
@@ -68,7 +78,7 @@ export const AnimatedText = ({
       initial="hidden"
       whileInView="visible"
       viewport={VIEWPORT}
-      variants={containerVariants(delay)}
+      variants={containerVariants(delay, stagger)}
     >
       {words.map((word, i) => (
         <Fragment key={`${word}-${i}`}>
@@ -76,7 +86,7 @@ export const AnimatedText = ({
             <motion.span
               className={`inline-block ${gradientClass ?? ''}`}
               style={light ? { willChange: 'transform, filter, opacity' } : undefined}
-              variants={wordVariants}
+              variants={wordVariants(duration)}
             >
               {word}
             </motion.span>

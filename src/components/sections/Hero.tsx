@@ -65,18 +65,23 @@ export const Hero = () => {
 
               {/* Main Headline */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white tracking-[-0.02em] leading-[1.1] mb-6">
+                {/* quick + tight delays: the branded boot shell has already
+                    covered the wait — the headline should be legible well
+                    under half a second after React mounts. */}
                 <AnimatedText
                   as="span"
                   text="We bring ideas"
                   light
-                  delay={0.3}
+                  quick
+                  delay={0.05}
                   className="block"
                 />
                 <AnimatedText
                   as="span"
                   text="to life."
                   light
-                  delay={0.55}
+                  quick
+                  delay={0.2}
                   className="block"
                   gradientClass="bg-gradient-to-r from-sage-light via-mint-soft to-mint-pale bg-clip-text text-transparent"
                 />
@@ -87,7 +92,7 @@ export const Hero = () => {
                 className="max-w-2xl mx-auto lg:mx-0 text-lg md:text-xl text-white/60 mb-10 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                transition={{ delay: 0.3, duration: 0.45 }}
               >
                 We design platforms, build web &amp; mobile products, and help startups go from first
                 sketch to launch — researched first, then engineered to last.
@@ -98,7 +103,7 @@ export const Hero = () => {
                 className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
+                transition={{ delay: 0.4, duration: 0.45 }}
               >
                 <MotionLink
                   to="/contact"
