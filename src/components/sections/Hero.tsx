@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { AnimatedGrid } from '../ui/AnimatedGrid';
 import { FloatingCodeCard } from '../ui/FloatingCodeCard';
+import { Picture } from '../ui/Picture';
 import { AnimatedText } from '../animations/AnimatedText';
 
 const MotionLink = motion.create(Link);
@@ -21,11 +22,11 @@ export const Hero = () => {
 
       {/* Aurora photographic accent — glows through the dark grid */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <img
+        <Picture
           src="/images/hero-abstract.jpg"
           alt=""
           loading="eager"
-          decoding="async"
+          fetchPriority="high"
           className="h-full w-full object-cover opacity-30 md:mix-blend-screen"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/45 via-forest-deep/10 to-forest-deep/35" />

@@ -1,6 +1,7 @@
 import { Check, ArrowRight } from 'lucide-react';
 import { Section } from '../layout/Section';
 import { Button } from '../ui/Button';
+import { Picture } from '../ui/Picture';
 import { FadeIn } from '../animations/FadeIn';
 
 const points = [
@@ -16,11 +17,10 @@ export const FlagshipTeaser = () => {
       <div className="relative overflow-hidden rounded-sq-2xl shadow-sq-xl">
         {/* Stadium backdrop */}
         <div className="absolute inset-0" aria-hidden="true">
-          <img
+          <Picture
             src="/images/products-stadium.jpg"
             alt=""
             loading="lazy"
-            decoding="async"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-deep/95 via-forest-deep/85 to-forest-deep/60" />

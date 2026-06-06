@@ -6,5 +6,6 @@ export { Logo } from './Logo';
 export { PhoneMock } from './PhoneMock';
 export { SectionHeading } from './SectionHeading';
 export { PageHero } from './PageHero';
+export { Picture } from './Picture';
 export { Accordion } from './Accordion';
 export { Lightbox } from './Lightbox';

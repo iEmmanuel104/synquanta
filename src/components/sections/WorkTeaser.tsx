@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
+import { Picture } from '../ui/Picture';
 import { StaggerContainer, staggerItemVariants } from '../animations/StaggerContainer';
 import { portfolioProjects } from '../../constants';
 
@@ -27,11 +28,10 @@ export const WorkTeaser = () => {
               className="group flex h-full flex-col overflow-hidden rounded-sq-2xl border border-cream-green bg-white shadow-sq transition-all duration-300 hover:-translate-y-1.5 hover:shadow-sq-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
-                <img
+                <Picture
                   src={p.image}
                   alt={`${p.name} — ${p.category}`}
                   loading="lazy"
-                  decoding="async"
                   className="h-full w-full object-cover object-top transition-transform duration-500 ease-out will-change-transform group-hover:scale-[1.04]"
                 />
               </div>

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { FadeIn, AnimatedText } from '../animations';
+import { Picture } from './Picture';
 
 interface PageHeroProps {
   eyebrow?: string;
@@ -20,11 +21,10 @@ export const PageHero = ({ eyebrow, title, subtitle, image, children }: PageHero
     <section className="relative overflow-hidden bg-forest-deep">
       {/* Background image + brand wash */}
       <div className="absolute inset-0" aria-hidden="true">
-        <img
+        <Picture
           src={image}
           alt=""
           loading="eager"
-          decoding="async"
           className="h-full w-full object-cover opacity-35"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/85 via-forest-deep/80 to-forest-deep/95" />

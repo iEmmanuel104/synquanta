@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Maximize2 } from 'lucide-react';
 import { Section } from '../layout/Section';
 import { Lightbox } from '../ui/Lightbox';
+import { Picture } from '../ui/Picture';
 import { staggerItemVariants, StaggerContainer } from '../animations/StaggerContainer';
 import { portfolioProjects } from '../../constants';
 import { PortfolioProject } from '../../types';
@@ -25,11 +26,10 @@ export const PortfolioGrid = () => {
           >
             {/* Screenshot */}
             <div className="relative aspect-[16/10] overflow-hidden">
-              <img
+              <Picture
                 src={p.image}
                 alt={`${p.name} — ${p.category}`}
                 loading="lazy"
-                decoding="async"
                 className="h-full w-full object-cover object-top transition-transform duration-500 ease-out will-change-transform group-hover:scale-[1.04]"
               />
               {/* Expand hint */}

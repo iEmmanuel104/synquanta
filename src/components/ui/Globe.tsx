@@ -69,9 +69,17 @@ export const Globe = ({
     if (!seen || !container || !canvas) return;
 
     const reduce = prefersReducedMotion();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Cap the render resolution on phones / low-core devices — a decorative
+    // globe doesn't need 2× DPR there, and halving the pixel count is the
+    // difference between smooth and janky on mid-range Android. Visually
+    // indistinguishable; the dot-map density (mapSamples) is left untouched.
+    const lowPower =
+      window.innerWidth < 768 ||
+      (typeof navigator !== 'undefined' && (navigator.hardwareConcurrency || 8) <= 4);
+    const dpr = Math.min(window.devicePixelRatio || 1, lowPower ? 1.5 : 2);
     let w = container.offsetWidth || 480;
     let raf = 0;
+    let running = false;
 
     const initialMarkers: Marker[] = baseMarkers.map((m) => ({
       location: m.location,
@@ -103,6 +111,7 @@ export const Globe = ({
 
     const start = performance.now();
     const tick = () => {
+      if (!running) return; // paused (scrolled out of view) → stop the loop
       if (!reduce && pointerStart.current === null) phi.current += 0.0035;
       const t = (performance.now() - start) / 1000;
       const pulsed: Marker[] = baseMarkers.map((m) => ({
@@ -113,10 +122,29 @@ export const Globe = ({
       globe.update({ phi: phi.current + drag.current, markers: pulsed });
       raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
+
+    // Only spin while the globe is actually on screen. When it scrolls away the
+    // rAF loop stops entirely, so the GPU stays idle during unrelated scrolling
+    // (the Android scroll-jank fix); it resumes seamlessly on re-entry.
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((e) => e.isIntersecting);
+        if (visible && !running) {
+          running = true;
+          raf = requestAnimationFrame(tick);
+        } else if (!visible && running) {
+          running = false;
+          cancelAnimationFrame(raf);
+        }
+      },
+      { threshold: 0 },
+    );
+    io.observe(container);
 
     return () => {
+      running = false;
       cancelAnimationFrame(raf);
+      io.disconnect();
       ro.disconnect();
       globe.destroy();
     };

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { PortfolioProject } from '../../types';
+import { Picture } from './Picture';
 
 interface LightboxProps {
   project: PortfolioProject | null;
@@ -62,7 +63,7 @@ export const Lightbox = ({ project, onClose }: LightboxProps) => {
             >
               <X size={18} />
             </button>
-            <img
+            <Picture
               src={project.image}
               alt={`${project.name} — ${project.category}`}
               className="max-h-[70vh] w-full object-cover object-top"
