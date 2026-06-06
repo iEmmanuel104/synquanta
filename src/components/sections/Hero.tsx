@@ -22,11 +22,15 @@ export const Hero = () => {
 
       {/* Aurora photographic accent — glows through the dark grid */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* noAvif: this is the LCP image — Safari decodes avif noticeably
+            slower than webp, so the eager hero serves webp (68KB vs 47KB is
+            worth the faster paint). */}
         <Picture
           src="/images/hero-abstract.jpg"
           alt=""
           loading="eager"
           fetchPriority="high"
+          noAvif
           className="h-full w-full object-cover opacity-30 md:mix-blend-screen"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/45 via-forest-deep/10 to-forest-deep/35" />

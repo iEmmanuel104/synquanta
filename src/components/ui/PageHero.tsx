@@ -21,10 +21,13 @@ export const PageHero = ({ eyebrow, title, subtitle, image, children }: PageHero
     <section className="relative overflow-hidden bg-forest-deep">
       {/* Background image + brand wash */}
       <div className="absolute inset-0" aria-hidden="true">
+        {/* noAvif: eager above-the-fold image — webp decodes faster in Safari. */}
         <Picture
           src={image}
           alt=""
           loading="eager"
+          fetchPriority="high"
+          noAvif
           className="h-full w-full object-cover opacity-35"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/85 via-forest-deep/80 to-forest-deep/95" />

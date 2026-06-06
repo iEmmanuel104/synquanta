@@ -1,5 +1,5 @@
-import { motion, useReducedMotion, type Transition } from 'framer-motion';
-import { ReactNode } from 'react';
+import { motion, useInView, useReducedMotion, type Transition } from 'framer-motion';
+import { ReactNode, useRef } from 'react';
 import { EASE_OUT, DUR } from '../../lib/motion';
 
 interface AnimatedIconProps {
@@ -14,27 +14,32 @@ interface AnimatedIconProps {
 /**
  * Motion wrapper for the coloured icon "chips" across the site.
  *
- * - reveal: scale 0.6 -> 1 + slight rotate (-8deg -> 0) on whileInView (once).
+ * - reveal: scale 0.6 -> 1 + slight rotate (-8deg -> 0) when scrolled into view.
  * - idle:   a tiny, varied float/pulse loop (disabled under reduced-motion).
  * - hover:  subtle lift + rotate + brand glow.
  *
- * Visual chip styling stays with the caller's `className`; this only adds motion.
+ * Reveal uses the `useInView` hook + `animate` rather than `whileInView`:
+ * these chips sit inside variant-driven StaggerContainers, and a nested
+ * whileInView prop conflicts with the parent's variant propagation (the icons
+ * were stuck at opacity:0 on mobile). The hook drives `animate` directly, so
+ * it is independent of any parent variants — scroll-reveal that can never be
+ * left invisible.
  */
 export const AnimatedIcon = ({ children, className, index = 0 }: AnimatedIconProps) => {
   const shouldReduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
 
   const revealTransition: Transition = { duration: DUR.base, ease: EASE_OUT };
 
   if (shouldReduceMotion) {
-    // Reveal on mount (not whileInView): these chips sit inside a variant-driven
-    // StaggerContainer, and a nested whileInView observer can fail to fire there
-    // — leaving the icon stuck at opacity:0 (was invisible on mobile). animate
-    // guarantees the icon always ends visible.
+    // Reveal still allowed (simple fade), but no looping idle/hover motion.
     return (
       <motion.div
+        ref={ref}
         className={className}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
         transition={revealTransition}
       >
         {children}
@@ -48,9 +53,10 @@ export const AnimatedIcon = ({ children, className, index = 0 }: AnimatedIconPro
 
   return (
     <motion.div
+      ref={ref}
       className={className}
       initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
-      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+      animate={inView ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.6, rotate: -8 }}
       transition={revealTransition}
       whileHover={{
         y: -3,

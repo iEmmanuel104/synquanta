@@ -3,6 +3,12 @@ import type { ImgHTMLAttributes } from 'react';
 interface PictureProps extends ImgHTMLAttributes<HTMLImageElement> {
   /** Path to the JPEG/PNG fallback under /public (e.g. "/images/hero-abstract.jpg"). */
   src: string;
+  /**
+   * Skip the avif source. Use for above-the-fold/LCP images: Safari decodes
+   * avif ~2× slower than webp, so the eager hero images serve webp instead —
+   * below-the-fold imagery keeps avif's smaller bytes.
+   */
+  noAvif?: boolean;
 }
 
 /**
@@ -12,11 +18,11 @@ interface PictureProps extends ImgHTMLAttributes<HTMLImageElement> {
  * to layout — the inner `<img>` keeps every class/attribute it had before, so
  * the rendering is pixel-identical, just lighter bytes.
  */
-export const Picture = ({ src, alt = '', ...img }: PictureProps) => {
+export const Picture = ({ src, alt = '', noAvif = false, ...img }: PictureProps) => {
   const base = src.replace(/\.(jpe?g|png)$/i, '');
   return (
     <picture style={{ display: 'contents' }}>
-      <source srcSet={`${base}.avif`} type="image/avif" />
+      {!noAvif && <source srcSet={`${base}.avif`} type="image/avif" />}
       <source srcSet={`${base}.webp`} type="image/webp" />
       <img src={src} alt={alt} decoding="async" {...img} />
     </picture>
