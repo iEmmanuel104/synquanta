@@ -1,11 +1,15 @@
 import { PageHero } from '../components/ui';
 import { Contact } from '../components/sections';
-import { usePageTitle } from '../lib/usePageTitle';
+import { Seo } from '../components/Seo';
 
 export const ContactPage = () => {
-  usePageTitle('Contact | SynQuanta Technologies');
   return (
     <>
+      <Seo
+        path="/contact"
+        title="Contact | SynQuanta Technologies"
+        description="Tell us about your business and we'll come back with a research-led plan and a tailored quote. Let's build your product together."
+      />
       <PageHero
         eyebrow="Let's talk"
         title="Tell us about your business"

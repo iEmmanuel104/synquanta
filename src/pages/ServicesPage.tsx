@@ -1,11 +1,15 @@
 import { PageHero } from '../components/ui';
 import { Services, Values, CallToAction } from '../components/sections';
-import { usePageTitle } from '../lib/usePageTitle';
+import { Seo } from '../components/Seo';
 
 export const ServicesPage = () => {
-  usePageTitle('Services | SynQuanta Technologies');
   return (
     <>
+      <Seo
+        path="/services"
+        title="Services | SynQuanta Technologies"
+        description="Platforms, web & mobile products, custom software and AI. SynQuanta helps teams turn an idea into a launched product — research-led, from first sketch to ship."
+      />
       <PageHero
         eyebrow="What we do"
         title="From idea to launch — we design, build & ship"

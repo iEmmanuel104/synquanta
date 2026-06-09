@@ -4,10 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
+    <!-- Primary Meta Tags. NOTE: title, description and canonical are owned
+         per-route by src/components/Seo.tsx (react-helmet-async) — they are
+         intentionally NOT duplicated here, to avoid two conflicting canonical/
+         description tags in the rendered DOM. The values below are the initial
+         pre-React paint only (Helmet replaces <title> on mount). The og:/twitter
+         block further down is kept static as the homepage social-card fallback
+         for non-JS scrapers. -->
     <title>SynQuanta Technologies | Product studio — platforms, apps & software</title>
-    <meta name="title" content="SynQuanta Technologies | Product studio — platforms, apps & software" />
-    <meta name="description" content="SynQuanta is a research-led product studio. We design platforms, build web & mobile products, and bring startup ideas to life — from first sketch to launch." />
     <meta name="keywords" content="product studio, software development, web applications, mobile app development, platforms, custom software, AI, MVP, startups" />
     <meta name="author" content="SynQuanta Technologies Ltd" />
     <meta name="theme-color" content="#1B4332" />
@@ -47,8 +51,37 @@
          the home route is the overwhelming entry point. -->
     <link rel="preload" href="/images/hero-abstract.webp" as="image" type="image/webp" fetchpriority="high" />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://synquanta.com/" />
+    <!-- Canonical is set per-route by Seo.tsx (react-helmet-async). -->
+
+    <!-- Structured data (Organization + WebSite) — static so it is present for
+         every route regardless of JS. Per-page <title>/description/OG are set
+         dynamically via src/components/Seo.tsx. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://synquanta.com/#organization",
+            "name": "SynQuanta Technologies",
+            "legalName": "SynQuanta Technologies Ltd",
+            "url": "https://synquanta.com/",
+            "logo": "https://synquanta.com/brand-kit/png/app-icon-180.png",
+            "image": "https://synquanta.com/brand-kit/png/og-image-1200x630.png",
+            "email": "info@synquanta.com",
+            "description": "A research-led product studio. We design platforms, build web & mobile products, and bring startup ideas to life — from first sketch to launch.",
+            "sameAs": []
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://synquanta.com/#website",
+            "url": "https://synquanta.com/",
+            "name": "SynQuanta Technologies",
+            "publisher": { "@id": "https://synquanta.com/#organization" }
+          }
+        ]
+      }
+    </script>
 
     <!-- Pre-hydration shell. Every route opens on a dark hero, but until the
          JS bundle parses and React mounts, #root is empty and the body is

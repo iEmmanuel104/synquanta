@@ -1,0 +1,6 @@
+# SynQuanta Technologies — https://synquanta.com
+# Allow all crawlers full access; point them at the sitemap.
+User-agent: *
+Allow: /
+
+Sitemap: https://synquanta.com/sitemap.xml
