@@ -4,13 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags. NOTE: title, description and canonical are owned
-         per-route by src/components/Seo.tsx (react-helmet-async) — they are
-         intentionally NOT duplicated here, to avoid two conflicting canonical/
-         description tags in the rendered DOM. The values below are the initial
-         pre-React paint only (Helmet replaces <title> on mount). The og:/twitter
-         block further down is kept static as the homepage social-card fallback
-         for non-JS scrapers. -->
+    <!-- Per-route title, description, canonical, OG/Twitter and JSON-LD are
+         owned by src/components/Seo.tsx and baked into each route's HTML at build
+         time by the prerender step (src/entry-prerender.tsx). The title below is
+         only the pre-hydration default for the dev server / SPA fallback. -->
     <title>SynQuanta Technologies | Product studio — platforms, apps & software</title>
     <meta name="keywords" content="product studio, software development, web applications, mobile app development, platforms, custom software, AI, MVP, startups" />
     <meta name="author" content="SynQuanta Technologies Ltd" />
@@ -23,22 +20,10 @@
     <link rel="apple-touch-icon" href="/brand-kit/png/app-icon-180.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.synquanta.com/" />
-    <meta property="og:title" content="SynQuanta Technologies | Product studio" />
-    <meta property="og:description" content="A research-led product studio — we design platforms, build web & mobile products, and bring startup ideas to life." />
-    <meta property="og:image" content="https://www.synquanta.com/brand-kit/png/og-image-1200x630.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="SynQuanta Technologies" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.synquanta.com/" />
-    <meta name="twitter:title" content="SynQuanta Technologies | Product studio" />
-    <meta name="twitter:description" content="A research-led product studio — we design platforms, build web & mobile products, and bring startup ideas to life." />
-    <meta name="twitter:image" content="https://www.synquanta.com/brand-kit/png/og-image-1200x630.png" />
+    <!-- Open Graph / Twitter cards are emitted PER-ROUTE by src/components/Seo.tsx
+         and baked into each prerendered route's HTML at build time (see
+         src/entry-prerender.tsx). Kept out of this shared template so prerendered
+         pages don't carry duplicate/homepage-only social tags. -->
 
     <!-- Fonts — self-hosted woff2 (declared in src/styles/fonts.css). Preload
          the above-the-fold faces (body Inter + Clash Display 600 headline) so
@@ -71,7 +56,9 @@
             "image": "https://www.synquanta.com/brand-kit/png/og-image-1200x630.png",
             "email": "info@synquanta.com",
             "description": "A research-led product studio. We design platforms, build web & mobile products, and bring startup ideas to life — from first sketch to launch.",
-            "sameAs": [],
+            "sameAs": [
+              "https://apps.apple.com/us/developer/synquanta-technologies-ltd/id1853940256"
+            ],
             "contactPoint": {
               "@type": "ContactPoint",
               "contactType": "sales",
@@ -85,6 +72,22 @@
             "url": "https://www.synquanta.com/",
             "name": "SynQuanta Technologies",
             "publisher": { "@id": "https://www.synquanta.com/#organization" }
+          },
+          {
+            "@type": "MobileApplication",
+            "name": "IQBotix — AI Trading Bot",
+            "operatingSystem": "iOS",
+            "applicationCategory": "FinanceApplication",
+            "url": "https://apps.apple.com/us/app/iqbotix-ai-trading-bot/id6756283021",
+            "author": { "@id": "https://www.synquanta.com/#organization" }
+          },
+          {
+            "@type": "MobileApplication",
+            "name": "Uplivon",
+            "operatingSystem": "iOS",
+            "applicationCategory": "FinanceApplication",
+            "url": "https://apps.apple.com/us/app/uplivon/id6755446082",
+            "author": { "@id": "https://www.synquanta.com/#organization" }
           }
         ]
       }
@@ -136,6 +139,8 @@
         <g class="sq-orb"><circle cx="69" cy="69" r="5" fill="url(#sqb)"></circle></g>
       </svg>
     </div>
+    <!-- Build-only SSG entry (the `prerender` attribute is stripped from output). -->
+    <script prerender type="module" src="/src/entry-prerender.tsx"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

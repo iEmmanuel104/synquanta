@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { vitePrerenderPlugin } from 'vite-prerender-plugin'
 
 /**
  * Inline the built CSS into index.html instead of emitting a render-blocking
@@ -45,5 +46,14 @@ function inlineCss(): Plugin {
 // WebKit modulepreload caching quirk). One straightforward bundle is the
 // stable, fast-everywhere configuration for a site this size.
 export default defineConfig({
-  plugins: [react(), tailwindcss(), inlineCss()],
+  // Order matters: prerender renders each route into the HTML template, then
+  // inlineCss() (enforce:'post') inlines the stylesheet into every emitted file.
+  // renderTarget '#root' injects markup INTO #root and leaves the #sq-boot shell
+  // and module scripts untouched.
+  plugins: [
+    react(),
+    tailwindcss(),
+    vitePrerenderPlugin({ renderTarget: '#root' }),
+    inlineCss(),
+  ],
 })
