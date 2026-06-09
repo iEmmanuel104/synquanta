@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-const SITE_URL = 'https://synquanta.com';
+const SITE_URL = 'https://www.synquanta.com';
 const DEFAULT_OG = '/brand-kit/png/og-image-1200x630.png';
 
 interface SeoProps {
