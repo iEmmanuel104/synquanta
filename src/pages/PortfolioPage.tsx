@@ -1,6 +1,8 @@
 import { PageHero } from '../components/ui';
 import { PortfolioGrid, CallToAction } from '../components/sections';
 import { Seo } from '../components/Seo';
+import { portfolioProjects } from '../constants';
+import { breadcrumb, creativeWorkListSchema } from '../lib/structuredData';
 
 export const PortfolioPage = () => {
   return (
@@ -9,6 +11,13 @@ export const PortfolioPage = () => {
         path="/portfolio"
         title="Portfolio | SynQuanta Technologies"
         description="Selected work from SynQuanta — platforms we've designed and shipped for founders and teams across fintech, education, community, e-commerce and fashion."
+        jsonLd={[
+          breadcrumb([
+            { name: 'Home', path: '/' },
+            { name: 'Portfolio', path: '/portfolio' },
+          ]),
+          creativeWorkListSchema(portfolioProjects),
+        ]}
       />
       <PageHero
         eyebrow="Selected work"

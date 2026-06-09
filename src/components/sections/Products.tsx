@@ -1,4 +1,5 @@
-import { Check, Gauge, MapPin, LucideIcon } from 'lucide-react';
+import { Check } from 'lucide-react';
+import { products, type Product } from '../../constants/products';
 import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Button } from '../ui/Button';
@@ -31,54 +32,6 @@ const Trophy = ({ size = 26, color = 'currentColor' }: { size?: number; color?: 
     <line x1="14" y1="42" x2="34" y2="42" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
   </svg>
 );
-
-interface Product {
-  flagship: boolean;
-  icon: LucideIcon;
-  name: string;
-  outcome: string;
-  bullets: string[];
-  cta: string;
-}
-
-const products: Product[] = [
-  {
-    flagship: true,
-    icon: Gauge, // unused for flagship (uses Trophy), kept for type parity
-    name: 'World Cup Revenue Optimization',
-    outcome: 'Climb the maps, fix the site, and capture matchday crowds — before kickoff.',
-    bullets: [
-      'Local map climb to top-5 before Group Stage',
-      'Mobile-first rebuild, 85+ PageSpeed',
-      'Automated review velocity program',
-    ],
-    cta: 'Request a quote',
-  },
-  {
-    flagship: false,
-    icon: Gauge,
-    name: 'Conversion Site Rebuild',
-    outcome: 'A fast, mobile-first website built to turn clicks into covers.',
-    bullets: [
-      'Sub-2-second mobile load',
-      'Online booking & contact built in',
-      'Designed to convert tourist traffic',
-    ],
-    cta: 'Request a quote',
-  },
-  {
-    flagship: false,
-    icon: MapPin,
-    name: 'Local Growth Engine',
-    outcome: 'Get found first when nearby customers search "near me".',
-    bullets: [
-      'Google Business Profile optimization',
-      'Keyword & citation targeting',
-      'Competitor positioning reports',
-    ],
-    cta: 'Request a quote',
-  },
-];
 
 const FlagshipCard = ({ p, delay }: { p: Product; delay: number }) => (
   <FadeIn delay={delay} className="flex">

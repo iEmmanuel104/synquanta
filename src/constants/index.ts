@@ -3,3 +3,4 @@ export { services } from './services';
 export { values } from './values';
 export { portfolioProjects } from './portfolio';
 export { faqs } from './faq';
+export { products } from './products';

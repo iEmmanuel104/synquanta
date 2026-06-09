@@ -1,45 +1,54 @@
 # SEO & Analytics — SynQuanta Website
 
-What's wired in, and the few manual steps that must be done in external dashboards.
+What's automated in the codebase, and the few manual steps that live in external dashboards. Primary domain: **`https://www.synquanta.com`** (apex 307-redirects to www).
 
 ## What's automated (in the codebase)
 
 - **`public/robots.txt`** — allows all crawlers, points to the sitemap.
-- **`public/sitemap.xml`** — the 6 routes. **Maintenance:** when you add a route in `src/App.tsx`, add a matching `<url>` here and bump its `<lastmod>`.
-- **Per-page meta** — `src/components/Seo.tsx` (react-helmet-async) sets a unique `<title>`, `description`, `canonical`, and Open Graph/Twitter tags per route. Each page renders `<Seo path="/x" title=… description=… />`.
-  - The static `og:`/`twitter:` block in `index.html` is the **homepage social-card fallback** for non-JS scrapers (LinkedIn/WhatsApp). Sub-pages share the homepage card on those platforms — Google renders JS so it reads the correct per-page tags. (To make sub-page social cards exact, add build-time prerendering later — currently out of scope.)
-- **Structured data** — `Organization` + `WebSite` JSON-LD is static in `index.html`. (`sameAs` is empty — add social profile URLs when they exist.)
-- **Analytics** — PostHog, **cookieless** (`persistence: 'memory'` in `src/lib/posthog.ts`), so **no consent banner is required**. SPA `$pageview` is captured on every route change in `src/App.tsx`.
+- **`public/sitemap.xml`** — the 6 routes, `www`, with honest `lastmod` (no `priority`/`changefreq` — Google ignores them). **Maintenance:** add a `<url>` when you add a route.
+- **Per-page meta** — `src/components/Seo.tsx` (react-helmet-async): unique `<title>`, description, canonical, OG/Twitter per route. The static `og:`/`twitter:` block + Organization/WebSite graph in `index.html` are the homepage social-card + entity fallback for non-JS scrapers.
+- **Structured data (JSON-LD):**
+  - Static in `index.html`: **Organization** (with `contactPoint`, `sameAs` ready/empty) + **WebSite**.
+  - Per-page via `src/lib/structuredData.ts` → `<Seo jsonLd={…}/>`: **BreadcrumbList** on every inner page; **FAQPage** (/faq), **Service ItemList** (/services), **CreativeWork ItemList** (/portfolio), **Service ItemList** (/products).
+- **Real 404** — `src/pages/NotFoundPage.tsx` with `noindex,follow` (replaced the old soft-404 redirect to `/`).
+- **PWA manifest** — `public/site.webmanifest`, linked in `index.html`.
+- **Analytics** — PostHog, cookieless (no consent banner), SPA `$pageview` per route.
+- **IndexNow** — `scripts/indexnow.mjs` + key file `public/92c0eb543a99c29c906522d60f53c711.txt`. Pings Bing/Yandex/DuckDuckGo (which feed ChatGPT/Copilot). Runs automatically via `npm run deploy`.
 
-## Manual step 1 — Vercel env vars — ✅ DONE
+## Deploy
 
-Already set on the `synquanta` Vercel project for **Production** and **Development**:
-
+```bash
+npm run deploy   # = vercel --prod && npm run indexnow
 ```
-VITE_PUBLIC_POSTHOG_KEY  = phc_wRmyBvotzLRbce2dRTanYboUeArGGXM8w3qwdTCY4Qfk   (public client key)
-VITE_PUBLIC_POSTHOG_HOST = https://us.i.posthog.com
-```
+This builds+deploys to production (Vercel env vars already set: Production + Development) and pings IndexNow. Pushing to git is for source backup; production ships via this CLI command.
 
-Preview is intentionally left unset so PR-preview traffic doesn't pollute the production PostHog project. The vars take effect on the **next build/deploy**.
+---
 
-The PostHog project is "Default project" (id 415405) in org *Synquanta technologies* — it had zero prior events, so the website now owns it. Rename it to **"SynQuanta Website"** in PostHog → Settings if you like.
+## Manual steps (one-time, no API — dashboards only)
 
-Local dev already works via the gitignored `website/.env` (see `.env.example`).
+### 1. Google Search Console (Domain property `synquanta.com` already verified ✅)
+1. **Submit sitemap:** [Search Console](https://search.google.com/search-console) → pick `synquanta.com` → **Indexing → Sitemaps** → type `sitemap.xml` → **Submit**. Expect "Success", 6 URLs discovered.
+2. **Request indexing (×6):** top **URL Inspection** bar → paste each full URL (`https://www.synquanta.com/`, `/services`, `/products`, `/portfolio`, `/faq`, `/contact`) → if "URL is not on Google" → **Request Indexing** (live test ~30–60s). ~10 requests/day; 6 is fine. Re-requesting the same URL doesn't speed it up.
+3. **Monitor:** **Indexing → Pages** (watch "Crawled – currently not indexed" / "Discovered – not indexed"; usually resolves for new sites). **Experience → Core Web Vitals** (field data accrues ~28 days). **Settings → Crawl stats**.
+4. **International targeting:** leave default — you're globally available, no hreflang needed.
+5. **Timeline:** discovery hours→days; first indexing days→~2 weeks; full settling 2–6 weeks for a young domain.
 
-## Manual step 2 — Google Search Console (required for indexing)
+### 2. Bing Webmaster Tools (powers ChatGPT/Copilot)
+[bing.com/webmasters](https://www.bing.com/webmasters) → **Import** → sign in with Google → **Allow** → select `synquanta.com` → **Import**. Ownership + sitemap transfer automatically; data within ~48h.
 
-1. Go to [search.google.com/search-console](https://search.google.com/search-console) and add a **Domain** property: `synquanta.com`.
-2. Verify via **DNS TXT** — add the TXT record Google gives you to the domain's DNS (in your registrar or Vercel DNS). Domain verification covers all subdomains; better than a meta tag.
-3. **Sitemaps** → submit `https://synquanta.com/sitemap.xml`.
-4. **URL Inspection** → test each of the 6 routes → *Request indexing*.
-5. Coverage/Indexing reports populate over the following days.
+### 3. Validate
+- [Rich Results Test](https://search.google.com/test/rich-results) on `https://www.synquanta.com/faq` and `/services` → Organization + BreadcrumbList (+ FAQPage) detected, 0 errors.
+- [opengraph.xyz](https://www.opengraph.xyz/) for social cards (sub-pages share the homepage card until prerendering ships — see below).
 
-Optional, also free: [Bing Webmaster Tools](https://www.bing.com/webmasters) — import directly from Search Console.
+---
 
-## How to verify after deploy
+## Known limitation / next phase — Prerendering (deferred)
 
-- `https://synquanta.com/robots.txt` and `/sitemap.xml` load.
-- View a sub-page (e.g. `/products`), inspect `<head>`: one `canonical`, one `description`, both route-specific.
-- [Google Rich Results Test](https://search.google.com/test/rich-results) on the homepage → Organization + WebSite detected.
-- PostHog → **Activity / Web Analytics** shows live pageviews with country + referrer.
-- Lighthouse → SEO score (target 100).
+The site is a client-rendered SPA, so **per-page** JSON-LD and OG cards are JS-injected: Google/Gemini read them on the render wave, but non-JS scrapers (LinkedIn/Slack/WhatsApp/Bing) see the homepage card + the static Organization graph for sub-pages. The fix is build-time **prerendering** (puppeteer postbuild snapshot → per-route static HTML), tracked as a separate focused pass to avoid destabilizing the Safari-tuned build. Until then, Google/AI-Overviews visibility is fully covered; only non-JS social/Bing *per-page* previews wait on Phase 2.
+
+## On "being found in Gemini / AI search"
+No API forces inclusion. Google AI Overviews/Gemini draw from Google's index — covered by the structured data + sitemap + fast crawl above. ChatGPT/Copilot draw from Bing — covered by Bing import + IndexNow. There is no general Google "request indexing" API (the Indexing API is jobs/livestream only), so step 1.2 stays manual.
+
+## Reference
+- PostHog project "Default project" (id 415405), key `phc_wRmy…4Qfk` (public), cookieless. Vercel env: Production + Development.
+- IndexNow key: `92c0eb543a99c29c906522d60f53c711` (file in `public/`).

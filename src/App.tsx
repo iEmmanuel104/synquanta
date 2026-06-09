@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header, Footer } from './components/layout';
 import { posthog, posthogEnabled } from './lib/posthog';
 // Pages are imported statically (no React.lazy / Suspense) so there is NO
@@ -14,6 +14,7 @@ import { ProductsPage } from './pages/ProductsPage';
 import { PortfolioPage } from './pages/PortfolioPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 /**
  * On every route change scroll to the top — unless the URL carries a #hash, in
@@ -62,7 +63,7 @@ function App() {
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />
