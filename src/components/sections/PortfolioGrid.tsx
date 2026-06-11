@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m as motion, useReducedMotion } from 'framer-motion';
 import { Maximize2 } from 'lucide-react';
 import { Section } from '../layout/Section';
 import { Lightbox } from '../ui/Lightbox';

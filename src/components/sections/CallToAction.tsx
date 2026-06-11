@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { m as motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../layout/Section';
 import { Button } from '../ui/Button';
 import { FadeIn } from '../animations/FadeIn';

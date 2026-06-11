@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { m as motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { StaggerContainer, staggerItemVariants } from '../animations/StaggerContainer';

@@ -1,4 +1,4 @@
-import { motion, useInView, useReducedMotion, type Transition } from 'framer-motion';
+import { m as motion, useInView, useReducedMotion, type Transition } from 'framer-motion';
 import { ReactNode, useRef } from 'react';
 import { EASE_OUT, DUR } from '../../lib/motion';
 

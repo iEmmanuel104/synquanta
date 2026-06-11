@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import createGlobe, { type Marker } from 'cobe';
+import type { Marker } from 'cobe';
 import { GLOBE_CITIES, type GlobeCity } from '../../constants/hostCities';
 import { useInView } from '../../hooks';
 
@@ -68,85 +68,102 @@ export const Globe = ({
     const canvas = canvasRef.current;
     if (!seen || !container || !canvas) return;
 
-    const reduce = prefersReducedMotion();
-    // Cap the render resolution on phones / low-core devices — a decorative
-    // globe doesn't need 2× DPR there, and halving the pixel count is the
-    // difference between smooth and janky on mid-range Android. Visually
-    // indistinguishable; the dot-map density (mapSamples) is left untouched.
-    const lowPower =
-      window.innerWidth < 768 ||
-      (typeof navigator !== 'undefined' && (navigator.hardwareConcurrency || 8) <= 4);
-    const dpr = Math.min(window.devicePixelRatio || 1, lowPower ? 1.5 : 2);
-    let w = container.offsetWidth || 480;
-    let raf = 0;
-    let running = false;
+    // cobe (the WebGL globe engine) is loaded with a DYNAMIC import so it never
+    // sits in the home page's critical bundle — it's fetched only when the globe
+    // actually scrolls into view. The effect is client-only, so this also keeps
+    // the build-time prerender (renderToString) free of cobe.
+    let cancelled = false;
+    let dispose = () => {};
 
-    const initialMarkers: Marker[] = baseMarkers.map((m) => ({
-      location: m.location,
-      size: BASE_SIZE,
-      color: m.color,
-    }));
+    void (async () => {
+      const { default: createGlobe } = await import('cobe');
+      if (cancelled) return;
 
-    const globe = createGlobe(canvas, {
-      devicePixelRatio: dpr,
-      width: w * dpr,
-      height: w * dpr,
-      phi: 0,
-      theta: 0.3,
-      dark: 1,
-      diffuse: 1.2,
-      mapSamples: 16000,
-      mapBrightness: 6,
-      baseColor: FOREST_DEEP,
-      markerColor: MAJOR,
-      glowColor: SAGE,
-      markers: initialMarkers,
-    });
+      const reduce = prefersReducedMotion();
+      // Cap the render resolution on phones / low-core devices — a decorative
+      // globe doesn't need 2× DPR there, and halving the pixel count is the
+      // difference between smooth and janky on mid-range Android. Visually
+      // indistinguishable; the dot-map density (mapSamples) is left untouched.
+      const lowPower =
+        window.innerWidth < 768 ||
+        (typeof navigator !== 'undefined' && (navigator.hardwareConcurrency || 8) <= 4);
+      const dpr = Math.min(window.devicePixelRatio || 1, lowPower ? 1.5 : 2);
+      let w = container.offsetWidth || 480;
+      let raf = 0;
+      let running = false;
 
-    const ro = new ResizeObserver(() => {
-      w = container.offsetWidth || w;
-      globe.update({ width: w * dpr, height: w * dpr });
-    });
-    ro.observe(container);
-
-    const start = performance.now();
-    const tick = () => {
-      if (!running) return; // paused (scrolled out of view) → stop the loop
-      if (!reduce && pointerStart.current === null) phi.current += 0.0035;
-      const t = (performance.now() - start) / 1000;
-      const pulsed: Marker[] = baseMarkers.map((m) => ({
+      const initialMarkers: Marker[] = baseMarkers.map((m) => ({
         location: m.location,
+        size: BASE_SIZE,
         color: m.color,
-        size: reduce ? BASE_SIZE : BASE_SIZE * (1 + 0.5 * Math.sin(t * 2.4 + m.phase)),
       }));
-      globe.update({ phi: phi.current + drag.current, markers: pulsed });
-      raf = requestAnimationFrame(tick);
-    };
 
-    // Only spin while the globe is actually on screen. When it scrolls away the
-    // rAF loop stops entirely, so the GPU stays idle during unrelated scrolling
-    // (the Android scroll-jank fix); it resumes seamlessly on re-entry.
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.some((e) => e.isIntersecting);
-        if (visible && !running) {
-          running = true;
-          raf = requestAnimationFrame(tick);
-        } else if (!visible && running) {
-          running = false;
-          cancelAnimationFrame(raf);
-        }
-      },
-      { threshold: 0 },
-    );
-    io.observe(container);
+      const globe = createGlobe(canvas, {
+        devicePixelRatio: dpr,
+        width: w * dpr,
+        height: w * dpr,
+        phi: 0,
+        theta: 0.3,
+        dark: 1,
+        diffuse: 1.2,
+        mapSamples: 16000,
+        mapBrightness: 6,
+        baseColor: FOREST_DEEP,
+        markerColor: MAJOR,
+        glowColor: SAGE,
+        markers: initialMarkers,
+      });
+
+      const ro = new ResizeObserver(() => {
+        w = container.offsetWidth || w;
+        globe.update({ width: w * dpr, height: w * dpr });
+      });
+      ro.observe(container);
+
+      const start = performance.now();
+      const tick = () => {
+        if (!running) return; // paused (scrolled out of view) → stop the loop
+        if (!reduce && pointerStart.current === null) phi.current += 0.0035;
+        const t = (performance.now() - start) / 1000;
+        const pulsed: Marker[] = baseMarkers.map((m) => ({
+          location: m.location,
+          color: m.color,
+          size: reduce ? BASE_SIZE : BASE_SIZE * (1 + 0.5 * Math.sin(t * 2.4 + m.phase)),
+        }));
+        globe.update({ phi: phi.current + drag.current, markers: pulsed });
+        raf = requestAnimationFrame(tick);
+      };
+
+      // Only spin while the globe is actually on screen. When it scrolls away the
+      // rAF loop stops entirely, so the GPU stays idle during unrelated scrolling
+      // (the Android scroll-jank fix); it resumes seamlessly on re-entry.
+      const io = new IntersectionObserver(
+        (entries) => {
+          const visible = entries.some((e) => e.isIntersecting);
+          if (visible && !running) {
+            running = true;
+            raf = requestAnimationFrame(tick);
+          } else if (!visible && running) {
+            running = false;
+            cancelAnimationFrame(raf);
+          }
+        },
+        { threshold: 0 },
+      );
+      io.observe(container);
+
+      dispose = () => {
+        running = false;
+        cancelAnimationFrame(raf);
+        io.disconnect();
+        ro.disconnect();
+        globe.destroy();
+      };
+    })();
 
     return () => {
-      running = false;
-      cancelAnimationFrame(raf);
-      io.disconnect();
-      ro.disconnect();
-      globe.destroy();
+      cancelled = true;
+      dispose();
     };
   }, [seen, containerRef, baseMarkers]);
 

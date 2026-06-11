@@ -5,7 +5,7 @@ import { PhoneMock } from '../ui/PhoneMock';
 import { FadeIn } from '../animations/FadeIn';
 import { StaggerContainer, staggerItemVariants } from '../animations/StaggerContainer';
 import { AnimatedIcon } from '../ui/AnimatedIcon';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 
 interface Step {
   icon: LucideIcon;

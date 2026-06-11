@@ -6,8 +6,6 @@ import App from './App.tsx'
 import './styles/index.css'
 import { initPostHog } from './lib/posthog'
 
-initPostHog()
-
 // Deliberately client-render (createRoot) OVER the prerendered HTML rather than
 // hydrateRoot. This is a framer-motion-heavy site (AnimatedText/FadeIn/grid),
 // where SSR vs client motion markup mismatches make hydration fragile. The
@@ -23,3 +21,15 @@ createRoot(document.getElementById('root')!).render(
     </HelmetProvider>
   </StrictMode>,
 )
+
+// Analytics is non-critical: load + init posthog-js only once the browser is
+// idle (or 2s later as a fallback) so it never competes with first paint or the
+// initial render on slow mobile devices. The first $pageview is queued by
+// capturePageview() and flushed when this resolves.
+if (typeof window !== 'undefined') {
+  const ric =
+    window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 2000))
+  ric(() => {
+    void initPostHog()
+  })
+}

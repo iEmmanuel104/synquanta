@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { m as motion, useReducedMotion } from 'framer-motion';
 import { ReactNode } from 'react';
 import { staggerItemVariants } from '../animations';
 

@@ -9,7 +9,16 @@ import { Globe, hasWebGL, prefersReducedMotion } from '../ui/Globe';
  * off the technical craft. De-coupled from the World Cup (general copy + dots).
  */
 export const GlobalReach = () => {
-  const [flat] = useState(() => prefersReducedMotion() || !hasWebGL());
+  // Skip the WebGL globe on phones — cobe download + GPU/WebGL init is the
+  // heaviest thing on mid-range mobile, exactly where first-load is slow. The
+  // lightweight radial-gradient fallback below renders instead. Desktop keeps
+  // the interactive globe.
+  const [flat] = useState(
+    () =>
+      prefersReducedMotion() ||
+      !hasWebGL() ||
+      (typeof window !== 'undefined' && window.innerWidth < 768),
+  );
 
   return (
     <section className="relative overflow-hidden bg-mesh-forest py-20 text-white lg:py-28">

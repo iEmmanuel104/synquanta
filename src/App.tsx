@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header, Footer } from './components/layout';
-import { posthog, posthogEnabled } from './lib/posthog';
+import { capturePageview } from './lib/posthog';
 // Pages are imported statically (no React.lazy / Suspense) so there is NO
 // loading state on any browser — the page renders the instant the app mounts,
 // and in-app navigation is immediate. Safari was the slowest to resolve the old
@@ -39,35 +40,39 @@ function ScrollManager() {
 /**
  * Capture a PostHog $pageview on every client-side route change. PostHog's
  * automatic pageview is disabled (capture_pageview: false) because this SPA
- * never does a full page load between routes.
+ * never does a full page load between routes. capturePageview() is queue-safe:
+ * PostHog is loaded lazily on idle, so the first pageview (fired before the SDK
+ * finishes loading) is buffered and flushed once it's ready.
  */
 function PostHogPageviews() {
   const { pathname } = useLocation();
   useEffect(() => {
-    if (posthogEnabled) posthog.capture('$pageview');
+    capturePageview();
   }, [pathname]);
   return null;
 }
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <ScrollManager />
-      <PostHogPageviews />
-      <Header />
-      <main id="main-content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <LazyMotion features={domAnimation} strict>
+      <div className="min-h-screen">
+        <ScrollManager />
+        <PostHogPageviews />
+        <Header />
+        <main id="main-content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </LazyMotion>
   );
 }
 

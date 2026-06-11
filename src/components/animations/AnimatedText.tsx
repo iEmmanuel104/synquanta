@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { m as motion, useReducedMotion } from 'framer-motion';
 import { createElement, Fragment } from 'react';
 import { EASE_OUT, DUR, VIEWPORT } from '../../lib/motion';
 

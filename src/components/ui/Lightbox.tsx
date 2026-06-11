@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m as motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { PortfolioProject } from '../../types';
 import { Picture } from './Picture';
