@@ -1,8 +1,5 @@
 export { Hero } from './Hero';
 export { Services } from './Services';
-export { Products } from './Products';
-export { CoverageBand } from './CoverageBand';
-export { Intel } from './Intel';
 export { WelcomeBand } from './WelcomeBand';
 export { Values } from './Values';
 export { CallToAction } from './CallToAction';
@@ -10,5 +7,4 @@ export { Contact } from './Contact';
 export { ServicesTeaser } from './ServicesTeaser';
 export { GlobalReach } from './GlobalReach';
 export { WorkTeaser } from './WorkTeaser';
-export { FlagshipTeaser } from './FlagshipTeaser';
 export { PortfolioGrid } from './PortfolioGrid';

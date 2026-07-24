@@ -6,7 +6,7 @@ import { Globe, hasWebGL, prefersReducedMotion } from '../ui/Globe';
 
 /**
  * Home-page showcase of the WebGL globe — frames our work as global and shows
- * off the technical craft. De-coupled from the World Cup (general copy + dots).
+ * off the technical craft. General copy + globe dots (no campaign tie-in).
  */
 export const GlobalReach = () => {
   // Skip the WebGL globe on phones — cobe download + GPU/WebGL init is the

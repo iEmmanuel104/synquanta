@@ -48,3 +48,15 @@ export function capturePageview() {
   if (instance) instance.capture('$pageview');
   else queuedPageviews++;
 }
+
+/**
+ * Capture a custom product event (e.g. a contact-form submission) so conversions
+ * are visible in PostHog, not just pageviews. Best-effort + cookieless: if
+ * PostHog hasn't finished its lazy load, the event is dropped rather than queued
+ * (we only queue pageviews) — a fired-and-missed conversion event is acceptable,
+ * and the submission is the source of truth in the platform DB regardless.
+ */
+export function captureEvent(event: string, properties?: Record<string, unknown>) {
+  if (!posthogEnabled || !instance) return;
+  instance.capture(event, properties);
+}

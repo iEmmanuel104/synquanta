@@ -22,10 +22,6 @@ export const faqs: FaqItem[] = [
     a: 'Fintech and trading platforms, education and talent tools, community networks, e-commerce and marketplaces, and fashion storefronts — across web and mobile. You can see a selection on our Portfolio page.',
   },
   {
-    q: 'What is World Cup Revenue Optimization?',
-    a: "It's one of our products — a focused offering that helps local businesses near the 2026 World Cup host cities (USA, Canada and Mexico) get found and get booked when matchday crowds search. It's a single product in our lineup, not the whole studio.",
-  },
-  {
     q: 'How much does it cost?',
     a: 'Every project is scoped and quoted individually — pricing depends on what you’re building and the outcome you need. Tell us your goals and we’ll send a tailored quote, with the plan and price laid out before any work begins.',
   },

@@ -36,7 +36,7 @@ function toHeadElements(parts: Array<{ toComponent(): ReactElement[] }>): HeadEl
   return out;
 }
 
-const ROUTES = ['/', '/services', '/products', '/portfolio', '/faq', '/contact'];
+const ROUTES = ['/', '/services', '/portfolio', '/about', '/faq', '/contact'];
 
 export async function prerender(data: { url: string }) {
   const helmetContext: { helmet?: HelmetServerState } = {};
@@ -50,7 +50,19 @@ export async function prerender(data: { url: string }) {
 
   const h = helmetContext.helmet;
   const elements = new Set<HeadEl>(h ? toHeadElements([h.meta, h.link, h.script]) : []);
-  const title = h?.title.toString().replace(/<\/?title[^>]*>/g, '').trim();
+  // h.title.toString() returns HTML — its text is already entity-escaped (e.g.
+  // "&" → "&amp;"). The prerender plugin escapes head.title AGAIN when it writes
+  // the <title>, which produced "&amp;amp;". Decode helmet's entities once here
+  // so the plugin's single re-escape yields correct output. Decode &amp; LAST.
+  const title = h?.title
+    .toString()
+    .replace(/<\/?title[^>]*>/g, '')
+    .trim()
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#(?:39|x27);/g, "'")
+    .replace(/&amp;/g, '&');
 
   const { parseLinks } = await import('vite-prerender-plugin/parse');
 

@@ -15,6 +15,7 @@ const urlList = [
   '/services',
   '/products',
   '/portfolio',
+  '/about',
   '/faq',
   '/contact',
 ].map((p) => `https://${HOST}${p}`);

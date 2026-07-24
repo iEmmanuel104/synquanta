@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, AlertCircle, ChevronD
 import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { FadeIn } from '../animations/FadeIn';
+import { captureEvent } from '../../lib/posthog';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -18,7 +19,6 @@ const needOptions = [
   'Custom software',
   'AI & automation',
   'Bring my idea to life',
-  'World Cup Revenue Optimization',
   'Something else',
 ];
 
@@ -49,16 +49,10 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
     setStatus('sending');
     setError('');
     try {
-      // Compose a single message body the existing /api/contact endpoint expects.
-      const composedMessage = [
-        `Need: ${form.need}`,
-        form.phone ? `Phone: ${form.phone}` : null,
-        '',
-        form.message,
-      ]
-        .filter((l) => l !== null)
-        .join('\n')
-        .trim();
+      // The message field is optional in the UI, but the API requires a
+      // non-empty message. Fall back to the selected "need" so a details-light
+      // enquiry (name + email + need) still submits.
+      const message = form.message.trim() || `Interested in: ${form.need}`;
 
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -67,12 +61,21 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
           name: form.name,
           email: form.email,
           company: form.company,
-          message: composedMessage,
+          phone: form.phone,
+          need: form.need,
+          message,
           website: form.website,
         }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Could not send your message.');
+      // Conversion event so submissions are visible in PostHog (not just
+      // pageviews). No PII beyond the need category + whether a company was given.
+      captureEvent('contact_form_submitted', {
+        need: form.need,
+        has_company: Boolean(form.company),
+        has_phone: Boolean(form.phone),
+      });
       setStatus('sent');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not send your message.');

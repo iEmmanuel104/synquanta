@@ -3,7 +3,6 @@ import {
   ServicesTeaser,
   GlobalReach,
   WelcomeBand,
-  FlagshipTeaser,
   CallToAction,
 } from '../components/sections';
 import { Seo } from '../components/Seo';
@@ -20,7 +19,6 @@ export const HomePage = () => {
       <ServicesTeaser />
       <GlobalReach />
       <WelcomeBand />
-      <FlagshipTeaser />
       <CallToAction />
     </>
   );

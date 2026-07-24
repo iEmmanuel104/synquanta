@@ -1,5 +1,5 @@
-// Globe markers. The 16 FIFA World Cup 2026 host cities (USA · Canada · Mexico)
-// are the bright focus; a worldwide set of dim markers conveys global reach.
+// Globe markers. A set of North American metros (USA · Canada · Mexico) are the
+// bright focus; a worldwide set of dim markers conveys global reach.
 export interface GlobeCity {
   c: string;
   lat: number;

@@ -3,7 +3,6 @@
 // Organization + WebSite graph lives statically in index.html; these reference
 // it by @id so crawlers stitch the entity together.
 import type { FaqItem, Service, PortfolioProject } from '../types';
-import type { Product } from '../constants/products';
 
 const SITE = 'https://www.synquanta.com';
 const ORG_ID = `${SITE}/#organization`;
@@ -27,6 +26,21 @@ export function breadcrumb(trail: Crumb[]): Json {
       name: c.name,
       item: `${SITE}${c.path}`,
     })),
+  };
+}
+
+/**
+ * AboutPage whose mainEntity is the global Organization (referenced by @id so
+ * crawlers stitch the studio's identity together). Reinforces the entity for
+ * Search's Knowledge Graph and AI overviews.
+ */
+export function aboutPageSchema(): Json {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About SynQuanta Technologies',
+    url: `${SITE}/about`,
+    mainEntity: { '@id': ORG_ID },
   };
 }
 
@@ -79,25 +93,6 @@ export function creativeWorkListSchema(projects: PortfolioProject[]): Json {
         image: `${SITE}${p.image}`,
         ...(p.tags ? { keywords: p.tags.join(', ') } : {}),
         creator: { '@id': ORG_ID },
-      },
-    })),
-  };
-}
-
-/** ItemList of productized Services (World Cup line). */
-export function productListSchema(products: Product[]): Json {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    itemListElement: products.map((p, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      item: {
-        '@type': 'Service',
-        name: p.name,
-        description: p.outcome,
-        provider: { '@id': ORG_ID },
-        areaServed: ['US', 'CA', 'MX'],
       },
     })),
   };

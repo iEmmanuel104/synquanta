@@ -1,5 +1,13 @@
 {
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "synquanta.com" }],
+      "destination": "https://www.synquanta.com/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {

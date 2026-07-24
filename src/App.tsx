@@ -11,8 +11,8 @@ import { capturePageview } from './lib/posthog';
 // libraries are still split into cached vendor chunks via vite.config.ts.
 import { HomePage } from './pages/HomePage';
 import { ServicesPage } from './pages/ServicesPage';
-import { ProductsPage } from './pages/ProductsPage';
 import { PortfolioPage } from './pages/PortfolioPage';
+import { AboutPage } from './pages/AboutPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -63,8 +63,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesPage />} />
-            <Route path="/products" element={<ProductsPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
