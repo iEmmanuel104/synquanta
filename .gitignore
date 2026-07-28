@@ -29,3 +29,14 @@ dist-ssr
 *.sw?
 .vercel
 documents/
+
+# Confidential client billing/PRD artefacts. This repo's origin
+# (iEmmanuel104/synquanta) is PUBLIC — never commit these.
+src/invoice/
+src/prd/
+
+# Local dev screenshots
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
