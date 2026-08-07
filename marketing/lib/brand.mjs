@@ -8,7 +8,7 @@
  * rendered creative must be a single self-contained HTML file, because Chrome
  * screenshots it from `file://` with no server and no network.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -40,6 +40,9 @@ export const GRADIENT = {
   text: `linear-gradient(90deg, ${C.sageLight} 0%, ${C.mintSoft} 50%, ${C.mintPale} 100%)`,
   // The dark hero treatment from brand-kit/index.html, verbatim.
   darkHero: `radial-gradient(800px 380px at 80% -10%, rgba(82,183,136,.18), transparent 60%), linear-gradient(150deg, ${C.forestDeep}, ${C.forestNight})`,
+  // Sits between a photograph and the copy. Heavier at the bottom, where the
+  // logo and URL live and legibility matters most.
+  overlay: `linear-gradient(165deg, rgba(27,67,50,.86) 0%, rgba(18,47,34,.93) 55%, rgba(18,47,34,.97) 100%)`,
 };
 
 // ------------------------------------------------------------------ type
@@ -84,6 +87,28 @@ export const markWhite = (size = 96) =>
     /width="96" height="96"/,
     `width="${size}" height="${size}"`,
   );
+
+// ----------------------------------------------------------- photography
+//
+// Chrome screenshots from file:// with no server, so a photograph has to be
+// inlined as a data URI like everything else. These are royalty-free images
+// under Unsplash/Pexels/Pixabay licences — provenance is recorded in
+// public/images/CREDITS.md, and the house rules there (no recognisable faces,
+// no readable brand logos) apply to anything added.
+
+const PHOTO_DIR = join(WEBSITE, 'public', 'images', 'ad');
+
+/** Inline an ad photograph as a base64 data URI. Returns '' if it is missing. */
+export function photo(name) {
+  const p = join(PHOTO_DIR, name);
+  if (!existsSync(p)) {
+    console.warn(`  ! missing ad photo: public/images/ad/${name} — rendering without it`);
+    return '';
+  }
+  const ext = name.split('.').pop().toLowerCase();
+  const mime = ext === 'png' ? 'image/png' : 'image/jpeg';
+  return `data:${mime};base64,${readFileSync(p).toString('base64')}`;
+}
 
 /**
  * Minimum sizes from design-assets/brand/brand-guidelines.html: full lockup

@@ -16,17 +16,21 @@ Safe zone: top 120px, bottom 200px. Subtitles burned in.
 |---|---|---|
 | 0.0–2.0s | **HOOK.** "Bring us the hard part" — **hard part** in mint. | "Bring us the hard part." |
 | 2.0–5.0s | Cut: a whiteboard mid-argument, arrows, a crossed-out box. | "The half-formed idea. The product that stopped scaling and nobody wants to touch." |
-| 5.0–8.5s | **1 week** in large mono, then the caption under it. | "We spend the first week finding out who your users actually are." |
+| 5.0–8.5s | Three ticks appear: a written plan · a price · one team. | "You get a written plan in plain English, a price before anyone starts work, and one team from first sketch to launch." |
 | 8.5–12.0s | Logo, `synquanta.com/contact`, "A real person reads it". | "Send it over. You'll get a written plan and a price before anyone starts work." |
 
 **Read it like an offer, not a boast.** The line "a real person reads it" is the
 one that earns the click — do not rush it.
 
+**No timelines.** An earlier cut of this script promised a week of research.
+Pulled: it reads as a fixed process, gets quoted back at you in a sales call,
+and is wrong for most projects.
+
 ## Shot list
 
 1. **0–2.0s** Type card, hard cut in. The word "hard" carries the emphasis.
 2. **2.0–5.0s** Whiteboard or wall of sticky notes, genuinely messy, mid-problem. Slow handheld pan left to right. It must look like a real problem, not a tidied set.
-3. **5.0–8.5s** Motion graphic: `1 week` counts up in mono over the dark gradient, gradient accent bar wipes in from the left.
+3. **5.0–8.5s** Motion graphic: three ticked lines stack in over the dark gradient, 140ms apart, each tick drawing on. **No durations on screen.**
 4. **8.5–12.0s** Logo on the dark hero gradient, URL, orbit node settles.
 
 ## Model prompts
@@ -54,3 +58,5 @@ one that earns the click — do not rush it.
 - [ ] Subtitles burned in, inside the safe zone
 - [ ] URL legible for the full final 3.5s
 - [ ] No pricing claim (this concept deliberately makes none)
+- [ ] No duration or timeline claim anywhere
+- [ ] No client names

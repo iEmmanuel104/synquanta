@@ -46,21 +46,31 @@ this by sampling the rendered pixels, not by trusting the CSS.
 
 | Key | Role | Line |
 |---|---|---|
-| `research-first` | positioning | Most software fails because someone guessed |
-| `shipped` | proof | Five products. Real users. |
+| `what-we-build` | what we do | The software your business actually runs on |
+| `how-we-work` | how we do it | You see it every week. No black box. |
 | `hard-part` | direct response | Bring us the hard part |
 
-Together they run a funnel: why us → proof → act. Video kits for each are in
-`video/`.
+The set answers what → how → act. Video kits for each are in `video/`.
 
-A fourth concept, `missed-call`, is **commented out** in `lib/concepts.mjs`. It
-sells the AI Receptionist, which is hidden from the site until the product is
-finished end to end. Restore it alongside `/hvac`.
+Two concepts are **retired**, documented in `lib/concepts.mjs` and not exported:
+
+- `shipped` named the five portfolio clients on the creative. An ad is the
+  wrong surface for a client list, and putting other companies' brands in paid
+  media raises a permission question we have no reason to open. The portfolio
+  is one click away on the site.
+- `missed-call` sold the AI Receptionist, hidden until the product is finished
+  end to end. Restore it alongside `/hvac`, and re-check its price line against
+  `src/constants/hvac.ts` then — `verify.mjs` only guards exported concepts.
 
 ## Rules
 
 - **Copy comes from the live site.** `src/constants/*.ts` and the shipped pages
   are the source. Do not invent a claim for an ad that the site does not make.
+- **No timeline claims.** Never put a duration on research, design or delivery.
+  A line like "a week of research" reads as a fixed process, gets quoted back at
+  you in a sales call, and is wrong for most projects. Scope drives the
+  schedule, and the schedule is agreed per project, in writing.
+- **No client names.** Same reason `shipped` was retired.
 - **Prices must match `src/constants/hvac.ts` byte for byte.** Paddle
   cross-checks published prices against the catalog, so a typo here is a
   compliance problem, not a design one. `verify.mjs` enforces it.
@@ -73,6 +83,20 @@ finished end to end. Restore it alongside `/hvac`.
   lockup 120px wide, mark alone 24px. Clear space is the mark's inner core
   height, `18/96` of mark height — that ratio is set in `lib/brand.mjs` because
   the guidelines only ever said "adequate".
+
+## Photography
+
+Backgrounds come from `public/images/ad/`, royalty-free under Unsplash, Pexels
+or Pixabay licences, with provenance recorded in `public/images/CREDITS.md`.
+Two house rules apply to anything added: **no clearly recognisable faces** and
+**no readable brand logos or on-screen text**.
+
+Each photo sits at low opacity under a near-opaque forest gradient
+(`GRADIENT.overlay`). That is not a style choice — ad copy has to stay legible
+on a phone in daylight, so the image supplies texture and never competes with
+the headline for contrast. Photos inline as base64, because Chrome renders from
+`file://` with no server. A missing file logs a warning and renders without it
+rather than failing the build.
 
 ## Adding a concept
 
