@@ -11,9 +11,9 @@ All images below are royalty-free and licensed for commercial use with **no attr
 | `portfolio-texture.jpg` | Pexels | https://www.pexels.com/photo/worms-eyeview-of-green-trees-957024/ | Felix Mittermeier | Pexels License |
 | `faq-texture.jpg` | Pexels | https://www.pexels.com/photo/green-and-brown-forest-132428/ | Pixabay (contributor) | Pexels License |
 | `contact-texture.jpg` | Unsplash | https://unsplash.com/photos/aerial-view-of-ocean-waves-hitting-the-shore-NWoBuClstZ8 | (aerial ocean waves) | Unsplash License |
-| `ad/building.jpg` | Pexels | https://www.pexels.com/photo/28993127/ | Matheus Bertelli | Pexels License |
+| `ad/building.jpg` | Pexels | https://www.pexels.com/photo/close-up-of-hands-typing-on-keyboard-at-night-31421513/ | Abdelrahman Ahmed | Pexels License |
 | `ad/planning.jpg` | Pexels | https://www.pexels.com/photo/574071/ | Lukas Blazek | Pexels License |
-| `ad/workspace.jpg` | Pexels | https://www.pexels.com/photo/546819/ | Luis Gomes | Pexels License |
+| `ad/workspace.jpg` | Pexels | https://www.pexels.com/photo/moody-workspace-with-keyboard-and-gadgets-34110027/ | Justin Rieta | Pexels License |
 
 ## Notes
 - Images are sized and re-encoded server-side via the CDN's own width/quality parameters (Unsplash `w=&q=&fm=jpg`, Pexels `w=&auto=compress`). All files are JPEG, longest edge ≤ 2400px, and under ~500 KB. (An earlier version of this note said no image tooling was installed — that is now out of date: `sharp` is a devDependency and ImageMagick 6 is on the machine.)
