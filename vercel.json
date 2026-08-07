@@ -6,6 +6,23 @@
       "has": [{ "type": "host", "value": "synquanta.com" }],
       "destination": "https://www.synquanta.com/$1",
       "permanent": true
+    },
+    {
+      "comment": "The AI Receptionist pages are hidden until the product is finished. They were prerendered, sitemapped and IndexNow-pinged, so search engines know them. Without this the SPA rewrite below would serve the root shell at HTTP 200 with a generic title — a soft 404 on an indexed URL. TEMPORARY (307) on purpose: these URLs come back when the product launches, and a permanent redirect would teach Google to forget them.",
+      "source": "/hvac/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/hvac",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "comment": "Same reasoning. The refund policy belongs to the product, not the website, and returns at /hvac/refund-policy.",
+      "source": "/refund-policy",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
