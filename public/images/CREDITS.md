@@ -17,7 +17,12 @@ All images below are royalty-free and licensed for commercial use with **no attr
 
 ## Notes
 - Images are sized and re-encoded server-side via the CDN's own width/quality parameters (Unsplash `w=&q=&fm=jpg`, Pexels `w=&auto=compress`). All files are JPEG, longest edge ≤ 2400px, and under ~500 KB. (An earlier version of this note said no image tooling was installed — that is now out of date: `sharp` is a devDependency and ImageMagick 6 is on the machine.)
-- **`ad/` images** back the advertising creative in `marketing/`. Same three approved sources and the same two house rules, which are load-bearing there: **no clearly recognisable faces** and **no readable brand logos or on-screen branding**. Several otherwise-good candidates were rejected on exactly this — one phone shot showed a TikTok interface, two whiteboard shots had fully readable sticky notes. Readable *code* on a monitor is acceptable: it is subject matter, not third-party branding.
+- **`ad/` images** back the advertising creative in `marketing/`. Same three approved sources, plus three selection rules. The first two are hard blocks; the third is judgement, and it is where most candidates actually die:
+  1. **No clearly recognisable faces.** Hands, backs of heads and out-of-focus figures are fine.
+  2. **No third-party branding.** Brand logos, wordmarks, or a recognisable app interface. A phone shot showing TikTok was rejected on this. Note that a real phone photographed in real use almost always carries branding somewhere — a visible interface realistically needs a mockup, not stock.
+  3. **Readable text is allowed only when it is subject matter, not a message.** Generic *code* on a monitor passes: it reads as texture and says nothing. Sticky notes and whiteboards do not — two candidates were rejected for fully readable "Testing"/"Complete"/"How-To" lettering, which competes with the ad's own words and tends to come with bright, high-key lighting the dark overlay cannot absorb.
+
+  Rule 3 supersedes an earlier, blunter phrasing of "on-screen text must not be readable", which would have excluded the code-on-monitor shot that is actually in use.
 - All chosen images avoid prominent brand logos and clearly recognizable human faces. The stadium is a distant wide shot; the city skyline is a generic aerial with no readable close-up signage.
 - License summaries:
   - **Unsplash License** — free to use commercially, no permission/attribution needed; cannot sell unaltered copies or build a competing stock service.
