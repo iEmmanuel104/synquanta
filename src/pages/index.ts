@@ -3,3 +3,7 @@ export { ServicesPage } from './ServicesPage';
 export { PortfolioPage } from './PortfolioPage';
 export { FaqPage } from './FaqPage';
 export { ContactPage } from './ContactPage';
+export { HvacPage } from './HvacPage';
+export { TermsPage } from './TermsPage';
+export { PrivacyPage } from './PrivacyPage';
+export { RefundPolicyPage } from './RefundPolicyPage';

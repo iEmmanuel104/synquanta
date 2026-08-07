@@ -65,7 +65,7 @@ export const Lightbox = ({ project, onClose }: LightboxProps) => {
             </button>
             <Picture
               src={project.image}
-              alt={`${project.name} — ${project.category}`}
+              alt={`${project.name}: ${project.category}`}
               className="max-h-[70vh] w-full object-cover object-top"
             />
             <div className="p-6 sm:p-7">

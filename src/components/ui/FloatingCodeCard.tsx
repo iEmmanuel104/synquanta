@@ -3,9 +3,9 @@ import { m as motion, useReducedMotion } from 'framer-motion';
 const codeLines = [
   { text: '// synquanta.config.ts', type: 'comment' },
   { text: 'export default {', type: 'keyword' },
-  { text: '  innovation: ', type: 'key', value: 'true', valueType: 'boolean' },
-  { text: '  quality: ', type: 'key', value: '"enterprise"', valueType: 'string' },
-  { text: '  scale: ', type: 'key', value: 'Infinity', valueType: 'keyword' },
+  { text: '  researchFirst: ', type: 'key', value: 'true', valueType: 'boolean' },
+  { text: '  stack: ', type: 'key', value: '"typescript"', valueType: 'string' },
+  { text: '  shipsWith: ', type: 'key', value: '"tests"', valueType: 'string' },
   { text: '}', type: 'keyword' },
 ];
 

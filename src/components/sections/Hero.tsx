@@ -94,8 +94,8 @@ export const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.45 }}
               >
-                We design platforms, build web &amp; mobile products, and help startups go from first
-                sketch to launch — researched first, then engineered to last.
+                Web and mobile products for founders and teams, taken from the first sketch all the
+                way to launch. We find out what to build before we build it.
               </motion.p>
 
               {/* CTAs */}

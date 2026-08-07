@@ -13,11 +13,14 @@ const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 const urlList = [
   '/',
   '/services',
-  '/products',
   '/portfolio',
   '/about',
   '/faq',
   '/contact',
+  '/hvac',
+  '/terms',
+  '/privacy',
+  '/refund-policy',
 ].map((p) => `https://${HOST}${p}`);
 
 const body = { host: HOST, key: KEY, keyLocation: KEY_LOCATION, urlList };

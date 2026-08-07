@@ -77,6 +77,54 @@ export function serviceListSchema(services: Service[]): Json {
   };
 }
 
+/**
+ * Service + Offer for the HVAC AI Receptionist landing page.
+ *
+ * The price here MUST match the price rendered in the pricing section and the
+ * price configured in the Paddle catalog — all three come from `hvacPlan` in
+ * src/constants/hvac.ts for exactly that reason. A mismatch between the price a
+ * crawler reads and the price actually charged is both a rich-result penalty and
+ * a payment-provider verification failure.
+ */
+export function hvacServiceSchema(plan: {
+  name: string;
+  priceUsd: number;
+  currency: string;
+  trialDays: number;
+  includedMinutes: number;
+}): Json {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${SITE}/hvac#service`,
+    name: 'AI Phone Receptionist for HVAC Contractors',
+    serviceType: 'AI answering service for HVAC contractors',
+    description:
+      'An AI receptionist that answers the calls your HVAC business misses, whether that is after hours, on another line, or while you are on a roof. It qualifies the caller, books the job and texts you, using your existing business number.',
+    provider: { '@id': ORG_ID },
+    areaServed: { '@type': 'Country', name: 'United States' },
+    audience: { '@type': 'BusinessAudience', name: 'HVAC contractors' },
+    offers: {
+      '@type': 'Offer',
+      name: plan.name,
+      price: String(plan.priceUsd),
+      priceCurrency: plan.currency,
+      availability: 'https://schema.org/InStock',
+      url: `${SITE}/hvac`,
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: plan.priceUsd,
+        priceCurrency: plan.currency,
+        unitText: 'MONTH',
+        billingDuration: 1,
+        billingIncrement: 1,
+      },
+      eligibleCustomerType: 'https://schema.org/Business',
+      description: `${plan.trialDays}-day free trial, then $${plan.priceUsd} per month including ${plan.includedMinutes} answered minutes. Cancel anytime.`,
+    },
+  };
+}
+
 /** ItemList of portfolio works. */
 export function creativeWorkListSchema(projects: PortfolioProject[]): Json {
   return {

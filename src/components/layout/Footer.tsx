@@ -1,7 +1,7 @@
 import { ArrowUp, Mail, Globe, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
-import { navLinks, services } from '../../constants';
+import { navLinks, legalLinks, services } from '../../constants';
 
 export const Footer = () => {
   const scrollToTop = () => {
@@ -21,7 +21,8 @@ export const Footer = () => {
               <Logo variant="white" />
             </Link>
             <p className="mb-6 text-sm leading-relaxed text-white/70">
-              We research first — then design, build and ship the products that move teams forward.
+              We find out what should be built, then we build it. Web and mobile products for
+              founders and teams.
             </p>
             <div className="flex flex-col gap-3 text-sm">
               <a
@@ -79,7 +80,7 @@ export const Footer = () => {
           <div className="rounded-sq-xl border border-white/10 bg-white/[0.04] p-6">
             <h3 className="mb-2 text-lg font-semibold">Start a project</h3>
             <p className="mb-5 text-sm leading-relaxed text-white/70">
-              Have an idea or a product to scale? Let's bring it to life.
+              Send us the idea, or the product that has outgrown what it was built on.
             </p>
             <Link
               to="/contact"
@@ -91,8 +92,25 @@ export const Footer = () => {
           </div>
         </div>
 
+        {/* Legal — Terms, Privacy and Refund must be publicly linked; Paddle's
+            account verification checks for exactly these three. */}
+        <nav
+          aria-label="Legal"
+          className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-white/10 pt-8 sm:justify-start"
+        >
+          {legalLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className="py-1 text-sm text-white/70 transition-colors hover:text-white"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
         {/* Bottom Bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-sm text-white/60">
             &copy; {currentYear} SynQuanta Technologies Ltd. All rights reserved.
           </p>

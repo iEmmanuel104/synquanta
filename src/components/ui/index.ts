@@ -8,4 +8,5 @@ export { SectionHeading } from './SectionHeading';
 export { PageHero } from './PageHero';
 export { Picture } from './Picture';
 export { Accordion } from './Accordion';
+export { LegalDoc } from './LegalDoc';
 export { Lightbox } from './Lightbox';

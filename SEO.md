@@ -5,11 +5,11 @@ What's automated in the codebase, and the few manual steps that live in external
 ## What's automated (in the codebase)
 
 - **`public/robots.txt`** — allows all crawlers, points to the sitemap.
-- **`public/sitemap.xml`** — the 6 routes, `www`, with honest `lastmod` (no `priority`/`changefreq` — Google ignores them). **Maintenance:** add a `<url>` when you add a route.
+- **`public/sitemap.xml`** — the 10 routes, `www`, with honest `lastmod` (no `priority`/`changefreq` — Google ignores them). **Maintenance:** add a `<url>` when you add a route.
 - **Per-page meta** — `src/components/Seo.tsx` (react-helmet-async): unique `<title>`, description, canonical, OG/Twitter per route. The static `og:`/`twitter:` block + Organization/WebSite graph in `index.html` are the homepage social-card + entity fallback for non-JS scrapers.
 - **Structured data (JSON-LD):**
   - Static in `index.html`: **Organization** (with `contactPoint`, `sameAs` ready/empty) + **WebSite**.
-  - Per-page via `src/lib/structuredData.ts` → `<Seo jsonLd={…}/>`: **BreadcrumbList** on every inner page; **FAQPage** (/faq), **Service ItemList** (/services), **CreativeWork ItemList** (/portfolio), **Service ItemList** (/products).
+  - Per-page via `src/lib/structuredData.ts` → `<Seo jsonLd={…}/>`: **BreadcrumbList** on every inner page; **FAQPage** (/faq, /hvac), **Service ItemList** (/services), **CreativeWork ItemList** (/portfolio), **Service + Offer** (/hvac).
 - **Real 404** — `src/pages/NotFoundPage.tsx` with `noindex,follow` (replaced the old soft-404 redirect to `/`).
 - **PWA manifest** — `public/site.webmanifest`, linked in `index.html`.
 - **Analytics** — PostHog, cookieless (no consent banner), SPA `$pageview` per route.
@@ -70,6 +70,32 @@ This builds+deploys to production (Vercel env vars already set: Production + Dev
 5. **Provide the X/Twitter URL** → it was selected as the one authoritative profile but no URL was given, so `sameAs` currently ships **empty**. Paste the handle and add it to `sameAs` in `index.html`.
 6. **Name-collision notes (out of our control — not bugs in our site):** `synquanta.net` (parked squatter — reclaim/redirect to us if it's yours, else ignore), `synquanta.tech` (a different company), `@synquantalabs` (an unrelated restaurant-ordering brand). Don't chase these in code; a strong, distinct entity is what separates us from them over time.
 7. **Expectation:** re-crawl days→~2 weeks; the AI description and cinquanta/Syngenta confusion settle over **2–6 weeks**. Apple's App Store pages keep ranking for a while regardless — we've stopped *reinforcing* them, not deleted Apple's own URLs.
+
+---
+
+---
+
+## 2026-07-28 — HVAC campaign + legal pages
+
+Four routes added: **`/hvac`** (paid-ad landing page for the AI Receptionist product) and the three
+policy pages **`/terms`**, **`/privacy`**, **`/refund-policy`** — the last three are a hard
+prerequisite for Paddle account verification, which requires live, publicly linked Terms, Privacy and
+Refund policies.
+
+- All four are registered in the six places (`App.tsx`, `entry-prerender.tsx` `ROUTES`,
+  `sitemap.xml`, `scripts/indexnow.mjs`, `src/pages/index.ts`).
+- **The legal three are in `legalLinks`** (`src/constants/navigation.ts`) and render in the footer —
+  *not* in `navLinks`, so they stay out of the header.
+- **`/hvac` is in neither nav list, deliberately.** It is an ad destination: reachable, prerendered
+  and indexed, but not part of the site's own navigation.
+- `scripts/indexnow.mjs` no longer submits `/products` — that route was deleted in `b1abf8a` and had
+  been returning 404 to Bing on every deploy since.
+- The `/hvac` price in the **Offer** JSON-LD, in the pricing card, and in the prose on `/terms` and
+  `/refund-policy` all trace back to `src/constants/hvac.ts`. Paddle cross-checks published prices
+  against the catalog — keep them in step.
+
+**Manual, after the next deploy:** Search Console → re-submit `sitemap.xml`, then URL-inspect and
+request indexing for `/hvac`, `/terms`, `/privacy` and `/refund-policy`.
 
 ---
 

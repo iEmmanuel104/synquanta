@@ -17,7 +17,7 @@ export const AboutPage = () => {
       <Seo
         path="/about"
         title="About SynQuanta Technologies | Software product studio"
-        description="SynQuanta Technologies is a research-led software product studio. We design platforms, build web and mobile products, and turn startup ideas into launched products."
+        description="SynQuanta Technologies is a software product studio that researches before it builds. We design and build web and mobile products for founders and teams, from first sketch to launch."
         jsonLd={[
           breadcrumb([
             { name: 'Home', path: '/' },
@@ -30,7 +30,7 @@ export const AboutPage = () => {
       <PageHero
         eyebrow="About us"
         title="We are SynQuanta Technologies"
-        subtitle="A research-led software product studio. We design platforms, build web and mobile products, and bring startup ideas to life — from first sketch to launch."
+        subtitle="A software product studio that does its homework first. We design and build web and mobile products, and stay with them from the first sketch through to launch."
         image="/images/services-workspace.jpg"
       />
 
@@ -38,26 +38,25 @@ export const AboutPage = () => {
         <div className="mx-auto max-w-3xl">
           <SectionHeading
             title="Who we are"
-            subtitle="An independent software product studio for founders and teams."
+            subtitle="An independent studio, working with founders and teams."
           />
           <div className="space-y-5 text-lg leading-relaxed text-neutral-medium-gray">
             <p>
               <strong className="text-forest-deep">SynQuanta Technologies</strong> (legally
-              SynQuanta Technologies Ltd) is a software product studio. We design and build
-              custom web and mobile products — from the first sketch through to a launched,
-              scalable product that real users rely on.
+              SynQuanta Technologies Ltd) is a software product studio. We design and build custom
+              web and mobile products, starting at the first sketch and staying on them well past
+              the day they go live.
             </p>
             <p>
-              We are research-led: before we write a line of code we study the problem, the
-              market and the people the product is for, so what we ship is grounded in evidence
-              rather than guesswork. That approach runs across everything we make — platforms,
-              web applications, mobile apps, custom software, AI features and early-stage MVPs.
+              The part that makes us useful is what happens before any code exists. We study the
+              problem, the market, and the people the product is meant to serve. It is unglamorous
+              work and it regularly saves clients from building the wrong thing, which is the most
+              expensive mistake available in this line of work.
             </p>
             <p>
-              We work with founders and teams who want a partner that can take an idea and turn
-              it into something tangible and dependable. Whether you are validating a new concept
-              or scaling an existing product, SynQuanta Technologies helps you move from idea to
-              launch with confidence.
+              Our clients are usually founders testing a new idea, or teams whose product has
+              outgrown whatever it was first built on. Both jobs need the same thing: someone who
+              will tell you what they actually found, then build accordingly.
             </p>
           </div>
         </div>
@@ -66,17 +65,17 @@ export const AboutPage = () => {
       <Section id="what-we-do" variant="light" className="scroll-mt-20">
         <div className="mx-auto max-w-3xl">
           <SectionHeading
-            title="What we do"
-            subtitle="Product design and engineering, end to end."
+            title="The shapes this usually takes"
+            subtitle="Design and engineering, from the first conversation to the live product."
           />
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {[
-              ['Platforms', 'Multi-sided systems and dashboards built to scale.'],
-              ['Web products', 'Fast, accessible web applications that ship.'],
-              ['Mobile apps', 'iOS and Android products people keep using.'],
-              ['Custom software', 'Bespoke tools tailored to how your team works.'],
-              ['AI features', 'Practical AI woven into real product workflows.'],
-              ['MVPs', 'Lean first versions that test an idea in the market.'],
+              ['Platforms', 'Multi-sided systems and the dashboards that keep them running.'],
+              ['Web products', 'Web apps that stay fast, and work for people using a screen reader.'],
+              ['Mobile apps', 'iOS and Android products that survive past the first week on a phone.'],
+              ['Custom software', 'Tools shaped around how your team already works.'],
+              ['AI features', 'AI aimed at a specific job inside a real workflow.'],
+              ['MVPs', 'A first version lean enough to test the idea before you commit to it.'],
             ].map(([title, body]) => (
               <li
                 key={title}

@@ -39,6 +39,11 @@
   --radius-sq: var(--sq-radius-md);
   --radius-sq-lg: var(--sq-radius-lg);
   --radius-sq-xl: var(--sq-radius-xl);
+  /* --radius-sq-2xl was missing here while `rounded-sq-2xl` was already used in
+     several components (Accordion, Lightbox, CallToAction, Contact,
+     PortfolioGrid) — Tailwind v4 emitted nothing for those, so they rendered
+     square. Registering the token makes the intended 16px radius apply. */
+  --radius-sq-2xl: var(--sq-radius-2xl);
 }
 
 @layer base {
@@ -672,6 +677,60 @@
   @keyframes sq-badgeIn {
     from { opacity: 0; transform: translateY(10px) scale(0.9); }
     to { opacity: 1; transform: none; }
+  }
+
+  /* ========================================
+     LEGAL DOCUMENTS (/terms, /privacy, /refund-policy)
+     Long-form policy prose. Styled here rather than with per-element utility
+     classes so the page files stay readable as documents.
+     ======================================== */
+
+  .legal-prose {
+    color: var(--sq-medium-gray);
+    font-size: 15.5px;
+    line-height: var(--sq-leading-relaxed);
+  }
+  .legal-prose > section + section {
+    margin-top: 40px;
+  }
+  .legal-prose h2 {
+    font-family: var(--sq-font-primary);
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--sq-forest-deep);
+    letter-spacing: -0.01em;
+    word-spacing: normal;
+    margin-bottom: 12px;
+  }
+  .legal-prose h3 {
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--sq-forest-deep);
+    margin: 22px 0 8px;
+  }
+  .legal-prose p + p,
+  .legal-prose p + ul,
+  .legal-prose ul + p {
+    margin-top: 12px;
+  }
+  .legal-prose ul {
+    list-style: disc;
+    padding-left: 22px;
+  }
+  .legal-prose li + li {
+    margin-top: 7px;
+  }
+  .legal-prose strong {
+    color: var(--sq-forest-deep);
+    font-weight: 600;
+  }
+  .legal-prose a {
+    color: var(--sq-forest-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .legal-prose a:hover {
+    color: var(--sq-sage-light);
   }
 
   /* ========================================

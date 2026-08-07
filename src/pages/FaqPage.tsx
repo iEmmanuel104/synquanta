@@ -11,7 +11,7 @@ export const FaqPage = () => {
       <Seo
         path="/faq"
         title="FAQ | SynQuanta Technologies"
-        description="How SynQuanta researches, what we build, and how we work — answers to the questions founders and teams ask us most."
+        description="Answers to what founders and teams ask us most: how we research, what we build, what it costs and how long it takes."
         jsonLd={[
           breadcrumb([
             { name: 'Home', path: '/' },
@@ -23,7 +23,7 @@ export const FaqPage = () => {
       <PageHero
         eyebrow="Answers"
         title="Frequently asked questions"
-        subtitle="Everything you might want to know about how we research, what we build, and how we work."
+        subtitle="What people usually want to know before they get in touch. If yours isn't here, just ask."
         image="/images/faq-texture.jpg"
       />
       <Section>

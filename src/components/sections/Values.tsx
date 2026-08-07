@@ -27,8 +27,8 @@ export const Values = () => {
   return (
     <Section id="values" className="scroll-mt-20">
       <SectionHeading
-        title="What Drives Us"
-        subtitle="Our core values guide every decision and every line of code we write"
+        title="What we hold to"
+        subtitle="The things we don't trade away when a deadline makes it tempting."
       />
 
       <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

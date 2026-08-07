@@ -16,18 +16,21 @@ interface Step {
 const steps: Step[] = [
   {
     icon: Search,
-    title: 'We research',
-    description: 'We study your users, your market and the competition — the data behind every decision.',
+    title: 'First, we go and look',
+    description:
+      'Your users, your market, the competitors already doing well. This is where most briefs change.',
   },
   {
     icon: FileText,
-    title: 'We design',
-    description: 'We map the product and design the experience, so what we build is right the first time.',
+    title: 'Then we draw it',
+    description:
+      'The product gets mapped and designed before anyone writes code, so the expensive decisions happen on paper.',
   },
   {
     icon: Hammer,
-    title: 'We build',
-    description: 'We engineer fast, reliable web and mobile products — and ship them to launch.',
+    title: 'Then we build and launch it',
+    description:
+      'Web and mobile, engineered to hold up under real traffic. We stay on it until it is live.',
   },
 ];
 
@@ -40,12 +43,12 @@ export const WelcomeBand = () => {
           <FadeIn>
             <p className="sq-eyebrow mb-4">How we work</p>
             <h2 className="mb-5 text-3xl font-semibold leading-tight tracking-tight text-forest-deep md:text-4xl lg:text-[40px]">
-              We research, design, and build — in that order.
+              Research comes first. Always.
             </h2>
             <p className="mb-6 max-w-xl text-lg leading-relaxed text-neutral-medium-gray">
-              Every engagement starts with research, never a template. We learn your users, your market
-              and your goals, then design and build exactly what moves the needle — whether that's a new
-              platform, a mobile app, or an idea you're taking from zero to one.
+              No project here starts from a template. It starts with a week of finding out who your
+              users actually are and what the people already serving them get wrong. Only then do we
+              decide what to build, which is often not the thing you came in asking for.
             </p>
 
             <StaggerContainer className="mb-8 flex flex-col gap-3.5">

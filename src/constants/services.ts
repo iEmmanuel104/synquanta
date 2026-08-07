@@ -7,7 +7,7 @@ export const services: Service[] = [
     illustration: '/illustrations/web-development.svg',
     title: 'Web Application Development',
     description:
-      'Custom web apps and platforms built with modern frameworks — fast, scalable, and made to grow.',
+      'Web apps and platforms that stay quick as the data grows and the user count climbs.',
   },
   {
     id: 'mobile-development',
@@ -15,7 +15,7 @@ export const services: Service[] = [
     illustration: '/illustrations/mobile-development.svg',
     title: 'Mobile Application Development',
     description:
-      'Native and cross-platform iOS & Android apps with seamless, product-grade experiences.',
+      'iOS and Android apps, native or cross-platform, built to the standard people expect from an app they paid for.',
   },
   {
     id: 'custom-software',
@@ -23,7 +23,7 @@ export const services: Service[] = [
     illustration: '/illustrations/custom-software.svg',
     title: 'Custom Software & Platforms',
     description:
-      'Bespoke software and SaaS that solves your exact problem and streamlines how you operate.',
+      'Software written for the way your business actually runs, rather than the way a generic tool assumes it does.',
   },
   {
     id: 'system-architecture',
@@ -31,7 +31,7 @@ export const services: Service[] = [
     illustration: '/illustrations/system-architecture.svg',
     title: 'System Architecture & Consulting',
     description:
-      'Architecture, infrastructure and technical strategy that scales with your product.',
+      'Help with the decisions that are expensive to reverse later: architecture, infrastructure, and what to build in-house.',
   },
   {
     id: 'ai-automation',
@@ -39,7 +39,7 @@ export const services: Service[] = [
     illustration: '/illustrations/ai-automation.svg',
     title: 'Artificial Intelligence & Automation',
     description:
-      'AI features, machine learning and automation that turn your data into an advantage.',
+      'AI put to work on a specific job, not bolted on for the sake of it. We build the ones that earn their keep.',
   },
   {
     id: 'blockchain',
@@ -47,6 +47,6 @@ export const services: Service[] = [
     illustration: '/illustrations/blockchain.svg',
     title: 'Blockchain & Distributed Systems',
     description:
-      'Decentralized apps, smart contracts and distributed systems, engineered securely.',
+      'Smart contracts and decentralised apps, written carefully, because on-chain mistakes are permanent.',
   },
 ];

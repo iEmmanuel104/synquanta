@@ -20,7 +20,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Education · Talent intelligence',
     image: '/screens/gritgateway.jpg',
     blurb:
-      'An AI talent-intelligence platform that looks beyond grades to connect students with mentors, scholarships and global opportunities.',
+      'A talent-intelligence platform that looks past grades, connecting students to mentors and scholarships they would not otherwise have found.',
     tags: ['Education', 'AI'],
   },
   {
@@ -29,7 +29,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Community · Professional network',
     image: '/screens/blkat.jpg',
     blurb:
-      'A professional network connecting Black executives, creatives and vendors with opportunity, mentorship and community.',
+      'A professional network putting Black executives, creatives and vendors in front of the opportunities and mentors they were missing.',
     tags: ['Community', 'Web app'],
   },
   {
@@ -38,7 +38,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'E-commerce · Marketplace',
     image: '/screens/busy2shop.jpg',
     blurb:
-      'A multi-market online shopping platform — browse trusted local markets and check out with agent-assisted delivery.',
+      'A multi-market shopping platform. Browse trusted local markets and check out with agent-assisted delivery.',
     tags: ['E-commerce', 'Marketplace'],
   },
   {
@@ -47,7 +47,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Fashion · E-commerce',
     image: '/screens/nevelline.jpg',
     blurb:
-      'A fashion storefront with seasonal collections, trending categories and a clean, conversion-focused shopping experience.',
+      'A fashion storefront built around seasonal collections, with a checkout that gets out of the way.',
     tags: ['Fashion', 'E-commerce'],
   },
 ];

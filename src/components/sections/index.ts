@@ -5,6 +5,6 @@ export { Values } from './Values';
 export { CallToAction } from './CallToAction';
 export { Contact } from './Contact';
 export { ServicesTeaser } from './ServicesTeaser';
+export { Flagship } from './Flagship';
 export { GlobalReach } from './GlobalReach';
-export { WorkTeaser } from './WorkTeaser';
 export { PortfolioGrid } from './PortfolioGrid';

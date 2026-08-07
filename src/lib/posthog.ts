@@ -11,6 +11,7 @@ export const posthogEnabled = Boolean(KEY);
 let instance: PostHog | null = null;
 let initStarted = false;
 let queuedPageviews = 0;
+let queuedEvents: Array<{ event: string; properties?: Record<string, unknown> }> = [];
 
 /**
  * Initialise PostHog in fully cookieless mode (persistence: 'memory' → no
@@ -35,8 +36,12 @@ export async function initPostHog() {
     capture_pageleave: true,
   });
   instance = posthog;
-  // Flush any pageviews that fired before the SDK finished loading.
+  // Flush anything that fired before the SDK finished loading — pageviews
+  // first, so a conversion event never precedes the pageview it belongs to.
   for (; queuedPageviews > 0; queuedPageviews--) posthog.capture('$pageview');
+  const pending = queuedEvents;
+  queuedEvents = [];
+  for (const { event, properties } of pending) posthog.capture(event, properties);
 }
 
 /**
@@ -50,13 +55,20 @@ export function capturePageview() {
 }
 
 /**
- * Capture a custom product event (e.g. a contact-form submission) so conversions
- * are visible in PostHog, not just pageviews. Best-effort + cookieless: if
- * PostHog hasn't finished its lazy load, the event is dropped rather than queued
- * (we only queue pageviews) — a fired-and-missed conversion event is acceptable,
- * and the submission is the source of truth in the platform DB regardless.
+ * Capture a custom product event (e.g. a contact-form submission, a landing-page
+ * CTA click) so conversions are visible in PostHog, not just pageviews.
+ * Queue-safe in the same way as capturePageview(): posthog-js is lazy-loaded on
+ * idle, so an event fired before that resolves — which on a paid-ad landing page
+ * is exactly the fast-clicking visitor you most want to measure — is buffered
+ * and replayed once initPostHog() completes, rather than dropped.
+ *
+ * The buffer is capped so a page that fires events in a loop can't grow it
+ * without bound if PostHog never loads (blocked by an ad blocker, say).
  */
+const MAX_QUEUED_EVENTS = 50;
+
 export function captureEvent(event: string, properties?: Record<string, unknown>) {
-  if (!posthogEnabled || !instance) return;
-  instance.capture(event, properties);
+  if (!posthogEnabled) return;
+  if (instance) instance.capture(event, properties);
+  else if (queuedEvents.length < MAX_QUEUED_EVENTS) queuedEvents.push({ event, properties });
 }

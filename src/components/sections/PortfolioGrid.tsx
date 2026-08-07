@@ -28,7 +28,7 @@ export const PortfolioGrid = () => {
             <div className="relative aspect-[16/10] overflow-hidden">
               <Picture
                 src={p.image}
-                alt={`${p.name} — ${p.category}`}
+                alt={`${p.name}: ${p.category}`}
                 loading="lazy"
                 className="h-full w-full object-cover object-top transition-transform duration-500 ease-out will-change-transform group-hover:scale-[1.04]"
               />

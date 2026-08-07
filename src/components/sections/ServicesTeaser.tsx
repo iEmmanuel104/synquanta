@@ -13,8 +13,8 @@ export const ServicesTeaser = () => {
   return (
     <Section id="explore" className="scroll-mt-20 bg-aurora-soft">
       <SectionHeading
-        title="We design, build & launch"
-        subtitle="Platforms, web & mobile products, and custom software — we help startups and teams turn ideas into real products."
+        title="What we're usually hired for"
+        subtitle="Most of our work falls into one of these. If yours doesn't quite, it's still worth asking."
       />
 
       <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">

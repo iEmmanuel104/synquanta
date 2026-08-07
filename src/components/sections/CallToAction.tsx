@@ -38,14 +38,14 @@ export const CallToAction = () => {
         <div className="relative z-10">
           <FadeIn>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 tracking-tight">
-              Ready to build something great?
+              Bring us the hard part
             </h2>
           </FadeIn>
 
           <FadeIn delay={0.1}>
             <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              Tell us what you're building and we'll come back with a clear plan and a tailored quote —
-              as soon as possible.
+              A half-formed idea, or a product that has stopped scaling. Either way you get back a
+              written plan and a price before anyone starts work.
             </p>
           </FadeIn>
 

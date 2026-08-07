@@ -98,7 +98,7 @@ export default async function handler(req: any, res: any) {
     if (!apiKey) {
       return res
         .status(502)
-        .json({ error: "We couldn't submit that just now — please email info@synquanta.com directly." });
+        .json({ error: "We couldn't submit that just now. Please email info@synquanta.com directly." });
     }
 
     const resend = new Resend(apiKey);
@@ -120,7 +120,7 @@ export default async function handler(req: any, res: any) {
           ${company ? `<tr><td style="padding:6px 0;color:#74796E">Company</td><td style="padding:6px 0">${esc(company)}</td></tr>` : ""}
         </table>
         <div style="margin-top:14px;padding:14px 16px;background:#F8FAF9;border:1px solid #D8F3DC;border-radius:12px;white-space:pre-wrap;font-size:14px;line-height:1.6">${composed}</div>
-        <p style="margin-top:16px;color:#95A097;font-size:12px">Sent from synquanta.com (platform API was unreachable — NOT saved to the DB; follow up manually).</p>
+        <p style="margin-top:16px;color:#95A097;font-size:12px">Sent from synquanta.com (platform API was unreachable, so this was NOT saved to the DB; follow up manually).</p>
       </div>`;
 
     const { error } = await resend.emails.send({
@@ -130,7 +130,7 @@ export default async function handler(req: any, res: any) {
       subject: `New enquiry from ${name}${company ? ` · ${company}` : ""}`,
       html,
     });
-    if (error) return res.status(502).json({ error: "Couldn't send right now — please email info@synquanta.com." });
+    if (error) return res.status(502).json({ error: "Couldn't send right now. Please email info@synquanta.com." });
 
     return res.status(200).json({ ok: true });
   } catch {

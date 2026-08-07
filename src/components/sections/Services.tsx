@@ -9,8 +9,8 @@ export const Services = () => {
   return (
     <Section id="services" className="scroll-mt-20 bg-aurora-soft">
       <SectionHeading
-        title="What we do"
-        subtitle="We don't just build websites — we design platforms, ship web & mobile products, and help teams take ideas all the way to launch."
+        title="The work itself"
+        subtitle="Most projects end up touching two or three of these at once."
       />
 
       <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">

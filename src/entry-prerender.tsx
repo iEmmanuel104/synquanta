@@ -36,7 +36,18 @@ function toHeadElements(parts: Array<{ toComponent(): ReactElement[] }>): HeadEl
   return out;
 }
 
-const ROUTES = ['/', '/services', '/portfolio', '/about', '/faq', '/contact'];
+const ROUTES = [
+  '/',
+  '/services',
+  '/portfolio',
+  '/about',
+  '/faq',
+  '/contact',
+  '/hvac',
+  '/terms',
+  '/privacy',
+  '/refund-policy',
+];
 
 export async function prerender(data: { url: string }) {
   const helmetContext: { helmet?: HelmetServerState } = {};

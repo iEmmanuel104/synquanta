@@ -15,6 +15,10 @@ import { PortfolioPage } from './pages/PortfolioPage';
 import { AboutPage } from './pages/AboutPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
+import { HvacPage } from './pages/HvacPage';
+import { TermsPage } from './pages/TermsPage';
+import { PrivacyPage } from './pages/PrivacyPage';
+import { RefundPolicyPage } from './pages/RefundPolicyPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 /**
@@ -67,6 +71,12 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            {/* Paid-ad landing page — deliberately NOT in navLinks (header/footer
+                nav), but fully routed, prerendered, sitemapped and indexable. */}
+            <Route path="/hvac" element={<HvacPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/refund-policy" element={<RefundPolicyPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

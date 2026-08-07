@@ -10,7 +10,7 @@ export const PortfolioPage = () => {
       <Seo
         path="/portfolio"
         title="Portfolio | SynQuanta Technologies"
-        description="Selected work from SynQuanta — platforms we've designed and shipped for founders and teams across fintech, education, community, e-commerce and fashion."
+        description="Selected work from SynQuanta. Platforms we've designed and shipped for founders and teams in fintech, education, community, e-commerce and fashion."
         jsonLd={[
           breadcrumb([
             { name: 'Home', path: '/' },
@@ -22,7 +22,7 @@ export const PortfolioPage = () => {
       <PageHero
         eyebrow="Selected work"
         title="Products we've designed and built"
-        subtitle="A look at the platforms we've shipped for founders and teams — across fintech, education, community, e-commerce and fashion."
+        subtitle="Products we've shipped for founders and teams, across fintech, education, community, e-commerce and fashion. Each one started as a conversation much like the one you're about to have."
         image="/images/portfolio-texture.jpg"
       />
       <PortfolioGrid />

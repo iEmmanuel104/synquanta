@@ -29,12 +29,12 @@ export const GlobalReach = () => {
           <FadeIn>
             <p className="sq-eyebrow mb-3.5 text-mint-pale">Global by design</p>
             <h2 className="mb-5 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl lg:text-[44px]">
-              We build for teams everywhere
+              Distance has never been the hard part
             </h2>
             <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/70">
-              From a first prototype to a product at scale, we partner with founders and teams across
-              the world — researching deeply, designing with care, and shipping software that performs
-              anywhere.
+              We work remotely with founders and teams in several countries, from a first prototype
+              through to a product carrying real traffic. Overlapping hours matter more than a shared
+              postcode, and we plan the week around them.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

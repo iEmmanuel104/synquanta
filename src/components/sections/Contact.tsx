@@ -10,7 +10,7 @@ type Status = 'idle' | 'sending' | 'sent' | 'error';
 const methods = [
   { icon: Mail, label: 'Email us', value: 'info@synquanta.com' },
   { icon: Phone, label: 'Call us', value: 'Mon–Fri, 9–6' },
-  { icon: MapPin, label: 'Who we work with', value: 'Startups & businesses, worldwide' },
+  { icon: MapPin, label: 'Who we work with', value: 'Founders & teams, remote-first' },
 ];
 
 const needOptions = [
@@ -88,7 +88,7 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
       {!hideHeading && (
         <SectionHeading
           title="Tell us about your project"
-          subtitle="Share a few details and we'll come back with a research-led plan and a tailored quote."
+          subtitle="A few details is enough to start. You'll get back a plan and a price."
         />
       )}
 
@@ -99,14 +99,14 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
             <div className="wc-pattern" style={{ opacity: 0.35 }} aria-hidden="true" />
             <div className="relative z-10">
               <span className="wc-gold-chip mb-5">
-                <span className="sq-livedot h-[7px] w-[7px] rounded-full bg-wc-gold-bright" /> Fast replies
+                <span className="sq-livedot h-[7px] w-[7px] rounded-full bg-wc-gold-bright" /> A real person reads this
               </span>
               <h3 className="mb-3.5 text-2xl font-semibold leading-snug tracking-tight text-white">
-                No pressure, no script — just a clear look at what we'd build with you.
+                No script, no pressure. Just a straight answer about what we'd build.
               </h3>
               <p className="mb-7 text-[15.5px] leading-relaxed text-white/70">
-                Tell us where you are — an idea, a rough spec, or a live product — and we'll come back with
-                a plain-English plan and a tailored quote.
+                An idea, a rough spec, or a product that already exists and is creaking. Tell us where
+                you are and you'll get back a plan in plain English, with a price attached.
               </p>
               <div className="flex flex-col gap-4">
                 {methods.map((m) => (
@@ -135,12 +135,11 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-cream-green">
                   <CheckCircle2 className="h-8 w-8 text-forest-primary" />
                 </div>
-                <h3 className="mb-2 text-2xl font-semibold text-forest-deep">You're in the right place 🎉</h3>
+                <h3 className="mb-2 text-2xl font-semibold text-forest-deep">That's with us now</h3>
                 <p className="max-w-sm text-base leading-relaxed text-neutral-medium-gray">
-                  Thanks{form.name ? `, ${form.name.split(' ')[0]}` : ''} — we'll review{' '}
-                  {form.company || 'your project'} and get back to{' '}
-                  <span className="font-medium text-forest-primary">{form.email}</span> as soon as
-                  possible.
+                  Thanks{form.name ? `, ${form.name.split(' ')[0]}` : ''}. We'll read through{' '}
+                  {form.company || 'your project'} and reply to{' '}
+                  <span className="font-medium text-forest-primary">{form.email}</span> shortly.
                 </p>
                 <button
                   onClick={() => {

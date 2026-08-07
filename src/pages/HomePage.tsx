@@ -1,6 +1,7 @@
 import {
   Hero,
   ServicesTeaser,
+  Flagship,
   GlobalReach,
   WelcomeBand,
   CallToAction,
@@ -12,11 +13,12 @@ export const HomePage = () => {
     <>
       <Seo
         path="/"
-        title="SynQuanta Technologies | We design platforms & build products"
-        description="SynQuanta is a research-led product studio. We design platforms, build web & mobile products, and bring startup ideas to life — from first sketch to launch."
+        title="SynQuanta Technologies | Web & mobile product studio"
+        description="SynQuanta is a product studio that researches before it builds. Web and mobile products for founders and teams, taken from the first sketch through to launch."
       />
       <Hero />
       <ServicesTeaser />
+      <Flagship />
       <GlobalReach />
       <WelcomeBand />
       <CallToAction />
