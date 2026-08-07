@@ -109,3 +109,24 @@ No API forces inclusion. Google AI Overviews/Gemini draw from Google's index —
 ## Reference
 - PostHog project "Default project" (id 415405), key `phc_wRmy…4Qfk` (public), cookieless. Vercel env: Production + Development.
 - IndexNow key: `92c0eb543a99c29c906522d60f53c711` (file in `public/`).
+
+## Hidden product URLs (2026-08-07)
+
+`/hvac`, `/hvac/*` and `/refund-policy` are **307 (temporary) redirects to `/`**
+in `vercel.json`.
+
+Why they exist: those pages were prerendered, listed in `sitemap.xml` and pinged
+to IndexNow, so search engines know them. When the AI Receptionist was hidden,
+the SPA rewrite (`/(.*) → /index.html`) started serving the root shell at those
+paths — HTTP 200, generic title, and a `noindex` that only appears after
+hydration. That is a soft 404 on an indexed URL, which is worse than either a
+real 404 or a redirect.
+
+Why **307 and not 308**: these URLs come back when the product launches. A
+permanent redirect tells Google to drop them for good, and we would have to earn
+the indexing again. `vercel.json` cannot carry comments, which is why this note
+lives here.
+
+When the product relaunches: remove those three redirect blocks, uncomment the
+`/hvac` route in `src/App.tsx` and the five other places listed in its comment,
+and re-add the sitemap entries.

@@ -3,12 +3,16 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "synquanta.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "synquanta.com"
+        }
+      ],
       "destination": "https://www.synquanta.com/$1",
       "permanent": true
     },
     {
-      "comment": "The AI Receptionist pages are hidden until the product is finished. They were prerendered, sitemapped and IndexNow-pinged, so search engines know them. Without this the SPA rewrite below would serve the root shell at HTTP 200 with a generic title — a soft 404 on an indexed URL. TEMPORARY (307) on purpose: these URLs come back when the product launches, and a permanent redirect would teach Google to forget them.",
       "source": "/hvac/:path*",
       "destination": "/",
       "permanent": false
@@ -19,42 +23,61 @@
       "permanent": false
     },
     {
-      "comment": "Same reasoning. The refund policy belongs to the product, not the website, and returns at /hvac/refund-policy.",
       "source": "/refund-policy",
       "destination": "/",
       "permanent": false
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/images/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/screens/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/brand-kit/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
       ]
     }
   ]
