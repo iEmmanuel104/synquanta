@@ -40,3 +40,9 @@ src/prd/
 /*.jpg
 /*.jpeg
 /*.gif
+
+# Generated ad-creative intermediates. `node marketing/build.mjs` rewrites these
+# from lib/, and each file inlines the brand woff2 fonts as base64 (~150KB
+# each), so they are pure regenerable bloat. The rendered PNGs beside them ARE
+# committed — those are the deliverable you upload to Meta/WhatsApp.
+marketing/out/**/*.html

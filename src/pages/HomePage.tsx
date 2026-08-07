@@ -1,7 +1,7 @@
 import {
   Hero,
   ServicesTeaser,
-  Flagship,
+  // Flagship,  ← AI Receptionist band, hidden until the product is finished.
   GlobalReach,
   WelcomeBand,
   RecentWork,
@@ -19,7 +19,11 @@ export const HomePage = () => {
       />
       <Hero />
       <ServicesTeaser />
-      <Flagship />
+      {/* HIDDEN 2026-08-07 — the AI Receptionist is not shown anywhere on the
+          site until the product is finished end to end. The component and its
+          page are intentionally kept, not deleted. Restore alongside the nav
+          link in constants/navigation.ts and the /hvac route in App.tsx. */}
+      {/* <Flagship /> */}
       <GlobalReach />
       <WelcomeBand />
       <RecentWork />

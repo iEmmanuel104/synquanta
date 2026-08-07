@@ -17,10 +17,9 @@ const urlList = [
   '/about',
   '/faq',
   '/contact',
-  '/hvac',
+  // '/hvac',  ← hidden until the AI Receptionist ships
   '/terms',
   '/privacy',
-  '/refund-policy',
 ].map((p) => `https://${HOST}${p}`);
 
 const body = { host: HOST, key: KEY, keyLocation: KEY_LOCATION, urlList };

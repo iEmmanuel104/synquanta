@@ -27,6 +27,8 @@ export interface PortfolioProject {
   category: string;
   /** Static screenshot path under /screens. Showcase only — never links off-site. */
   image: string;
+  /** The client's own logo, shown in the home-page RecentWork strip. */
+  logo: string;
   blurb: string;
   tags?: string[];
 }

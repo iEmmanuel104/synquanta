@@ -7,6 +7,7 @@ import { PortfolioProject } from '../types';
 export const portfolioProjects: PortfolioProject[] = [
   {
     slug: 'fundedforge',
+    logo: '/logos/fundedforge.png',
     name: 'Funded Forge',
     category: 'Fintech · Trading platform',
     image: '/screens/fundedforge.jpg',
@@ -16,6 +17,7 @@ export const portfolioProjects: PortfolioProject[] = [
   },
   {
     slug: 'gritgateway',
+    logo: '/logos/gritgateway.svg',
     name: 'GritGateway',
     category: 'Education · Talent intelligence',
     image: '/screens/gritgateway.jpg',
@@ -25,6 +27,7 @@ export const portfolioProjects: PortfolioProject[] = [
   },
   {
     slug: 'blkat',
+    logo: '/logos/blkat.svg',
     name: 'BlackAt',
     category: 'Community · Professional network',
     image: '/screens/blkat.jpg',
@@ -34,6 +37,7 @@ export const portfolioProjects: PortfolioProject[] = [
   },
   {
     slug: 'busy2shop',
+    logo: '/logos/busy2shop.png',
     name: 'Busy2Shop',
     category: 'E-commerce · Marketplace',
     image: '/screens/busy2shop.jpg',
@@ -43,6 +47,7 @@ export const portfolioProjects: PortfolioProject[] = [
   },
   {
     slug: 'nevelline',
+    logo: '/logos/nevelline.png',
     name: 'Nevelline',
     category: 'Fashion · E-commerce',
     image: '/screens/nevelline.jpg',

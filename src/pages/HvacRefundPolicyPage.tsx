@@ -11,17 +11,17 @@ import { breadcrumb } from '../lib/structuredData';
  * part reviewers check — that refunds are issued by Paddle as merchant of
  * record, with the route to request one.
  */
-export const RefundPolicyPage = () => {
+export const HvacRefundPolicyPage = () => {
   return (
     <>
       <Seo
-        path="/refund-policy"
+        path="/hvac/refund-policy"
         title="Refund & Cancellation Policy | SynQuanta Technologies"
         description="How cancellation and refunds work for the SynQuanta AI Receptionist: a 14-day free trial before any charge, cancel anytime effective at the end of the current billing period, and refunds issued through Paddle as merchant of record."
         jsonLd={[
           breadcrumb([
             { name: 'Home', path: '/' },
-            { name: 'Refund & Cancellation Policy', path: '/refund-policy' },
+            { name: 'Refund & Cancellation Policy', path: '/hvac/refund-policy' },
           ]),
         ]}
       />
@@ -96,7 +96,7 @@ export const RefundPolicyPage = () => {
             <li>
               Your call recordings, transcripts and lead details stay available in the dashboard
               until the account closes. Export what you want to keep. Account data is deleted 90 days
-              after closure. See the <a href="/privacy">Privacy Policy</a>.
+              after closure. See the <a href="/hvac/privacy">Privacy Policy</a>.
             </li>
           </ul>
         </section>
@@ -230,8 +230,8 @@ export const RefundPolicyPage = () => {
             (Paddle, merchant of record)
           </p>
           <p>
-            This policy sits alongside our <a href="/terms">Terms &amp; Conditions</a> and{' '}
-            <a href="/privacy">Privacy Policy</a>.
+            This policy sits alongside our <a href="/hvac/terms">Terms &amp; Conditions</a> and{' '}
+            <a href="/hvac/privacy">Privacy Policy</a>.
           </p>
         </section>
       </LegalDoc>

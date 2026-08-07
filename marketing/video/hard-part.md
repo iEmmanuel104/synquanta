@@ -1,0 +1,56 @@
+# Video kit — "Bring us the hard part"
+
+**Concept role:** direct response · **Length:** 12s · **Format:** 1080×1920 (9:16)
+**Opening frame:** `marketing/out/hard-part/status.png`
+
+The shortest of the three on purpose. This one exists to get a click, not to
+explain the company. Everything is subordinate to the ask.
+
+Safe zone: top 120px, bottom 200px. Subtitles burned in.
+
+---
+
+## Script
+
+| Time | On screen | Voiceover |
+|---|---|---|
+| 0.0–2.0s | **HOOK.** "Bring us the hard part" — **hard part** in mint. | "Bring us the hard part." |
+| 2.0–5.0s | Cut: a whiteboard mid-argument, arrows, a crossed-out box. | "The half-formed idea. The product that stopped scaling and nobody wants to touch." |
+| 5.0–8.5s | **1 week** in large mono, then the caption under it. | "We spend the first week finding out who your users actually are." |
+| 8.5–12.0s | Logo, `synquanta.com/contact`, "A real person reads it". | "Send it over. You'll get a written plan and a price before anyone starts work." |
+
+**Read it like an offer, not a boast.** The line "a real person reads it" is the
+one that earns the click — do not rush it.
+
+## Shot list
+
+1. **0–2.0s** Type card, hard cut in. The word "hard" carries the emphasis.
+2. **2.0–5.0s** Whiteboard or wall of sticky notes, genuinely messy, mid-problem. Slow handheld pan left to right. It must look like a real problem, not a tidied set.
+3. **5.0–8.5s** Motion graphic: `1 week` counts up in mono over the dark gradient, gradient accent bar wipes in from the left.
+4. **8.5–12.0s** Logo on the dark hero gradient, URL, orbit node settles.
+
+## Model prompts
+
+### Shot 2 — Veo
+> A whiteboard in a working office covered in half-erased diagrams, arrows connecting boxes, one box crossed out, sticky notes at the edges. A hand enters frame from the right and adds a single line, then pauses. The camera pans slowly left to right at eye height, handheld with a gentle natural wobble, 35mm, shallow depth of field so the far edge of the board softens. Cool daylight from a window off-frame left. Muted greens and greys. Real, unstaged, mid-problem rather than solved.
+
+**Negative:** legible brand names, readable text, logos, watermarks, tidy or staged whiteboard, stock-photo people posing, warped hands.
+
+### Shot 2 — Runway
+> Handheld pan across a messy office whiteboard, half-erased diagrams and arrows, sticky notes, a hand adding one line. Muted green-grey palette, natural window light, subtle film grain, shallow focus, documentary feel. Unresolved and in-progress rather than polished.
+
+**Negative:** readable text, logos, watermark, oversaturation, glossy corporate, fast motion.
+
+### Shot 2 — Sora
+> This is what a problem looks like before anyone has solved it. A whiteboard covered in arrows and half-erased boxes, one of them crossed out. A hand comes into frame, adds a line, and hesitates. The camera drifts across the board slowly, handheld, the way someone would look at it while thinking. Daylight from a window. Nothing here is tidy, and that is the point.
+
+**Negative:** on-screen text, readable writing, logos, staged perfection, people addressing the camera.
+
+---
+
+## Deliverable checklist
+
+- [ ] 1080×1920, H.264 MP4
+- [ ] Subtitles burned in, inside the safe zone
+- [ ] URL legible for the full final 3.5s
+- [ ] No pricing claim (this concept deliberately makes none)

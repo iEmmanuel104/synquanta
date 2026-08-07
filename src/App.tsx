@@ -15,10 +15,14 @@ import { PortfolioPage } from './pages/PortfolioPage';
 import { AboutPage } from './pages/AboutPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
-import { HvacPage } from './pages/HvacPage';
+// HIDDEN 2026-08-07 — kept, not deleted. See the commented /hvac route below.
+// import { HvacPage } from './pages/HvacPage';
 import { TermsPage } from './pages/TermsPage';
 import { PrivacyPage } from './pages/PrivacyPage';
-import { RefundPolicyPage } from './pages/RefundPolicyPage';
+// Product legal set — hidden with the AI Receptionist, kept not deleted.
+// import { HvacTermsPage } from './pages/HvacTermsPage';
+// import { HvacPrivacyPage } from './pages/HvacPrivacyPage';
+// import { HvacRefundPolicyPage } from './pages/HvacRefundPolicyPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 /**
@@ -71,12 +75,26 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            {/* Paid-ad landing page — deliberately NOT in navLinks (header/footer
-                nav), but fully routed, prerendered, sitemapped and indexable. */}
-            <Route path="/hvac" element={<HvacPage />} />
+            {/* HIDDEN 2026-08-07 — the AI Receptionist is not shown anywhere
+                on the site until the product is finished end to end. Commented
+                out rather than deleted: HvacPage.tsx, constants/hvac.ts and
+                sections/Flagship.tsx all stay in the tree, ready to restore.
+                Un-hiding means: this route, the navLinks entry in
+                constants/navigation.ts, the <Flagship/> band in HomePage.tsx,
+                the ROUTES entry in entry-prerender.tsx, public/sitemap.xml and
+                scripts/indexnow.mjs. */}
+            {/* <Route path="/hvac" element={<HvacPage />} /> */}
+            {/* The site's own legal pages. Scoped to this website only. */}
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/refund-policy" element={<RefundPolicyPage />} />
+            {/* The AI Receptionist's separate legal set. Hidden with the
+                product; these describe a paid subscription, call recording and
+                Paddle billing, none of which the website itself does. Restore
+                alongside the /hvac route above.
+            <Route path="/hvac/terms" element={<HvacTermsPage />} />
+            <Route path="/hvac/privacy" element={<HvacPrivacyPage />} />
+            <Route path="/hvac/refund-policy" element={<HvacRefundPolicyPage />} />
+            */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

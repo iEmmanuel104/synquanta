@@ -3,7 +3,10 @@ import { NavLink } from '../types';
 export const navLinks: NavLink[] = [
   { label: 'Home', to: '/' },
   { label: 'Services', to: '/services' },
-  { label: 'AI Receptionist', to: '/hvac' },
+  // HIDDEN 2026-08-07 — the AI Receptionist stays out of the nav until the
+  // product is finished end to end. Restore this line (and the <Flagship/>
+  // band in HomePage.tsx, plus the /hvac route in App.tsx) to relaunch it.
+  // { label: 'AI Receptionist', to: '/hvac' },
   { label: 'Portfolio', to: '/portfolio' },
   { label: 'About', to: '/about' },
   { label: 'FAQ', to: '/faq' },
@@ -11,17 +14,20 @@ export const navLinks: NavLink[] = [
 ];
 
 /**
- * Policy pages. Footer only: they are deliberately kept out of `navLinks` (the
- * header) but must stay publicly reachable and indexable, because Paddle's
- * account verification requires live Terms, Privacy and Refund pages linked
- * from the site.
+ * THIS WEBSITE'S policy pages. Footer only, deliberately kept out of the header.
  *
- * `/hvac` used to sit in neither list, on the basis that it was a paid-ad
- * landing page. It is now the one product we actually sell, so it is in the
- * header nav and in the footer. The paid-ad traffic still lands on it directly.
+ * These are scoped to www.synquanta.com itself: the contact form and cookieless
+ * analytics. They are NOT the AI Receptionist's legal documents — that product
+ * has its own Terms, Privacy and Refund policy (HvacTermsPage.tsx and siblings,
+ * routed under /hvac/*), currently hidden along with the product.
+ *
+ * Keep the two sets separate. Paddle's account verification needs the PRODUCT's
+ * three documents live and linked at launch; pointing it at these website pages
+ * would not satisfy it, because they describe no paid service.
  */
 export const legalLinks: NavLink[] = [
-  { label: 'Terms & Conditions', to: '/terms' },
+  { label: 'Terms of Use', to: '/terms' },
   { label: 'Privacy Policy', to: '/privacy' },
-  { label: 'Refund & Cancellation', to: '/refund-policy' },
+  // No refund policy on the website: nothing is sold here. The AI Receptionist
+  // has its own refund policy, which ships with that product.
 ];

@@ -28,10 +28,14 @@
     <loc>https://www.synquanta.com/contact</loc>
     <lastmod>2026-06-23</lastmod>
   </url>
+  <!-- HIDDEN 2026-08-07 — the AI Receptionist is not public until the product
+       is finished end to end. Restore this entry when the /hvac route in
+       src/App.tsx is uncommented.
   <url>
     <loc>https://www.synquanta.com/hvac</loc>
     <lastmod>2026-07-28</lastmod>
   </url>
+  -->
   <url>
     <loc>https://www.synquanta.com/terms</loc>
     <lastmod>2026-07-28</lastmod>
@@ -40,8 +44,13 @@
     <loc>https://www.synquanta.com/privacy</loc>
     <lastmod>2026-07-28</lastmod>
   </url>
+  <!-- HIDDEN 2026-08-07 — the refund policy belongs to the AI Receptionist,
+       not to this website, and moves to /hvac/refund-policy when the product
+       launches. Nothing is sold on synquanta.com, so the site has no refund
+       policy of its own.
   <url>
     <loc>https://www.synquanta.com/refund-policy</loc>
     <lastmod>2026-07-28</lastmod>
   </url>
+  -->
 </urlset>

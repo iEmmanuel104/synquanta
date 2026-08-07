@@ -43,10 +43,9 @@ const ROUTES = [
   '/about',
   '/faq',
   '/contact',
-  '/hvac',
+  // '/hvac',  ← hidden until the AI Receptionist ships; see App.tsx
   '/terms',
   '/privacy',
-  '/refund-policy',
 ];
 
 export async function prerender(data: { url: string }) {
