@@ -96,7 +96,7 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
         {/* Left — dark reassurance aside */}
         <FadeIn>
           <div className="wc-band relative flex h-full flex-col justify-center overflow-hidden rounded-sq-2xl p-8 shadow-sq-lg sm:p-9">
-            <div className="wc-pattern" style={{ opacity: 0.35 }} aria-hidden="true" />
+            <div className="sq-grid-pattern" style={{ opacity: 0.35 }} aria-hidden="true" />
             <div className="relative z-10">
               <span className="wc-gold-chip mb-5">
                 <span className="sq-livedot h-[7px] w-[7px] rounded-full bg-wc-gold-bright" /> A real person reads this

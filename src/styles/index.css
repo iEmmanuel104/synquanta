@@ -184,11 +184,106 @@
     background: var(--sq-gradient-pitchnight);
   }
 
-  /* Pitch pattern overlay (host grid art) */
-  .wc-pattern {
+  /* ---- Orbital sweep for dark product bands ---------------------------
+     The brand mark is an atom with a node orbiting it, so the flagship band
+     gets the same gesture at room scale: one ring, one lit node, rotating.
+
+     Transform-only, deliberately. No filter, no blend-mode, no animated blur —
+     that combination is the documented cause of mobile jank in this repo (see
+     AnimatedGrid, which drops to a static SVG under 768px). A rotation on a
+     single absolutely-positioned element composites on the GPU and stays
+     smooth on a mid-range phone, so this one runs on mobile too. */
+  @keyframes sq-orbit-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .sq-orbit-sweep {
+    /* Sized so the ring actually fits the band's height — at 132% of width the
+       node spent most of its loop clipped out of view. Anchored right so it
+       bleeds off that edge and reads as decoration, not a circle in a box. */
+    --ring: clamp(240px, 36vw, 460px);
+    position: absolute;
+    top: 50%;
+    right: -80px;
+    width: var(--ring);
+    height: var(--ring);
+    margin-top: calc(var(--ring) / -2);
+    border: 1px solid rgba(149, 213, 178, 0.12);
+    border-radius: 9999px;
+    animation: sq-orbit-spin 44s linear infinite;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  /* The orbiting node. Rotating the ring carries it around the circumference. */
+  .sq-orbit-sweep::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    margin-left: -3.5px;
+    border-radius: 9999px;
+    background: rgba(149, 213, 178, 0.8);
+    box-shadow: 0 0 14px 3px rgba(82, 183, 136, 0.45);
+  }
+
+  /* ---- Recent-work marquee -------------------------------------------
+     CSS-only on purpose. <LazyMotion strict> only loads `domAnimation`, which
+     has no cheap primitive for a continuous transform loop, so doing this in
+     framer-motion would mean shipping `domMax` — more JS than the whole
+     feature. This costs zero bytes of JS.
+
+     The track holds the item list TWICE and translates exactly -50%, so the
+     second copy lands where the first started and the loop is seamless. That
+     only works if both halves are identical width, which is why the gap lives
+     in each item's own margin rather than in a flex `gap`. */
+  @keyframes sq-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .sq-marquee-viewport {
+    overflow: hidden;
+    /* Fade both edges so items enter and leave instead of being chopped. */
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .sq-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: sq-marquee 46s linear infinite;
+    will-change: transform;
+  }
+
+  /* Pause on hover, and on keyboard focus so a keyboard user can actually
+     reach and read a card that is drifting past. */
+  .sq-marquee-viewport:hover .sq-marquee-track,
+  .sq-marquee-viewport:focus-within .sq-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .sq-marquee-item {
+    margin-right: 1.25rem;
+  }
+
+  /* Geometric grid overlay for dark bands (Flagship, Contact aside).
+     Was `.wc-pattern` pointing at ../assets/worldcup/wc-pitch-pattern.svg — a
+     file that never existed in this repo, so it 404'd on / and /contact on
+     every load. The art itself is generic squares-and-quarter-circles (no FIFA
+     IP), so it moved to a neutral path and lost the retired campaign's name. */
+  .sq-grid-pattern {
     position: absolute;
     inset: 0;
-    background-image: url('../assets/worldcup/wc-pitch-pattern.svg');
+    background-image: url('../assets/grid-pattern.svg');
     opacity: 0.55;
     pointer-events: none;
   }
@@ -762,6 +857,12 @@
   .sq-livedot,
   .sq-floaty,
   .report-live .report-livedot { animation: none !important; }
+  /* Marquee stops dead; the strip becomes a normal horizontal scroller so the
+     items past the fold are still reachable. */
+  .sq-marquee-track { animation: none !important; }
+  .sq-marquee-viewport { overflow-x: auto; mask-image: none !important; -webkit-mask-image: none !important; }
+  /* Ring stays, node stops orbiting. */
+  .sq-orbit-sweep { animation: none !important; }
   .reveal-up { opacity: 1 !important; transform: none !important; }
   .bar-fill,
   .rank-marker { transition: none !important; }

@@ -4,6 +4,7 @@ import {
   Flagship,
   GlobalReach,
   WelcomeBand,
+  RecentWork,
   CallToAction,
 } from '../components/sections';
 import { Seo } from '../components/Seo';
@@ -21,6 +22,7 @@ export const HomePage = () => {
       <Flagship />
       <GlobalReach />
       <WelcomeBand />
+      <RecentWork />
       <CallToAction />
     </>
   );

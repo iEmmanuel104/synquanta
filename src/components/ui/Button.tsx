@@ -1,4 +1,4 @@
-import { m as motion } from 'framer-motion';
+import { m as motion, useReducedMotion } from 'framer-motion';
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -45,6 +45,18 @@ export const Button = ({
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
+  // Every variant below shares one hover/tap spring. Under prefers-reduced-motion
+  // the scale is dropped entirely (the CSS colour transition still gives the
+  // affordance) — this component previously animated regardless of the setting.
+  const shouldReduceMotion = useReducedMotion();
+  const press = shouldReduceMotion
+    ? {}
+    : {
+        whileHover: { scale: 1.02 },
+        whileTap: { scale: 0.98 },
+        transition: { type: 'spring' as const, stiffness: 400, damping: 17 },
+      };
+
   if (href) {
     // Internal route → client-side <Link>; external / hash / mailto → plain anchor.
     const isInternal = href.startsWith('/') && !href.startsWith('//');
@@ -54,9 +66,7 @@ export const Button = ({
           to={href}
           className={combinedClassName}
           onClick={onClick}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          {...press}
         >
           {children}
         </MotionLink>
@@ -70,9 +80,7 @@ export const Button = ({
         href={href}
         className={combinedClassName}
         onClick={onClick}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        {...press}
       >
         {children}
       </motion.a>
@@ -85,9 +93,7 @@ export const Button = ({
       className={combinedClassName}
       onClick={onClick}
       disabled={disabled}
-      whileHover={disabled ? undefined : { scale: 1.02 }}
-      whileTap={disabled ? undefined : { scale: 0.98 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+      {...(disabled ? {} : press)}
     >
       {children}
     </motion.button>

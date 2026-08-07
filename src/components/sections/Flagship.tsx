@@ -30,7 +30,8 @@ export const Flagship = () => {
   return (
     <Section id="flagship" className="scroll-mt-20">
       <div className="wc-band relative overflow-hidden rounded-sq-2xl p-8 shadow-sq-lg sm:p-10 lg:p-12">
-        <div className="wc-pattern" style={{ opacity: 0.35 }} aria-hidden="true" />
+        <div className="sq-grid-pattern" style={{ opacity: 0.35 }} aria-hidden="true" />
+        <div className="sq-orbit-sweep" aria-hidden="true" />
 
         <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
           <FadeIn>

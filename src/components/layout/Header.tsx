@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { m as motion, AnimatePresence } from 'framer-motion';
+import { m as motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
@@ -15,6 +15,12 @@ export const Header = () => {
   // page once scrolled) gets the solid header.
   const onHome = pathname === '/';
   const solid = isScrolled || !onHome;
+
+  // Mobile menu + logo press animate; under prefers-reduced-motion they become
+  // instant. `reduceT` collapses every duration to 0 rather than removing the
+  // props, so AnimatePresence still sequences mount/unmount correctly.
+  const shouldReduceMotion = useReducedMotion();
+  const reduceT = shouldReduceMotion ? { duration: 0 } : undefined;
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const toggleMobileMenu = () => setIsMobileMenuOpen((v) => !v);
@@ -65,7 +71,10 @@ export const Header = () => {
                   </li>
                 ))}
               </ul>
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <motion.div
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+              >
                 <Link
                   to="/contact"
                   className={`inline-flex items-center justify-center font-medium rounded-sq px-4 py-2 text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2 ${
@@ -102,7 +111,7 @@ export const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={reduceT ?? { duration: 0.3, ease: 'easeInOut' }}
               className="lg:hidden bg-white border-t border-cream-green overflow-hidden"
             >
               <nav className="container-custom py-6">
@@ -112,7 +121,7 @@ export const Header = () => {
                       key={link.to}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.08 }}
+                      transition={reduceT ?? { delay: index * 0.08 }}
                     >
                       <NavLink
                         to={link.to}

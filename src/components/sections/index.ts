@@ -6,5 +6,6 @@ export { CallToAction } from './CallToAction';
 export { Contact } from './Contact';
 export { ServicesTeaser } from './ServicesTeaser';
 export { Flagship } from './Flagship';
+export { RecentWork } from './RecentWork';
 export { GlobalReach } from './GlobalReach';
 export { PortfolioGrid } from './PortfolioGrid';

@@ -5,7 +5,7 @@ import { PhoneMock } from '../ui/PhoneMock';
 import { FadeIn } from '../animations/FadeIn';
 import { StaggerContainer, staggerItemVariants } from '../animations/StaggerContainer';
 import { AnimatedIcon } from '../ui/AnimatedIcon';
-import { m as motion } from 'framer-motion';
+import { m as motion, useReducedMotion } from 'framer-motion';
 
 interface Step {
   icon: LucideIcon;
@@ -35,6 +35,11 @@ const steps: Step[] = [
 ];
 
 export const WelcomeBand = () => {
+  // StaggerContainer degrades to a plain <div> under prefers-reduced-motion, so
+  // a child still passing `staggerItemVariants` has no parent orchestrating it.
+  // Drop the variants in that mode, exactly as ServicesTeaser/PortfolioGrid do.
+  const reduce = useReducedMotion();
+
   return (
     <Section id="about" className="scroll-mt-20">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -53,7 +58,11 @@ export const WelcomeBand = () => {
 
             <StaggerContainer className="mb-8 flex flex-col gap-3.5">
               {steps.map((step, i) => (
-                <motion.div key={step.title} variants={staggerItemVariants} className="flex items-start gap-3.5">
+                <motion.div
+                  key={step.title}
+                  variants={reduce ? undefined : staggerItemVariants}
+                  className="flex items-start gap-3.5"
+                >
                   <AnimatedIcon
                     index={i}
                     className="flex h-[42px] w-[42px] flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-sage-medium to-sage-light text-white shadow-sq"
