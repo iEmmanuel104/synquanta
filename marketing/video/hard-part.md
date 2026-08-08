@@ -1,12 +1,26 @@
 # Video kit — "Bring us the hard part"
 
 **Concept role:** direct response · **Length:** 12s · **Format:** 1080×1920 (9:16)
-**Opening frame:** `marketing/out/hard-part/status.png`
+**Opening frame:** `marketing/out/hard-part/story.png` (Reels/Stories)
+or `marketing/out/hard-part/status.png` (WhatsApp Status)
 
 The shortest of the three on purpose. This one exists to get a click, not to
 explain the company. Everything is subordinate to the ask.
 
-Safe zone: top 120px, bottom 200px. Subtitles burned in.
+**Two safe zones, not one.** Cut the video once at 1080x1920, but keep every
+subtitle and every logo inside the *Reels* box, which is far tighter:
+
+| Destination | Top | Bottom | Sides |
+|---|---|---|---|
+| WhatsApp Status | 120px | 200px | 60px |
+| IG/FB Stories + Reels | **270px** | **670px** | 65px |
+
+Meta's caption, audio row and Learn More button occupy the bottom third of a
+Reel, and the like/comment/share rail runs up the right edge. A subtitle placed
+for Status disappears underneath all of it. Design to 270/670 and the same cut
+plays correctly on both.
+
+Subtitles burned in — most of this is watched with the sound off.
 
 ---
 
@@ -55,7 +69,7 @@ and is wrong for most projects.
 ## Deliverable checklist
 
 - [ ] 1080×1920, H.264 MP4
-- [ ] Subtitles burned in, inside the safe zone
+- [ ] Subtitles burned in, inside the 270/670 Reels safe zone
 - [ ] URL legible for the full final 3.5s
 - [ ] No pricing claim (this concept deliberately makes none)
 - [ ] No duration or timeline claim anywhere

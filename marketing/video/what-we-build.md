@@ -1,10 +1,23 @@
 # Video kit — "The software your business actually runs on"
 
 **Concept role:** what we do · **Length:** 15s · **Format:** 1080×1920 (9:16)
-**Opening frame:** `marketing/out/what-we-build/status.png`
+**Opening frame:** `marketing/out/what-we-build/story.png` (Reels/Stories)
+or `marketing/out/what-we-build/status.png` (WhatsApp Status)
 
-Safe zone: nothing important in the top 120px or bottom 200px. Burn subtitles
-in — most of this is watched with the sound off.
+**Two safe zones, not one.** Cut the video once at 1080x1920, but keep every
+subtitle and every logo inside the *Reels* box, which is far tighter:
+
+| Destination | Top | Bottom | Sides |
+|---|---|---|---|
+| WhatsApp Status | 120px | 200px | 60px |
+| IG/FB Stories + Reels | **270px** | **670px** | 65px |
+
+Meta's caption, audio row and Learn More button occupy the bottom third of a
+Reel, and the like/comment/share rail runs up the right edge. A subtitle placed
+for Status disappears underneath all of it. Design to 270/670 and the same cut
+plays correctly on both.
+
+Subtitles burned in — most of this is watched with the sound off.
 
 **No timelines.** Do not say how long anything takes. Scope drives the schedule
 and the schedule is agreed per project, in writing.
@@ -54,7 +67,7 @@ Structure: Subject → Action → Environment → Cinematics. Present tense, 60�
 ## Deliverable checklist
 
 - [ ] 1080×1920, H.264 MP4
-- [ ] Subtitles burned in, inside the safe zone
+- [ ] Subtitles burned in, inside the 270/670 Reels safe zone
 - [ ] Final frame holds the logo for at least 1.5s
 - [ ] No duration or timeline claim anywhere
 - [ ] No client names

@@ -46,3 +46,4 @@ src/prd/
 # each), so they are pure regenerable bloat. The rendered PNGs beside them ARE
 # committed — those are the deliverable you upload to Meta/WhatsApp.
 marketing/out/**/*.html
+marketing/social/*.html

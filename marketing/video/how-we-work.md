@@ -1,9 +1,23 @@
 # Video kit — "You see it every week. No black box."
 
 **Concept role:** how we do it · **Length:** 15s · **Format:** 1080×1920 (9:16)
-**Opening frame:** `marketing/out/how-we-work/status.png`
+**Opening frame:** `marketing/out/how-we-work/story.png` (Reels/Stories)
+or `marketing/out/how-we-work/status.png` (WhatsApp Status)
 
-Safe zone: top 120px, bottom 200px. Subtitles burned in.
+**Two safe zones, not one.** Cut the video once at 1080x1920, but keep every
+subtitle and every logo inside the *Reels* box, which is far tighter:
+
+| Destination | Top | Bottom | Sides |
+|---|---|---|---|
+| WhatsApp Status | 120px | 200px | 60px |
+| IG/FB Stories + Reels | **270px** | **670px** | 65px |
+
+Meta's caption, audio row and Learn More button occupy the bottom third of a
+Reel, and the like/comment/share rail runs up the right edge. A subtitle placed
+for Status disappears underneath all of it. Design to 270/670 and the same cut
+plays correctly on both.
+
+Subtitles burned in — most of this is watched with the sound off.
 
 **No timelines.** The differentiator here is *visibility*, not speed — do not
 let the edit imply "fast". Never put a duration on research, design or delivery.
@@ -52,6 +66,6 @@ Structure: Subject → Action → Environment → Cinematics. Present tense, 60�
 ## Deliverable checklist
 
 - [ ] 1080×1920, H.264 MP4
-- [ ] Subtitles burned in, inside the safe zone
+- [ ] Subtitles burned in, inside the 270/670 Reels safe zone
 - [ ] No duration, week count or "in X days" claim
 - [ ] No client names

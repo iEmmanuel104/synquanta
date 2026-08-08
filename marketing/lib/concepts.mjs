@@ -31,6 +31,9 @@ function metrics(placement) {
     p,
     wide,
     tall,
+    // `compact` is the Stories/Reels case: the usable band is only ~980px
+    // tall, so the aside is dropped and the headline carries the frame alone.
+    compact: !!p.compact,
     h1: px(wide ? p.w * 0.058 : tall ? p.w * 0.099 : p.w * 0.079),
     body: px(wide ? p.w * 0.0225 : p.w * 0.0295),
     small: px(p.w * 0.021),
@@ -149,9 +152,28 @@ function ticked(m, items) {
   </div>`;
 }
 
-/** Shared skeleton so every concept keeps one rhythm across all five canvases. */
-function frame(m, { eyebrow, headline, body, aside, cta, image }) {
+/**
+ * Shared skeleton so every concept keeps one rhythm across all five canvases.
+ *
+ * `short` is the Stories/Reels copy — one sentence instead of three. It is a
+ * separate string rather than a truncation of `body` because a clause cut in
+ * half is worse than a line written to length.
+ */
+function frame(m, { eyebrow, headline, body, short, aside, cta, image }) {
   const mainDir = m.wide ? 'row' : 'column';
+  // Reels reserves the bottom 35% and the right rail. Everything below has to
+  // land in the middle ~950x980, so the aside goes and the copy shortens.
+  if (m.compact) {
+    return `${backdrop(m, image)}
+<div class="canvas" style="justify-content:space-between">
+  ${header(m, eyebrow)}
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <h1 style="font-size:${m.h1};max-width:14ch">${headline}</h1>
+    <p style="font-size:${m.body};line-height:1.5;color:rgba(255,255,255,.82);margin-top:${px(m.p.h * 0.022)};max-width:28ch">${short ?? body}</p>
+  </div>
+  ${footer(m, cta)}
+</div>`;
+  }
   return `${backdrop(m, image)}
 <div class="canvas" style="justify-content:space-between">
   ${header(m, eyebrow)}
@@ -178,6 +200,7 @@ function whatWeBuild(placement) {
     eyebrow: 'What we build',
     headline: `The software your business <span class="grad">actually runs on</span>`,
     body: 'Web platforms, mobile apps, and the internal tools that do not come off a shelf. Designed and engineered by one team, start to finish.',
+    short: 'Web platforms, mobile apps, and the internal tools that do not come off a shelf.',
     aside: numbered(m, ['Web apps & platforms', 'iOS and Android', 'Custom software', 'AI where it earns its keep']),
     cta: { url: 'synquanta.com', note: 'Web & mobile product studio' },
   });
@@ -191,6 +214,7 @@ function howWeWork(placement) {
     eyebrow: 'How we work',
     headline: `You see it every week. <span class="grad">No black box.</span>`,
     body: 'We find out who your users are before we build for them, settle the expensive decisions on paper, then engineer it. You get something to click through while there is still time to change your mind.',
+    short: 'You get something to click through while there is still time to change your mind.',
     aside: numbered(m, ['Research', 'Design', 'Build', 'Launch and stay on it']),
     cta: { url: 'synquanta.com', note: 'Research first, then we build' },
   });
@@ -204,6 +228,7 @@ function hardPart(placement) {
     eyebrow: "Let's talk",
     headline: `Bring us the <span class="grad">hard part</span>`,
     body: 'A half-formed idea, or a product that has stopped scaling. Tell us where you are and a real person will read it.',
+    short: 'A half-formed idea, or a product that has stopped scaling. A real person will read it.',
     aside: ticked(m, [
       'A written plan, in plain English',
       'A price, before anyone starts work',

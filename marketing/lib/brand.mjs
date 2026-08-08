@@ -126,16 +126,40 @@ export const clearSpace = (markPx) => Math.round((18 / 96) * markPx);
 
 // ------------------------------------------------------------- placements
 //
-// Verified against current platform guidance, 2026-08. Meta has never
-// published a creative spec for WhatsApp Status ads; the safe zone below is
-// derived from the Status UI itself (sender name top, reply bar bottom).
+// Verified against current platform guidance, 2026-08.
+//
+// THE TWO 9:16 PLACEMENTS ARE NOT THE SAME AND MUST NOT SHARE A RENDER.
+// They were identical until 2026-08-08, which shipped an unusable Stories
+// asset — see the `story` note below. `verify.mjs` now fails the build if any
+// two PNGs come out byte-identical, so this cannot silently regress.
+//
+//  - WhatsApp Status: Meta has never published a creative spec. The numbers
+//    are derived from the Status UI itself — sender name and progress bar on
+//    top, reply field on the bottom. Both are shallow.
+//  - IG/FB Stories + Reels: Meta unified these into ONE 9:16 safe zone in
+//    March 2026, and it is severe. The bottom 35% carries the caption, audio
+//    row and the Learn More button; the right edge carries the like/comment/
+//    share rail. Usable area is roughly the middle 950x980.
+//
+// `safeBottom` here is a RESERVED band, not padding taste. Anything rendered
+// inside it is covered by platform UI on a real phone.
 
 export const PLACEMENTS = {
-  status: { w: 1080, h: 1920, safeTop: 120, safeBottom: 200, label: 'WhatsApp Status' },
-  story: { w: 1080, h: 1920, safeTop: 120, safeBottom: 200, label: 'IG/FB Stories + Reels' },
-  feed45: { w: 1080, h: 1350, safeTop: 48, safeBottom: 48, label: 'Feed 4:5' },
-  feed11: { w: 1080, h: 1080, safeTop: 48, safeBottom: 48, label: 'Feed / carousel 1:1' },
-  link: { w: 1200, h: 628, safeTop: 40, safeBottom: 40, label: 'Link ad 1.91:1' },
+  status: {
+    w: 1080, h: 1920, safeTop: 120, safeBottom: 200, safeSide: 60,
+    label: 'WhatsApp Status',
+  },
+  story: {
+    w: 1080, h: 1920, safeTop: 270, safeBottom: 670, safeSide: 65,
+    label: 'IG/FB Stories + Reels',
+    // Only the headline, one supporting line and the logo fit above the fold
+    // here. `concepts.mjs` drops the numbered aside for this placement rather
+    // than shrinking type below arm's-length legibility.
+    compact: true,
+  },
+  feed45: { w: 1080, h: 1350, safeTop: 48, safeBottom: 48, safeSide: 48, label: 'Feed 4:5' },
+  feed11: { w: 1080, h: 1080, safeTop: 48, safeBottom: 48, safeSide: 48, label: 'Feed / carousel 1:1' },
+  link: { w: 1200, h: 628, safeTop: 40, safeBottom: 40, safeSide: 40, label: 'Link ad 1.91:1' },
 };
 
 // ---------------------------------------------------------------- shell
