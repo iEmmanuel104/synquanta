@@ -2,6 +2,8 @@ import { ArrowUp, Mail, Globe, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
 import { navLinks, legalLinks, services } from '../../constants';
+import { captureEvent } from '../../lib/posthog';
+import { trackContact } from '../../lib/facebook-pixel';
 
 export const Footer = () => {
   const scrollToTop = () => {
@@ -25,8 +27,16 @@ export const Footer = () => {
               founders and teams.
             </p>
             <div className="flex flex-col gap-3 text-sm">
+              {/* Emailing us is a conversion, not navigation — it just happens
+                  on someone else's client, so nothing downstream would ever see
+                  it. Meta's `Contact` standard event is what makes that visible.
+                  See lib/facebook-pixel.ts. */}
               <a
                 href="mailto:info@synquanta.com"
+                onClick={() => {
+                  captureEvent('contact_email_clicked', { location: 'footer' });
+                  trackContact({ content_category: 'email' });
+                }}
                 className="inline-flex items-center gap-2 py-1 text-white/70 transition-colors hover:text-white"
               >
                 <Mail size={16} />

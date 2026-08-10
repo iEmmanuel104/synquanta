@@ -149,3 +149,46 @@ export function trackViewContent(properties?: Record<string, unknown>) {
   if (!facebookPixelEnabled) return;
   ensurePixel()('track', 'ViewContent', properties);
 }
+
+/**
+ * The `Contact` standard event — someone started a conversation by email rather
+ * than through the form.
+ *
+ * Our own ads tell people to "email or synquanta.com", so this is a real
+ * conversion path, and until this existed it produced no signal whatsoever:
+ * a visitor who clicked the address and wrote to us looked identical to one who
+ * bounced.
+ *
+ * A click is not a sent email, so this is a weaker signal than `Lead` and
+ * should not be optimised against once `Lead` has the volume to carry a
+ * campaign on its own.
+ */
+export function trackContact(properties?: Record<string, unknown>) {
+  if (!facebookPixelEnabled) return;
+  ensurePixel()('track', 'Contact', properties);
+}
+
+/**
+ * `FormStart` — a CUSTOM event (trackCustom, not track), fired the first time
+ * someone types into the contact form.
+ *
+ * WHY A CUSTOM EVENT AND NOT InitiateCheckout
+ * InitiateCheckout is the obvious-looking fit and it is the wrong one. It is a
+ * commerce event; using it for a contact form corrupts every report that
+ * assumes it means a checkout, permanently, and Meta optimises against custom
+ * conversions perfectly well.
+ *
+ * WHY IT EXISTS AT ALL
+ * Meta needs roughly 50 optimisation events per ad set per week to leave the
+ * learning phase. A B2B studio will not get 50 enquiries a week from a cold
+ * start, so optimising straight for `Lead` leaves ad sets stuck in learning and
+ * spending badly. This is the middle rung of the ladder:
+ *
+ *   ViewContent  (lots of volume)  →  FormStart  (some)  →  Lead  (the real thing)
+ *
+ * Move down a rung as volume allows. Switch to Lead once it clears ~50/week.
+ */
+export function trackFormStart(properties?: Record<string, unknown>) {
+  if (!facebookPixelEnabled) return;
+  ensurePixel()('trackCustom', 'FormStart', properties);
+}

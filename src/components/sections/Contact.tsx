@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, AlertCircle, ChevronDown } from 'lucide-react';
 import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { FadeIn } from '../animations/FadeIn';
 import { captureEvent } from '../../lib/posthog';
-import { trackLead } from '../../lib/facebook-pixel';
+import { trackLead, trackContact, trackFormStart } from '../../lib/facebook-pixel';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
+// `href` makes the entry clickable. The email address used to render as plain
+// text, which meant the page told people to email us and then gave them no way
+// to do it — a conversion leak, quite apart from the tracking.
 const methods = [
-  { icon: Mail, label: 'Email us', value: 'info@synquanta.com' },
+  { icon: Mail, label: 'Email us', value: 'info@synquanta.com', href: 'mailto:info@synquanta.com' },
   { icon: Phone, label: 'Call us', value: 'Mon–Fri, 9–6' },
   { icon: MapPin, label: 'Who we work with', value: 'Founders & teams, remote-first' },
 ];
@@ -39,10 +42,34 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
     website: '', // honeypot
   });
 
+  // Fired once, the first time this visitor touches the form. A ref rather than
+  // state because flipping it must not re-render the form mid-keystroke.
+  const startedRef = useRef(false);
+  const noteStart = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    captureEvent('contact_form_started');
+    trackFormStart();
+  };
+
+  /**
+   * Someone chose to email us instead of using the form. Meta's `Contact`
+   * standard event. Weaker than `Lead` — a click is not a sent email — so do
+   * not optimise campaigns against it once Lead carries enough volume.
+   */
+  const noteEmailClick = () => {
+    captureEvent('contact_email_clicked', { location: 'contact_section' });
+    trackContact({ content_category: 'email' });
+  };
+
   const set =
     (k: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      // Not the honeypot: it is hidden, so only a bot ever fills it, and a bot
+      // must not look like a human starting an enquiry.
+      if (k !== 'website') noteStart();
       setForm((f) => ({ ...f, [k]: e.target.value }));
+    };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,17 +143,33 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
                 you are and you'll get back a plan in plain English, with a price attached.
               </p>
               <div className="flex flex-col gap-4">
-                {methods.map((m) => (
-                  <div key={m.label} className="flex items-center gap-3.5">
-                    <div className="contact-chip">
-                      <m.icon size={18} />
+                {methods.map((m) => {
+                  const body = (
+                    <>
+                      <div className="contact-chip">
+                        <m.icon size={18} />
+                      </div>
+                      <div>
+                        <div className="text-[13px] text-white/55">{m.label}</div>
+                        <div className="text-[15px] font-semibold text-white">{m.value}</div>
+                      </div>
+                    </>
+                  );
+                  return m.href ? (
+                    <a
+                      key={m.label}
+                      href={m.href}
+                      onClick={noteEmailClick}
+                      className="flex items-center gap-3.5 rounded-sq transition-opacity hover:opacity-80"
+                    >
+                      {body}
+                    </a>
+                  ) : (
+                    <div key={m.label} className="flex items-center gap-3.5">
+                      {body}
                     </div>
-                    <div>
-                      <div className="text-[13px] text-white/55">{m.label}</div>
-                      <div className="text-[15px] font-semibold text-white">{m.value}</div>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
