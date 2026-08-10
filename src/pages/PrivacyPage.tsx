@@ -8,14 +8,17 @@ import { breadcrumb } from '../lib/structuredData';
  * Scope matters here. The AI Receptionist product has its own, separate policy
  * in HvacPrivacyPage.tsx (call recordings, voice sub-processors, 12-month
  * retention). That document is about a paid service; this one is about a
- * marketing site with a contact form and cookieless analytics. Do not merge
- * them — a visitor reading this should not be told about call recording, and a
- * paying customer should not have to infer their rights from a website notice.
+ * marketing site with a contact form, cookieless analytics and an advertising
+ * pixel. Do not merge them — a visitor reading this should not be told about
+ * call recording, and a paying customer should not have to infer their rights
+ * from a website notice.
  *
  * Everything stated below is checked against what the site actually does:
  *   - the form fields in components/sections/Contact.tsx
  *   - the request path in api/contact.ts (platform API first, Resend fallback)
  *   - the analytics setup in lib/posthog.ts (cookieless, no autocapture of PII)
+ *   - the Meta Pixel in lib/facebook-pixel.ts, which DOES set cookies and is
+ *     the reason this page can no longer claim the site sets none
  * If any of those change, change this page in the same commit.
  *
  * NOTE: no governing-law or jurisdiction clause. Deliberate, pending
@@ -27,7 +30,7 @@ export const PrivacyPage = () => {
       <Seo
         path="/privacy"
         title="Privacy Policy | SynQuanta Technologies"
-        description="What personal data www.synquanta.com collects, why, how long it is kept and how to have it deleted. Covers the contact form and our cookieless analytics."
+        description="What personal data www.synquanta.com collects, why, how long it is kept and how to have it deleted. Covers the contact form, our cookieless analytics and the Meta advertising pixel."
         jsonLd={[
           breadcrumb([
             { name: 'Home', path: '/' },
@@ -44,9 +47,9 @@ export const PrivacyPage = () => {
       />
 
       <LegalDoc
-        summary="This covers the SynQuanta website only. We collect what you type into the contact form, plus anonymous, cookieless page statistics. We do not use tracking cookies, we do not sell anything to anyone, and we do not use what you send us to train AI models. Email info@synquanta.com and we will delete your details."
-        lastUpdated="7 August 2026"
-        lastUpdatedIso="2026-08-07"
+        summary="This covers the SynQuanta website only. We collect what you type into the contact form, plus anonymous page statistics. Because we advertise on Facebook and Instagram, this site also runs the Meta Pixel, which sets cookies and tells Meta which pages you opened — never your name, email or message. We do not sell anything to anyone, and we do not use what you send us to train AI models. Email info@synquanta.com and we will delete your details."
+        lastUpdated="10 August 2026"
+        lastUpdatedIso="2026-08-10"
       >
         <section>
           <h2>1. Who this covers</h2>
@@ -85,9 +88,28 @@ export const PrivacyPage = () => {
           <h3>Analytics</h3>
           <p>
             We use <strong>PostHog in cookieless mode</strong> to count page views and see
-            which pages people read. It sets <strong>no cookies</strong>, which is why this
-            site shows you no cookie banner. What it records is aggregate and not tied to
-            a name or an email address.
+            which pages people read. It sets <strong>no cookies</strong>. What it records
+            is aggregate and not tied to a name or an email address.
+          </p>
+
+          <h3>Advertising — the Meta Pixel</h3>
+          <p>
+            We advertise on Facebook, Instagram and WhatsApp, so this site runs the{' '}
+            <strong>Meta Pixel</strong>. Unlike our analytics, it{' '}
+            <strong>does set cookies</strong> — <code>_fbp</code> on any visit, and{' '}
+            <code>_fbc</code> if you arrive by clicking one of our ads. It tells Meta which
+            pages you opened and whether you sent the contact form, so we can see which ads
+            actually work and stop paying for the ones that do not.
+          </p>
+          <p>
+            It is <strong>not</strong> given your name, email address, phone number or
+            anything you typed into the form. When you submit an enquiry, Meta is told that
+            an enquiry happened and which of the six categories you picked, nothing more.
+          </p>
+          <p>
+            You can switch this off. Browser tracking protection, an ad blocker, or the ad
+            settings in your own Facebook or Instagram account will all stop it, and none of
+            that affects the rest of the site.
           </p>
 
           <h3>Server logs</h3>
@@ -114,6 +136,12 @@ export const PrivacyPage = () => {
               <strong>To understand what the site is doing</strong>: aggregate, cookieless
               statistics. Basis: our legitimate interest, balanced by the fact that the
               data is not personally identifying.
+            </li>
+            <li>
+              <strong>To measure our advertising</strong>: the Meta Pixel, so we know which
+              ads bring people who actually get in touch. Basis: our legitimate interest in
+              not wasting money on advertising that does not work. This is the one thing on
+              this list you may not want, so the section above explains how to stop it.
             </li>
           </ul>
           <p>
@@ -145,6 +173,11 @@ export const PrivacyPage = () => {
               <strong>PostHog</strong>: the cookieless analytics described above. It is not
               given your contact details.
             </li>
+            <li>
+              <strong>Meta</strong> (Facebook, Instagram): the advertising pixel described
+              above. It is told which pages you opened and whether you sent an enquiry. It
+              is not given your name, email address, phone number or your message.
+            </li>
           </ul>
           <p>
             We do not sell personal data, we do not share it for anyone else&rsquo;s
@@ -168,6 +201,11 @@ export const PrivacyPage = () => {
             <li>
               <strong>Analytics</strong>: aggregate and cookieless, retained per our
               analytics provider&rsquo;s own schedule.
+            </li>
+            <li>
+              <strong>Advertising cookies</strong>: the Meta Pixel&rsquo;s{' '}
+              <code>_fbp</code> and <code>_fbc</code> cookies last up to 90 days from your
+              last visit. Clear your browser cookies and they are gone.
             </li>
           </ul>
         </section>

@@ -106,6 +106,22 @@
     </style>
   </head>
   <body>
+    <!-- Meta Pixel — no-JS fallback only. The pixel itself is initialised from
+         src/lib/facebook-pixel.ts, NOT from Meta's copy-paste snippet: that
+         snippet ends with fbq('track','PageView'), which in a client-routed SPA
+         counts the landing route once and every route after it never. React
+         owns every PageView instead. This <img> gives visitors with JavaScript
+         disabled exactly one, and does not fire when JS is on, so nothing is
+         double-counted. -->
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        alt=""
+        src="https://www.facebook.com/tr?id=1358780625858062&ev=PageView&noscript=1"
+      />
+    </noscript>
     <div id="root"></div>
     <div id="sq-boot" aria-hidden="true">
       <!-- Orbit Atom mark inlined (1.5KB) — zero extra requests, animates from

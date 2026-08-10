@@ -3,6 +3,7 @@ import { LazyMotion, domAnimation } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header, Footer } from './components/layout';
 import { capturePageview } from './lib/posthog';
+import { trackPageView, trackViewContent } from './lib/facebook-pixel';
 // Pages are imported statically (no React.lazy / Suspense) so there is NO
 // loading state on any browser — the page renders the instant the app mounts,
 // and in-app navigation is immediate. Safari was the slowest to resolve the old
@@ -46,16 +47,36 @@ function ScrollManager() {
 }
 
 /**
- * Capture a PostHog $pageview on every client-side route change. PostHog's
- * automatic pageview is disabled (capture_pageview: false) because this SPA
- * never does a full page load between routes. capturePageview() is queue-safe:
- * PostHog is loaded lazily on idle, so the first pageview (fired before the SDK
- * finishes loading) is buffered and flushed once it's ready.
+ * Routes that signal buying intent, and therefore fire Meta's `ViewContent` on
+ * top of the pageview. Kept here rather than scattered through the page
+ * components so the whole tracking surface is visible in one place.
+ *
+ * /contact is absent on purpose — arriving there is not the conversion,
+ * submitting the form is, and that fires `Lead` from Contact.tsx.
  */
-function PostHogPageviews() {
+const INTENT_ROUTES: Record<string, string> = {
+  '/services': 'Services',
+  '/portfolio': 'Portfolio',
+};
+
+/**
+ * Capture a pageview on every client-side route change, for both analytics
+ * destinations. Neither one's automatic pageview is used: PostHog has
+ * capture_pageview disabled, and the Meta Pixel's snippet PageView call was
+ * deliberately dropped (see lib/facebook-pixel.ts). This SPA never does a full
+ * page load between routes, so their built-in tracking would count the landing
+ * route once and every route after it never.
+ *
+ * Both calls are queue-safe — each SDK is lazy-loaded on idle, and a pageview
+ * fired before that resolves is buffered rather than dropped.
+ */
+function Pageviews() {
   const { pathname } = useLocation();
   useEffect(() => {
     capturePageview();
+    trackPageView();
+    const contentName = INTENT_ROUTES[pathname];
+    if (contentName) trackViewContent({ content_name: contentName });
   }, [pathname]);
   return null;
 }
@@ -65,7 +86,7 @@ function App() {
     <LazyMotion features={domAnimation} strict>
       <div className="min-h-screen">
         <ScrollManager />
-        <PostHogPageviews />
+        <Pageviews />
         <Header />
         <main id="main-content">
           <Routes>

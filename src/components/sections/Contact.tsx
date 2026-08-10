@@ -4,6 +4,7 @@ import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { FadeIn } from '../animations/FadeIn';
 import { captureEvent } from '../../lib/posthog';
+import { trackLead } from '../../lib/facebook-pixel';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -76,6 +77,12 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
         has_company: Boolean(form.company),
         has_phone: Boolean(form.phone),
       });
+      // The same conversion, as Meta's `Lead` standard event, so Ads Manager can
+      // attribute an enquiry to the ad that produced it and optimise delivery
+      // toward people who enquire. Fired only AFTER the request succeeds — a
+      // Lead recorded on a failed submission trains the algorithm on nothing.
+      // Deliberately no email, name or message: Meta receives the category only.
+      trackLead({ content_category: form.need });
       setStatus('sent');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not send your message.');

@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import App from './App.tsx'
 import './styles/index.css'
 import { initPostHog } from './lib/posthog'
+import { initFacebookPixel } from './lib/facebook-pixel'
 
 // Deliberately client-render (createRoot) OVER the prerendered HTML rather than
 // hydrateRoot. This is a framer-motion-heavy site (AnimatedText/FadeIn/grid),
@@ -22,14 +23,16 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-// Analytics is non-critical: load + init posthog-js only once the browser is
-// idle (or 2s later as a fallback) so it never competes with first paint or the
-// initial render on slow mobile devices. The first $pageview is queued by
-// capturePageview() and flushed when this resolves.
+// Analytics is non-critical: load + init posthog-js and the Meta Pixel only
+// once the browser is idle (or 2s later as a fallback) so neither competes with
+// first paint or the initial render on slow mobile devices. Nothing is lost by
+// deferring — the first $pageview is queued by capturePageview(), and fbq's own
+// stub queues anything fired before fbevents.js lands.
 if (typeof window !== 'undefined') {
   const ric =
     window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 2000))
   ric(() => {
     void initPostHog()
+    initFacebookPixel()
   })
 }
