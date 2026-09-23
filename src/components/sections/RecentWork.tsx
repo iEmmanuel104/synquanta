@@ -5,6 +5,9 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { FadeIn } from '../animations/FadeIn';
 import { portfolioProjects } from '../../constants';
 
+const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'];
+const count = WORDS[portfolioProjects.length] ?? String(portfolioProjects.length);
+
 /**
  * Scrolling strip of the clients we have shipped for, between WelcomeBand and
  * CallToAction — social proof immediately before the ask.
@@ -13,12 +16,12 @@ import { portfolioProjects } from '../../constants';
  * each company's own site. They sit on white tiles rather than directly on the
  * section background, because the set has mixed polarity: BlackAt's mark is
  * black-and-red, Funded Forge's is gold, Nevelline's is a black wordmark. A
- * white tile is the one background all five read against, and it avoids
+ * white tile is the one background every mark reads against, and it avoids
  * recolouring anyone's mark to force consistency.
  *
  * The list renders TWICE. The CSS translates the track exactly -50%, so the
  * duplicate lands where the original started and the loop shows no seam; with
- * only five clients a single pass would leave a gap on a wide screen. The
+ * a short client list a single pass would leave a gap on a wide screen. The
  * duplicate half is aria-hidden and untabbable so it is not announced twice.
  * See `.sq-marquee-*` in styles/index.css.
  */
@@ -30,7 +33,7 @@ export const RecentWork = () => {
       <FadeIn>
         <SectionHeading
           title="Work we've shipped"
-          subtitle="Five products currently in people's hands. Each one started as a conversation."
+          subtitle={`${count} products currently in people's hands. Each one started as a conversation.`}
         />
       </FadeIn>
 

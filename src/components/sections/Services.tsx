@@ -13,7 +13,7 @@ export const Services = () => {
         subtitle="Most projects end up touching two or three of these at once."
       />
 
-      <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {services.map((service) => (
           <motion.div
             key={service.id}

@@ -139,6 +139,7 @@ export function creativeWorkListSchema(projects: PortfolioProject[]): Json {
         about: p.category,
         description: p.blurb,
         image: `${SITE}${p.image}`,
+        ...(p.url ? { url: p.url } : {}),
         ...(p.tags ? { keywords: p.tags.join(', ') } : {}),
         creator: { '@id': ORG_ID },
       },

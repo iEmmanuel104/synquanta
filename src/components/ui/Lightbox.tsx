@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { m as motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { X } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
 import { PortfolioProject } from '../../types';
 import { Picture } from './Picture';
 
@@ -10,7 +10,7 @@ interface LightboxProps {
 }
 
 /**
- * In-page screenshot viewer. Purely a showcase — there is no link off our site.
+ * In-page screenshot viewer, with a link out to the live product when there is one.
  * Closes on backdrop click or Escape; locks body scroll while open.
  */
 export const Lightbox = ({ project, onClose }: LightboxProps) => {
@@ -85,6 +85,18 @@ export const Lightbox = ({ project, onClose }: LightboxProps) => {
                     </span>
                   ))}
                 </div>
+              )}
+              {project.url && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-forest-deep px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-light focus-visible:ring-offset-2"
+                >
+                  Visit {project.name}
+                  <ArrowUpRight size={16} />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
               )}
             </div>
           </motion.div>

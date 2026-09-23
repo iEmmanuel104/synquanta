@@ -20,13 +20,20 @@ export interface NavLink {
   to: string;
 }
 
+/** The product-type groups the portfolio filter tabs are built from. */
+export type PortfolioType = 'platforms' | 'marketplaces' | 'ai' | 'websites';
+
 export interface PortfolioProject {
   slug: string;
   name: string;
   /** Short category label, e.g. "Fashion · E-commerce". */
   category: string;
-  /** Static screenshot path under /screens. Showcase only — never links off-site. */
+  /** Filter groups this project appears under. A project can sit in several. */
+  types: PortfolioType[];
+  /** Static screenshot path under /screens. */
   image: string;
+  /** The live product. Opens in a new tab. Omit when there is nothing live worth sending people to. */
+  url?: string;
   /** The client's own logo, shown in the home-page RecentWork strip. */
   logo: string;
   blurb: string;

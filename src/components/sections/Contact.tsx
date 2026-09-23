@@ -21,7 +21,9 @@ const needOptions = [
   'A web app or platform',
   'A mobile app (iOS / Android)',
   'Custom software',
-  'AI & automation',
+  'A custom ERP system',
+  'AI integration or an AI system',
+  'Blockchain',
   'Bring my idea to life',
   'Something else',
 ];

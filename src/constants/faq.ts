@@ -19,7 +19,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'What kinds of products have you built?',
-    a: 'Trading and fintech platforms, education and talent tools, community networks, marketplaces and fashion storefronts, on web and mobile. There is a selection on our Portfolio page.',
+    a: 'AI products, service and shopping marketplaces, trading and fintech platforms, education and talent tools, community networks and non-profit websites, on web and mobile. There is a selection on our Portfolio page.',
   },
   {
     q: 'How much does it cost?',

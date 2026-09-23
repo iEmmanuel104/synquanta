@@ -1,6 +1,6 @@
 # Client logos
 
-The five marks shown in the `RecentWork` strip on the home page. Each was taken
+The client marks shown in the `RecentWork` strip on the home page. Each was taken
 from that company's own website.
 
 | File | Client | Notes |
@@ -10,6 +10,9 @@ from that company's own website.
 | `blkat.svg` | BlackAt | Black "BLK" + red "@" |
 | `busy2shop.png` | Busy2Shop | Full colour |
 | `nevelline.png` | Nevelline | Black wordmark |
+| `umbrelar.png` | Umbrelar | Rasterised from the client's own `packages/ui/assets/brand/logo-primary.svg` |
+| `hommesalon.png` | HommeSalon | `apps/web/public/logo-lockup.svg`, rendered with Bricolage Grotesque (the SVG names a font we don't load) |
+| `hopedelivery.png` | The Hope Delivery Foundation | `assets/brand/logo-dark.svg` from the foundation's site repo |
 
 ## These are not our marks
 
