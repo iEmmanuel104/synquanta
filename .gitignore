@@ -47,3 +47,8 @@ src/prd/
 # committed — those are the deliverable you upload to Meta/WhatsApp.
 marketing/out/**/*.html
 marketing/social/*.html
+
+# Large marketing production files — kept locally, never in the public repo
+marketing/out/media.zip
+marketing/video-ai-pack/
+marketing/video/idea-to-reality.md
