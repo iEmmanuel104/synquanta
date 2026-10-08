@@ -141,10 +141,21 @@ Set `D2F_DEBUG=1` for stack traces.
 - Ten endpoint captures of a 233-screen board took ~20 s each and ~12 MCP calls in total (1 id + 1 poll per section).
 - Run capture loops with `bash -c '…'` — zsh does not word-split `$pair`, so a `for … set -- $pair` loop silently runs once.
 - The page list from `get_metadata` can lag; read pages with a `use_figma` script when in doubt.
-- **Layout after capture (`figma/relayout.js`)**: the board's horizontal rows capture with cards overlapping (flow-4/5 had
-  ~200 px overlaps) and column stacks read as scattered. Run the card-boundary re-flow: it regroups each container's
-  children into their original rows, re-spaces and wraps them, and NEVER enters a screen. A first attempt that recursed
-  into screens stretched/blanked them (no undo) and forced a full re-capture — keep the `isCard` check before recursion.
+- **Prefer ONE whole-board capture over per-section captures.** `capture --section '#dc-root > .sc-host > div'`
+  (the common ancestor of all `#flow-N` sections) sends the whole board (23.6 MB for 233 screens) and lands as a single
+  frame that reproduces the board layout exactly — sections in columns, rows intact, nothing to re-stack. capture.js
+  reports "Request timed out after 60 seconds" on the upload, **but the server still processes it**: poll the capture
+  id / read the page children before trying anything else. Per-section captures stay the fallback for boards > 50 MB.
+- **Do NOT re-flow a capture.** Every attempt to regroup/reposition cards (card-boundary rows, DOM-order wrapping,
+  text-class heuristics) scrambled or elongated the layout, and one pass that recursed into screens stretched/blanked
+  them with no undo. The capture is already the board; keep it.
+- **Overlapping screens are the board's own flex-shrink, fixed by hugging (`figma/unshrink.js`)**: sections 04/05 had
+  29 + 21 overlapping pairs because the board's step columns shrink below their 402-px screens and capture.js keeps those
+  wrappers as auto-layout frames with a FIXED counter axis. Setting every overflowing non-screen wrapper to hug
+  (`counterAxisSizingMode = 'AUTO'`, `layoutSizingHorizontal = 'HUG'`, deepest first) re-flows the rows natively and the
+  auto-layout board widens by itself (34265 → 35192). Moving cards by `x` does nothing inside auto-layout parents.
+- Ground truth for any layout doubt: `runs/dom-layout-probe.mjs <served url> <out.json>` dumps every section's DOM size
+  and child rows headlessly (screens unmount off-screen in headless, so use it for sizes, not per-screen boxes).
 - **Image shortfall = re-capture that section**: one section came back with 39/46 image fills (lazy avatars not yet
   loaded); a second capture of just that section a minute later matched exactly. Compare counts, swap the frame.
 - `generate_figma_design` node ids from a batch are not contiguous (72/76 were skipped) — read the page children, don't assume.
