@@ -1,0 +1,23 @@
+{
+  "name": "design2figma",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Move a Claude Design board export (.dc.html) into a Figma page as editable layers via Figma's html-to-design capture script.",
+  "bin": {
+    "design2figma": "./design2figma.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "stage": "node design2figma.mjs stage",
+    "prep": "node design2figma.mjs prep",
+    "capture": "node design2figma.mjs capture",
+    "expected": "node design2figma.mjs expected",
+    "verify": "node design2figma.mjs verify"
+  },
+  "dependencies": {
+    "playwright": "^1.64.0"
+  }
+}

@@ -52,3 +52,13 @@ marketing/social/*.html
 marketing/out/media.zip
 marketing/video-ai-pack/
 marketing/video/idea-to-reality.md
+# design2figma is shareable tooling (no client data, no secrets) — un-ignore it only
+!documents/
+documents/*
+!documents/asll-design/
+documents/asll-design/*
+!documents/asll-design/design2figma/
+!documents/asll-design/README.md
+documents/asll-design/design2figma/runs/
+documents/asll-design/design2figma/node_modules/
+documents/asll-design/design2figma/vendor/

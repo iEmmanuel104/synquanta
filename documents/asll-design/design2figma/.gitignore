@@ -1,0 +1,11 @@
+node_modules/
+# Each run keeps only its report; staged exports, browser profile, queues and captured JSON are disposable.
+runs/*
+!runs/.gitkeep
+!runs/*/
+runs/*/*
+!runs/*/report.md
+# staging dirs created with --out outside runs/
+stage/
+*.stage/
+.DS_Store
