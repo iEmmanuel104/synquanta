@@ -141,3 +141,10 @@ Set `D2F_DEBUG=1` for stack traces.
 - Ten endpoint captures of a 233-screen board took ~20 s each and ~12 MCP calls in total (1 id + 1 poll per section).
 - Run capture loops with `bash -c '…'` — zsh does not word-split `$pair`, so a `for … set -- $pair` loop silently runs once.
 - The page list from `get_metadata` can lag; read pages with a `use_figma` script when in doubt.
+- **Layout after capture (`figma/relayout.js`)**: the board's horizontal rows capture with cards overlapping (flow-4/5 had
+  ~200 px overlaps) and column stacks read as scattered. Run the card-boundary re-flow: it regroups each container's
+  children into their original rows, re-spaces and wraps them, and NEVER enters a screen. A first attempt that recursed
+  into screens stretched/blanked them (no undo) and forced a full re-capture — keep the `isCard` check before recursion.
+- **Image shortfall = re-capture that section**: one section came back with 39/46 image fills (lazy avatars not yet
+  loaded); a second capture of just that section a minute later matched exactly. Compare counts, swap the frame.
+- `generate_figma_design` node ids from a batch are not contiguous (72/76 were skipped) — read the page children, don't assume.
