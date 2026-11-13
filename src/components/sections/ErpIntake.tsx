@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, CalendarDays, CheckCircle2, ClipboardList, Loade
 import { captureEvent } from '../../lib/posthog';
 import { trackLead, trackFormStart } from '../../lib/facebook-pixel';
 import { attributionLine, getAttribution } from '../../lib/attribution';
+import { CountrySelect } from '../ui/CountrySelect';
 
 /**
  * The ERP enquiry flow on /erp: the landing page every ERP ad points at.
@@ -422,9 +423,7 @@ export const ErpIntake = ({ initialMode = 'questionnaire' }: { initialMode?: Mod
         {mode === 'questionnaire' && step === 0 && (
           <>
             {businessQ}
-            <Field label="Which country are you in?" optional>
-              <input className={fieldCls} value={f.country} onChange={inp('country')} autoComplete="country-name" placeholder="e.g. Nigeria, UK, UAE" />
-            </Field>
+            <CountrySelect label="Which country are you in?" optional value={f.country} onChange={(v, auto) => (auto ? setF((s) => ({ ...s, country: v })) : set('country', v))} />
           </>
         )}
 
