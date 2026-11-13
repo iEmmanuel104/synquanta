@@ -58,7 +58,7 @@ const PAINS = [
 ];
 const AREAS = ['Sales and clients', 'Stock and purchases', 'Money: invoices and expenses', 'Staff and tasks', 'Projects and delivery', 'Reports'];
 const TIMELINES = ['As soon as possible', 'In 1–3 months', 'In 3–6 months', 'Just exploring'];
-const BUDGETS = ['Under $5,000', '$5,000–$15,000', '$15,000–$50,000', '$50,000+', 'Not sure yet'];
+const NOT_SURE = 'Not sure yet';
 const SLOTS = ['Weekday mornings', 'Weekday afternoons', 'Weekday evenings', 'Any time'];
 
 const STEPS = ['Your business', 'How you work today', 'What needs fixing', 'Timing', 'Your details'];
@@ -465,13 +465,33 @@ export const ErpIntake = ({ initialMode = 'questionnaire' }: { initialMode?: Mod
                 </Chip>
               ))}
             </Q>
-            <Q label="Do you have a budget in mind?" hint="Optional, in US dollars. It helps us suggest the right size of first step.">
-              {BUDGETS.map((o) => (
-                <Chip key={o} on={f.budget === o} onClick={() => one('budget', o)}>
-                  {o}
+            <fieldset className="mb-6">
+              <legend className="mb-1 text-[15px] font-semibold text-forest-deep">Do you have a budget in mind?</legend>
+              <p className="mb-3 text-[13px] text-neutral-medium-gray">
+                Optional, in US dollars. A rough figure is fine. It helps us suggest the right size of first step.
+              </p>
+              <div className="flex flex-col items-start gap-2.5 sm:flex-row sm:items-center">
+                <div className="relative w-full sm:flex-1">
+                  <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[15px] font-semibold text-neutral-medium-gray">
+                    $
+                  </span>
+                  <input
+                    className={`${fieldCls} pl-8`}
+                    inputMode="numeric"
+                    aria-label="Budget in US dollars"
+                    placeholder="e.g. 10,000"
+                    value={f.budget === NOT_SURE ? '' : f.budget.replace(/^\$/, '')}
+                    onChange={(e) => {
+                      const digits = e.target.value.replace(/\D/g, '').slice(0, 9);
+                      set('budget', digits ? `$${Number(digits).toLocaleString('en-US')}` : '');
+                    }}
+                  />
+                </div>
+                <Chip on={f.budget === NOT_SURE} onClick={() => one('budget', NOT_SURE)}>
+                  {NOT_SURE}
                 </Chip>
-              ))}
-            </Q>
+              </div>
+            </fieldset>
             <Field label="Anything else we should know?" optional>
               <textarea
                 className={`${fieldCls} min-h-[96px] resize-y`}
