@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects (replaces vercel.json "redirects"; the apex → www
+# redirect lives in functions/_middleware.ts because _redirects cannot match a host).
+/hvac/*          /  302
+/hvac            /  302
+/refund-policy   /  302
