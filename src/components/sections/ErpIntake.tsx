@@ -458,10 +458,23 @@ export const ErpIntake = ({ initialMode = 'questionnaire' }: { initialMode?: Mod
 
         {mode === 'questionnaire' && step === 3 && (
           <>
-            <Q label="When would you like this in place?">
-              {TIMELINES.map((o) => (
+            <Q label="When would you like this in place?" hint="We can start as soon as we’ve agreed the plan together, so sooner is very doable.">
+              {TIMELINES.map((o, i) => (
                 <Chip key={o} on={f.timeline === o} onClick={() => one('timeline', o)}>
-                  {o}
+                  {i === 0 ? (
+                    <span className="flex items-center gap-2">
+                      {o}
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${
+                          f.timeline === o ? 'bg-white/20 text-white' : 'bg-mint-pale text-forest-primary'
+                        }`}
+                      >
+                        Most popular
+                      </span>
+                    </span>
+                  ) : (
+                    o
+                  )}
                 </Chip>
               ))}
             </Q>
