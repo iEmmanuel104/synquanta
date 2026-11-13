@@ -2,6 +2,7 @@ import { m as motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { StaggerContainer, staggerItemVariants } from '../animations/StaggerContainer';
+import { Link } from 'react-router-dom';
 import { services } from '../../constants';
 
 export const Services = () => {
@@ -32,6 +33,11 @@ export const Services = () => {
             <div className="flex flex-1 flex-col p-6">
               <h3 className="mb-2 text-lg font-semibold text-forest-deep">{service.title}</h3>
               <p className="text-sm leading-relaxed text-neutral-medium-gray">{service.description}</p>
+              {service.href && (
+                <Link to={service.href} className="mt-4 text-sm font-semibold text-forest-primary hover:underline">
+                  See how it works →
+                </Link>
+              )}
             </div>
           </motion.div>
         ))}

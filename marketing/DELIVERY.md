@@ -133,3 +133,22 @@ hand-edit anything in `out/` — `build.mjs` deletes that directory on every run
 platform UI, that no two placements are secretly the same image, that no price
 contradicts `src/constants/hvac.ts`, and that every copy field fits inside the
 limit Meta actually displays. It exits non-zero on any of them.
+
+---
+
+## ERP campaign videos (added 2026-11-13)
+
+Video files are in `out/erp-promo/`. Copy for each one is in `copy/erp.md`, and the scripts and research are in `erp/`. **Which file goes where, in plain words: `erp/GUIDE.md`.** Every ad links to `synquanta.com/erp`.
+
+| Where | File | Length |
+|---|---|---|
+| IG/FB **Reels + Stories** (cold) | `adA-916.mp4` … `adE-916.mp4` | 15s |
+| IG/FB **Feed** (cold) | `adA-45.mp4` … `adE-45.mp4` | 15s |
+| Warm retargeting, Reels/Stories | `consider-916.mp4`, `master-916.mp4` | 30s, ~79s |
+| Warm retargeting, Feed | `consider-45.mp4` | 30s |
+| Website, YouTube, LinkedIn | `master-169.mp4` | ~79s |
+
+How the files are made:
+- **Re-render:** `node erp/tools/build-stage.mjs && node erp/tools/render.mjs <video> <916|45|169>`.
+- **Voice and music:** `erp/audio/`, generated on fal.ai (ElevenLabs voice "George"; ElevenLabs Music).
+- **New voice lines:** `FAL_KEY=… node erp/tools/vo.mjs <id>`. The key is read from Railway `umbrelar` and is never stored in this repo.

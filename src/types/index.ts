@@ -5,6 +5,8 @@ export interface Service {
   illustration: string;
   title: string;
   description: string;
+  /** Optional deeper page for this service, e.g. /erp. */
+  href?: string;
 }
 
 export interface Value {

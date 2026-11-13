@@ -28,6 +28,10 @@
     <loc>https://www.synquanta.com/contact</loc>
     <lastmod>2026-06-23</lastmod>
   </url>
+  <url>
+    <loc>https://www.synquanta.com/erp</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
   <!-- HIDDEN 2026-08-07 — the AI Receptionist is not public until the product
        is finished end to end. Restore this entry when the /hvac route in
        src/App.tsx is uncommented.

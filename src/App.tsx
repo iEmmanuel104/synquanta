@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header, Footer } from './components/layout';
 import { capturePageview } from './lib/posthog';
 import { trackPageView, trackViewContent } from './lib/facebook-pixel';
+import { captureAttribution } from './lib/attribution';
 // Pages are imported statically (no React.lazy / Suspense) so there is NO
 // loading state on any browser — the page renders the instant the app mounts,
 // and in-app navigation is immediate. Safari was the slowest to resolve the old
@@ -16,6 +17,7 @@ import { PortfolioPage } from './pages/PortfolioPage';
 import { AboutPage } from './pages/AboutPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
+import { ErpPage } from './pages/ErpPage';
 // HIDDEN 2026-08-07 — kept, not deleted. See the commented /hvac route below.
 // import { HvacPage } from './pages/HvacPage';
 import { TermsPage } from './pages/TermsPage';
@@ -57,6 +59,7 @@ function ScrollManager() {
 const INTENT_ROUTES: Record<string, string> = {
   '/services': 'Services',
   '/portfolio': 'Portfolio',
+  '/erp': 'ERP',
 };
 
 /**
@@ -73,6 +76,7 @@ const INTENT_ROUTES: Record<string, string> = {
 function Pageviews() {
   const { pathname } = useLocation();
   useEffect(() => {
+    captureAttribution();
     capturePageview();
     trackPageView();
     const contentName = INTENT_ROUTES[pathname];
@@ -96,6 +100,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/erp" element={<ErpPage />} />
             {/* HIDDEN 2026-08-07 — the AI Receptionist is not shown anywhere
                 on the site until the product is finished end to end. Commented
                 out rather than deleted: HvacPage.tsx, constants/hvac.ts and

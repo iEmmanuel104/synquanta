@@ -1,10 +1,11 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, AlertCircle, ChevronDown } from 'lucide-react';
 import { Section } from '../layout/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { FadeIn } from '../animations/FadeIn';
 import { captureEvent } from '../../lib/posthog';
 import { trackLead, trackContact, trackFormStart } from '../../lib/facebook-pixel';
+import { attributionLine } from '../../lib/attribution';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -28,6 +29,15 @@ const needOptions = [
   'Something else',
 ];
 
+// ?need=<key> preselects the dropdown, so a link can say what the visitor came for.
+const NEED_KEYS: Record<string, string> = {
+  erp: 'A custom ERP system',
+  web: 'A web app or platform',
+  mobile: 'A mobile app (iOS / Android)',
+  ai: 'AI integration or an AI system',
+};
+const needFromUrl = () => NEED_KEYS[new URLSearchParams(window.location.search).get('need') ?? ''];
+
 const fieldCls =
   'w-full rounded-sq-lg border-[1.5px] border-cream-green bg-neutral-off-white px-3.5 py-3 text-[15px] text-forest-deep placeholder:text-neutral-light-gray outline-none transition-all duration-200 focus:border-sage-medium focus:bg-white focus:ring-4 focus:ring-sage-light/20';
 
@@ -43,6 +53,13 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
     message: '',
     website: '', // honeypot
   });
+
+  // Applied after mount, not in the initial state, so the prerendered HTML and
+  // the first client render agree (no hydration mismatch on the select).
+  useEffect(() => {
+    const n = needFromUrl();
+    if (n) setForm((f) => ({ ...f, need: n }));
+  }, []);
 
   // Fired once, the first time this visitor touches the form. A ref rather than
   // state because flipping it must not re-render the form mid-keystroke.
@@ -82,7 +99,7 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
       // The message field is optional in the UI, but the API requires a
       // non-empty message. Fall back to the selected "need" so a details-light
       // enquiry (name + email + need) still submits.
-      const message = form.message.trim() || `Interested in: ${form.need}`;
+      const message = `${form.message.trim() || `Interested in: ${form.need}`}\n\nSource: ${attributionLine()}`;
 
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -94,6 +111,7 @@ export const Contact = ({ hideHeading = false }: { hideHeading?: boolean } = {})
           phone: form.phone,
           need: form.need,
           message,
+          pageUrl: window.location.href.slice(0, 500),
           website: form.website,
         }),
       });

@@ -4,6 +4,7 @@ export { WelcomeBand } from './WelcomeBand';
 export { Values } from './Values';
 export { CallToAction } from './CallToAction';
 export { Contact } from './Contact';
+export { ErpIntake } from './ErpIntake';
 export { ServicesTeaser } from './ServicesTeaser';
 export { Flagship } from './Flagship';
 export { RecentWork } from './RecentWork';

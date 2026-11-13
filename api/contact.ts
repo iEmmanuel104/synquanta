@@ -78,7 +78,7 @@ export default async function handler(req: any, res: any) {
         need,
         message,
         website: "",
-        pageUrl: String(req.headers["referer"] || req.headers["referrer"] || "").slice(0, 500),
+        pageUrl: String(body.pageUrl || req.headers["referer"] || req.headers["referrer"] || "").slice(0, 500),
       });
       if (fwd.ok) return res.status(200).json({ ok: true });
       // A 4xx from the platform is a genuine validation error — surface it.

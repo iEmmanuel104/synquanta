@@ -43,6 +43,7 @@ const ROUTES = [
   '/about',
   '/faq',
   '/contact',
+  '/erp',
   // '/hvac',  ← hidden until the AI Receptionist ships; see App.tsx
   '/terms',
   '/privacy',

@@ -18,6 +18,7 @@ export const services: Service[] = [
     icon: 'LayoutDashboard',
     illustration: '/illustrations/custom-erp.svg',
     title: 'Custom ERP Systems',
+    href: '/erp',
     description:
       'Inventory, finance, HR, procurement and reporting in one system, built around how your business actually works instead of forcing it into an off-the-shelf mould.',
   },

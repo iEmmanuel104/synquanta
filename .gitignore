@@ -62,3 +62,11 @@ documents/asll-design/*
 documents/asll-design/design2figma/runs/
 documents/asll-design/design2figma/node_modules/
 documents/asll-design/design2figma/vendor/
+
+# ERP campaign: rendered videos, generated audio, EstateOS screenshots and the
+# built stage page stay local (large, and the screenshots are client designs).
+marketing/out/erp-promo/
+marketing/erp/audio/
+marketing/erp/assets/
+marketing/erp/stage.html
+marketing/erp/.chrome-*

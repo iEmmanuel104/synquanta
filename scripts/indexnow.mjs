@@ -17,6 +17,7 @@ const urlList = [
   '/about',
   '/faq',
   '/contact',
+  '/erp',
   // '/hvac',  ← hidden until the AI Receptionist ships
   '/terms',
   '/privacy',
