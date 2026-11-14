@@ -147,11 +147,11 @@
     return messTiles(99, 1, fade) + hubAt(lt, d, SCAT);
   };
 
-  S.pipeline = (lt, d) => {
-    const N = [['chat', 'Enquiry', 'Sales'], ['cart', 'Sale', 'Sales'], ['truck', 'Delivery', 'Warehouse'], ['doc', 'Invoice', 'Accounts'], ['coin', 'Payment', 'Owner']];
+  S.pipeline = (lt, d, seg = {}) => {
+    const N = seg.nodes || [['chat', 'Enquiry', 'Sales'], ['cart', 'Sale', 'Sales'], ['truck', 'Delivery', 'Warehouse'], ['doc', 'Invoice', 'Accounts'], ['coin', 'Payment', 'Owner']];
     const xs = N.map((_, i) => 110 + i * 195), y = 360;
-    const stat = ['New enquiry', 'Sold', 'Delivered', 'Invoiced', 'Paid ✓'];
-    const t0 = 0.7, span = Math.max(1, d - 2.0), step = span / 4;
+    const stat = seg.stat || ['New enquiry', 'Sold', 'Delivered', 'Invoiced', 'Paid ✓'];
+    const t0 = seg.t0 || 0.7, span = Math.max(1, d - t0 - 1.3), step = span / 4;
     const k = cl((lt - t0) / step, 0, 4); // continuous node index
     const ki = Math.floor(k + 1e-6), frac = k - ki;
     const cx = ki >= 4 ? xs[4] : L(xs[ki], xs[ki + 1], ez(cl((frac - 0.45) / 0.55)));
@@ -164,10 +164,10 @@
         (on ? G(`<circle r="17" fill="${SL}"/>` + icon('check', 0, 0, 0.26, WH, 14), { x: 40, y: -40, s: pop(lt, t0 + i * step) }) : '') +
         T(0, 92, lab, { size: 26, w: 700, c: FD }), { x: xs[i], y, o: po });
       const tp = P(lt, t0 + i * step, t0 + i * step + 0.4);
-      s += G(R(-80, -24, 160, 48, { r: 24, f: on ? CG : OW, fl: '' }) + icon('person', -50, 0, 0.3, on ? FP : GR, 12) + T(10, 8, team, { size: 22, w: 600, c: on ? FD : GR }), { x: xs[i], y: y + 150, o: L(0.35, 1, tp) * po });
+      s += G(R(-80, -24, 160, 48, { r: 24, f: on ? CG : OW, fl: '' }) + icon('person', -50, 0, 0.3, on ? FP : GR, 12) + T(team.length > 7 ? 16 : 10, 8, team, { size: team.length > 7 ? 19 : 22, w: 600, c: on ? FD : GR }), { x: xs[i], y: y + 150, o: L(0.35, 1, tp) * po });
     });
     const co = P(lt, t0 - 0.4, t0);
-    s += G(R(-96, -44, 192, 88, { r: 18, f: WH, s: SL, sw: 4 }) + T(0, -8, 'Order #1042', { size: 24, w: 700, c: FD }) + T(0, 24, stat[Math.min(4, ki)], { size: 21, w: 600, c: SM }),
+    s += G(R(-96, -44, 192, 88, { r: 18, f: WH, s: SL, sw: 4 }) + T(0, -8, seg.card || 'Order #1042', { size: 24, w: 700, c: FD }) + T(0, 24, stat[Math.min(4, ki)], { size: 21, w: 600, c: SM }),
       { x: cx, y: y - 140 + Math.sin(lt * 3) * 3, o: co });
     return s;
   };
@@ -321,6 +321,126 @@
     return S.template(lt, d, P(lt, a, b), P(lt, b, b + 1.2));
   };
 
+
+  // --- social batch 1 (organic series, marketing/SOCIAL-AUTOPOST.md)
+  const qmark = (x, y, sc) => sc > 0 ? G(`<circle r="46" fill="${WH}" filter="url(#sh)"/>` + T(0, 22, '?', { size: 64, w: 700, c: CO, f: 'C' }), { x, y, s: sc }) : '';
+  const okDot = (x, y, sc, r = 16) => sc > 0 ? G(`<circle r="${r}" fill="${SL}"/>` + icon('check', 0, 0, r / 64, WH, 14), { x, y, s: sc }) : '';
+
+  S.sheets = (lt, d) => {
+    const c = d * 0.56; let s = '';
+    const files = ['Sales.xlsx', 'Stock.xlsx', 'Accounts.xlsx', 'Owner copy.xlsx', 'Final_v2.xlsx'], tot = ['1,240', '1,180', '1,305', '1,262', '1,198'];
+    const pos = [[180, 175], [500, 140], [820, 175], [300, 475], [700, 475]];
+    const m = P(lt, c, c + 0.9);
+    if (m < 1) pos.forEach(([x, y], i) => {
+      const p = pop(lt, 0.25 + i * 0.4); if (p <= 0) return;
+      const card = R(-125, -110, 250, 220, { r: 22 }) + icon('sheet', 0, -55, 0.5, SM, 7) + T(0, 12, files[i], { size: 23, w: 600, c: GR }) +
+        T(0, 76, tot[i], { size: 46, w: 600, c: lt > d * 0.38 ? CO : FD, f: 'C' });
+      s += G(card, { x: L(x, 500, m), y: L(y, 330, m), s: p * (1 - m * 0.6), r: (i % 2 ? 5 : -5) * (1 - m) + Math.sin(lt * 4 + i) * 1.5 * (1 - m), o: 1 - m });
+    });
+    if (lt < c + 0.3) s += qmark(500, 330, pop(lt, d * 0.4) * (1 - P(lt, c, c + 0.3)));
+    const o = P(lt, c + 0.5, c + 1.2);
+    if (o > 0) {
+      let card = R(-280, -250, 560, 500, { r: 30 }) + T(-240, -186, 'One system', { size: 36, w: 600, c: FD, f: 'C', a: 'start' }) +
+        T(-240, -146, 'Sold this month', { size: 22, w: 500, c: GR, a: 'start' });
+      ['Sales', 'Warehouse', 'Accounts', 'Owner'].forEach((l, i) => {
+        const a = c + 1.0 + i * 0.22, rp = P(lt, a, a + 0.35);
+        card += G(R(-240, -30, 480, 64, { r: 16, f: i % 2 ? OW : CG, fl: '' }) + icon('person', -205, 2, 0.32, FP, 11) + T(-176, 11, l + ' sees', { size: 26, w: 600, c: FD, a: 'start' }) +
+          T(150, 12, '1,240', { size: 30, w: 700, c: FP, a: 'end', f: 'C' }) + okDot(205, 2, pop(lt, a + 0.25)), { y: -70 + i * 82, o: rp });
+      });
+      s += G(card, { x: 500, y: 345, s: L(0.92, 1, o), o });
+    }
+    return s;
+  };
+
+  S.stock = (lt, d) => {
+    const c = d * 0.42, s0 = c + 1.4, step = Math.max(0.6, (d - s0 - 0.6) / 4);
+    const sold = cl((lt - s0) / step, 0, 4), soldI = Math.floor(sold + 1e-6);
+    const synced = P(lt, c + 0.2, c + 1.0);
+    const sysN = lt < c + 0.2 ? 40 : Math.round(L(40, 12, synced)) - (synced >= 1 ? soldI : 0);
+    let s = '';
+    // the system screen
+    s += G(R(-175, -150, 350, 300, { r: 24 }) + R(-175, -150, 350, 60, { r: 24, f: FD, fl: '' }) + R(-175, -114, 350, 24, { r: 0, f: FD, fl: '' }) +
+      T(0, -110, 'Stock system', { size: 26, w: 700, c: WH }) + T(0, -30, 'In stock', { size: 26, w: 600, c: GR }) +
+      T(0, 72, String(sysN), { size: 120, w: 600, c: lt < c + 0.2 ? CO : FP, f: 'C' }) + okDot(120, -30, synced >= 1 ? pop(lt, c + 1.0) : 0, 20), { x: 230, y: 330, s: pop(lt, 0.1) });
+    // the shelf
+    let shelf = R(-195, -160, 390, 320, { r: 18, f: CG, fl: '' }) + `<path d="M-195 -40h390M-195 70h390" stroke="${FP}" stroke-width="9" stroke-linecap="round"/>`;
+    for (let i = 0; i < 12; i++) {
+      const row = Math.floor(i / 6), col = i % 6, go = i >= 8 ? cl(sold - (11 - i), 0, 1) : 0;
+      if (go >= 1) continue;
+      shelf += G(R(-23, -23, 46, 46, { r: 6, f: i % 3 ? MS : SL, fl: 'sh2' }) + `<path d="M-23 -6h46" stroke="${FP}" stroke-width="3" opacity=".5"/>`,
+        { x: -150 + col * 60, y: row ? 44 : -66, o: 1 - go, s: 1 - go * 0.3 });
+    }
+    shelf += T(0, 128, 'On the shelf', { size: 26, w: 700, c: FD });
+    s += G(shelf, { x: 770, y: 330, s: pop(lt, 0.4) });
+    // mismatch, then the link
+    const ne = pop(lt, 1.0) * (1 - P(lt, c, c + 0.3));
+    if (ne > 0) s += G(`<circle r="50" fill="${WH}" filter="url(#sh)"/>` + T(0, 26, '≠', { size: 72, w: 700, c: CO, f: 'C' }), { x: 500, y: 330, s: ne });
+    const lk = P(lt, c, c + 0.6);
+    if (lk > 0) {
+      s += `<line x1="410" y1="330" x2="${L(410, 572, lk)}" y2="330" stroke="${SL}" stroke-width="8" stroke-linecap="round"/>`;
+      if (lk >= 1) { const ph = (lt * 0.9) % 1; s += `<circle cx="${L(410, 572, ph)}" cy="330" r="8" fill="${FP}"/>`; }
+      s += G(R(-62, -22, 124, 44, { r: 22, f: FD, fl: '' }) + T(0, 8, 'Linked', { size: 22, w: 700, c: WH }), { x: 491, y: 280, s: pop(lt, c + 0.4) });
+    }
+    if (lt > s0 - 0.3) {
+      const k = Math.min(3, Math.floor(Math.max(0, lt - s0 + 0.3) / step)), pl = lt - s0 + 0.3 - k * step;
+      s += G(R(-70, -30, 140, 60, { r: 30, f: WH, s: SL, sw: 3 }) + icon('cart', -34, 0, 0.36, FP, 10) + T(18, 9, 'Sale', { size: 24, w: 700, c: FD }),
+        { x: 491, y: 450, s: pop(pl, 0, 0.3) * (1 - P(pl, step - 0.2, step)) });
+    }
+    return s;
+  };
+
+  S.next = (lt, d) => {
+    const C = [['doc', 'We read it', 'A real person', 'on our team'], ['mail', 'We reply', 'By email, within', 'one working day'], ['plan', 'We plan it', 'Together, in a session']];
+    const ap = [d * 0.24, d * 0.47, d * 0.7], xs = [180, 500, 820]; let s = '';
+    s += G(R(-150, -36, 300, 72, { r: 36, f: FD, fl: '' }) + icon('check', -108, 0, 0.36, MP, 13) + T(16, 9, 'Answers sent', { size: 26, w: 700, c: WH }),
+      { x: 500, y: 70, s: pop(lt, 0.3), o: 1 - P(lt, ap[0] - 0.4, ap[0]) * 0.5 });
+    C.forEach(([n, t, ...sub], i) => {
+      const p = pop(lt, ap[i], 0.45);
+      if (i > 0) { const dp = P(lt, ap[i] - 0.5, ap[i]); if (dp > 0) s += `<path d="M${xs[i - 1] + 140} 360h${L(0, 40, dp)}" stroke="${SL}" stroke-width="7" stroke-linecap="round"/>`; }
+      if (p <= 0) return;
+      s += G(R(-140, -175, 280, 350, { r: 28 }) + `<circle cy="-72" r="58" fill="${CG}"/>` + icon(n, 0, -72, 0.68, FP, 8) +
+        T(0, 34, t, { size: 38, w: 600, c: FD, f: 'C' }) + sub.map((l, j) => T(0, 80 + j * 32, l, { size: 24, w: 500, c: GR })).join('') +
+        G(`<circle r="20" fill="${FD}"/>` + T(0, 8, String(i + 1), { size: 22, w: 700, c: WH }), { x: -108, y: -148 }), { x: xs[i], y: 360, s: p, o: cl(p) });
+    });
+    const tr = P(lt, ap[1] - 0.6, ap[1]);
+    if (tr > 0 && tr < 1) s += G(icon('mail', 0, 0, 0.42, FP, 9), { x: L(xs[0], xs[1], tr), y: 360 - Math.sin(tr * Math.PI) * 120 });
+    return s;
+  };
+
+  S.signs = (lt, d, seg) => {
+    const items = [['person', 'Two people, two different numbers'], ['chart', 'Reports take hours'], ['brief', 'Only one person knows how it all works'], ['sheet', 'The same order gets typed twice'], ['coin', 'You can’t easily see who owes you']];
+    const lead = seg.voStart - seg.start, txt = seg.text;
+    const at = ['One:', 'Two:', 'Three:', 'Four:', 'Five:'].map((k) => lead + (seg.voDur * txt.indexOf(k)) / txt.length);
+    const fam = lead + (seg.voDur * txt.indexOf('Sound')) / txt.length;
+    let s = '';
+    items.forEach(([n, t], i) => {
+      const p = P(lt, at[i] - 0.2, at[i] + 0.25), y = 70 + i * 118; if (p <= 0) return;
+      const now = lt >= at[i] && (i === 4 ? lt < fam : lt < at[i + 1]);
+      s += G(R(70, -48, 860, 96, { r: 22, f: now ? WH : OW, s: now ? SL : 'none', sw: now ? 4 : 0 }) +
+        G(`<circle r="28" fill="${now ? FD : CG}"/>` + T(0, 10, String(i + 1), { size: 28, w: 700, c: now ? WH : FD, f: 'C' }), { x: 130 }) +
+        icon(n, 205, 0, 0.42, now ? CO : GR, 9) + T(250, 10, t, { size: 30, w: 600, c: FD, a: 'start' }) + okDot(880, 0, lt > fam ? pop(lt, fam + i * 0.12) : 0, 20),
+        { x: L(40, 0, p), y, o: p });
+    });
+    return s;
+  };
+
+  S.keyperson = (lt, d) => {
+    const c = d * 0.52; let s = '';
+    const ppl = [[160, 230], [840, 230], [840, 520], [160, 520], [500, 610]];
+    if (lt < c + 0.6) {
+      let g = desk(500, 400, 1) + G(R(-66, -24, 132, 48, { r: 24, f: CO, fl: '' }) + T(0, 9, 'Away', { size: 26, w: 700, c: WH }), { x: 500, y: 250, s: pop(lt, 0.3) });
+      for (let i = 0; i < 6; i++) { const p = pop(lt, 2.2 + i * 0.35, 0.3); if (p > 0) g += G(R(-50, -22, 100, 44, { r: 6, f: i % 2 ? COP : '#FFF7E0', fl: 'sh2' }), { x: 380 + (i % 3) * 120, y: 380 - Math.floor(i / 3) * 34, s: p, r: (i % 2 ? 7 : -6) }); }
+      ppl.forEach(([x, y], i) => {
+        const p = pop(lt, 0.6 + i * 0.25); if (p <= 0) return;
+        g += person(x, y + 50, 0.75, GR, cl(p));
+        const b = pop(lt, 1.0 + i * 0.3); if (b > 0) g += G(R(-34, -30, 68, 56, { r: 16, f: WH }) + T(0, 12, '?', { size: 36, w: 700, c: CO, f: 'C' }), { x: x + (x < 500 ? 56 : -56), y: y - 46, s: b, r: Math.sin(lt * 5 + i) * 4 });
+      });
+      s += G(g, { o: 1 - P(lt, c, c + 0.6) });
+    }
+    if (lt > c) s += hubAt(lt - c, d - c, ppl);
+    return s;
+  };
+
   // ---------------------------------------------------------------- frame
   let TL = null, UI = null, VB = [0, 0, 1000, 700];
   const $ = (id) => document.getElementById(id);
@@ -355,7 +475,7 @@
       $('ecta').style.opacity = P(lt, 0.5, 1.1);
     }
     if (!isEnd || eo < 1) {
-      $('stage').innerHTML = DEFS + (S[seg.scene] ? S[seg.scene](lt, d) : '');
+      $('stage').innerHTML = DEFS + (S[seg.scene] ? S[seg.scene](lt, d, seg) : '');
       const hl = typeof seg.hl === 'string' ? seg.hl : pick(seg.hl, f), sub = typeof seg.sub === 'string' ? seg.sub : pick(seg.sub, f);
       const ho = Math.min(P(lt, 0, 0.45), 1 - P(lt, d - 0.25, d));
       $('hl').innerHTML = (hl || '').replace(/\n/g, '<br>'); $('hl').className = (hl || '').length > 48 ? 'long' : ''; $('sub').textContent = sub || '';

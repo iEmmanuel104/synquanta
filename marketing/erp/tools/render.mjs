@@ -7,8 +7,9 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ERP = join(dirname(fileURLToPath(import.meta.url)), '..');
-const OUT = join(ERP, '..', 'out', 'erp-promo');
 const [video, fmt] = process.argv.slice(2);
+// s1..s6 = organic social series (marketing/SOCIAL-AUTOPOST.md), everything else = the ERP ad campaign
+const OUT = join(ERP, '..', 'out', /^s\d/.test(video) ? 'social' : 'erp-promo');
 const arg = (k) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : null; };
 const FPS = Number(arg('--fps') || 30);
 const stills = arg('--stills')?.split(',').map(Number);
@@ -42,15 +43,26 @@ const DEF = {
   adC: [['imagine', 'c', { hl: 'What if your whole business ran on one system?' }]],
   adD: [['industries3', 'd', { hl: 'Different businesses. Same problem.' }]],
   adE: [['generic', 'e', { hl: 'Your business isn’t generic.\nYour software shouldn’t be either.' }]],
+  // organic social series, batch 1
+  s1: [['sheets', 's1', { hl: 'Spreadsheets aren’t the problem.\nFive of them are.' }]],
+  s2: [['stock', 's2', { hl: 'System says 40.\nShelf says 12.' }]],
+  s3: [['pipeline', 's3', { hl: 'A distributor’s day,\nin one system', t0: 2.9, card: 'Order #2207',
+    nodes: [['cart', 'Order', 'Sales'], ['box', 'Stock', 'Warehouse'], ['truck', 'Delivery', 'Driver'], ['doc', 'Invoice', 'Accounts'], ['coin', 'Paid', 'Owner']],
+    stat: ['Order in', 'Stock set aside', 'Out for delivery', 'Invoice sent', 'Paid ✓'] }]],
+  s4: [['next', 's4', { hl: 'You told us about your business.\nWhat happens next?' }]],
+  s5: [['signs', 's5', { hl: [[0, '5 signs you’ve outgrown spreadsheets'], [0.84, 'Sound familiar?']] }]],
+  s6: [['keyperson', 's6', { hl: 'When the one person who knows everything is away…' }]],
 };
 
 function timeline() {
   const segs = []; let t = 0;
-  if (video.startsWith('ad')) {
-    const [[scene, vo, o]] = DEF[video]; const vd = dur(vo); const endAt = Math.max(12.4, 0.3 + vd - 0.2);
+  if (DEF[video].length === 1) { // single-scene shorts: ads are exactly 15s, social shorts run to the VO + a 2.8s end card
+    const ad = video.startsWith('ad');
+    const [[scene, vo, o]] = DEF[video]; const vd = dur(vo); const endAt = ad ? Math.max(12.4, 0.3 + vd - 0.2) : 0.3 + vd + 0.6;
+    const total = ad ? 15 : endAt + 2.8;
     segs.push({ scene, start: 0, dur: endAt, vo, voStart: 0.3, voDur: vd, text: lines[vo], ...o });
-    segs.push({ scene: 'end', start: endAt, dur: 15 - endAt, endHl: ADEND });
-    return { fmt, segs, total: 15 };
+    segs.push({ scene: 'end', start: endAt, dur: total - endAt, endHl: ADEND });
+    return { fmt, segs, total };
   }
   for (const [scene, vo, pre, post, o] of DEF[video]) {
     const vd = dur(vo); const d = post == null ? Math.max(pre + vd + 0.4, 30 - t) : pre + vd + post;
