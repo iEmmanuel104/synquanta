@@ -106,7 +106,7 @@ export const Globe = ({
         theta: 0.3,
         dark: 1,
         diffuse: 1.2,
-        mapSamples: 16000,
+        mapSamples: lowPower ? 10000 : 16000,
         mapBrightness: 6,
         baseColor: FOREST_DEEP,
         markerColor: MAJOR,

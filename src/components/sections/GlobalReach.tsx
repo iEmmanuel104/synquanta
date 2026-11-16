@@ -2,23 +2,19 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FadeIn } from '../animations/FadeIn';
-import { Globe, hasWebGL, prefersReducedMotion } from '../ui/Globe';
+import { Globe, hasWebGL } from '../ui/Globe';
 
 /**
  * Home-page showcase of the WebGL globe — frames our work as global and shows
  * off the technical craft. General copy + globe dots (no campaign tie-in).
  */
 export const GlobalReach = () => {
-  // Skip the WebGL globe on phones — cobe download + GPU/WebGL init is the
-  // heaviest thing on mid-range mobile, exactly where first-load is slow. The
-  // lightweight radial-gradient fallback below renders instead. Desktop keeps
-  // the interactive globe.
-  const [flat] = useState(
-    () =>
-      prefersReducedMotion() ||
-      !hasWebGL() ||
-      (typeof window !== 'undefined' && window.innerWidth < 768),
-  );
+  // The globe now shows on phones too. It stays out of the first load: cobe is
+  // dynamic-imported only when the globe scrolls into view, it renders at a
+  // capped DPR with fewer map dots on phones, and its loop pauses off-screen.
+  // Reduced-motion users get a still globe (handled inside <Globe>). Only
+  // browsers without WebGL fall back to the flat glow.
+  const [flat] = useState(() => !hasWebGL());
 
   return (
     <section className="relative overflow-hidden bg-mesh-forest py-20 text-white lg:py-28">
