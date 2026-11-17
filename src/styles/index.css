@@ -241,38 +241,11 @@
      second copy lands where the first started and the loop is seamless. That
      only works if both halves are identical width, which is why the gap lives
      in each item's own margin rather than in a flex `gap`. */
-  @keyframes sq-marquee {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(-50%, 0, 0);
-    }
-  }
-
   .sq-marquee-viewport {
     overflow: hidden;
     /* Fade both edges so items enter and leave instead of being chopped. */
     mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  }
-
-  .sq-marquee-track {
-    display: flex;
-    width: max-content;
-    animation: sq-marquee 46s linear infinite;
-    will-change: transform;
-  }
-
-  /* Pause on hover, and on keyboard focus so a keyboard user can actually
-     reach and read a card that is drifting past. */
-  .sq-marquee-viewport:hover .sq-marquee-track,
-  .sq-marquee-viewport:focus-within .sq-marquee-track {
-    animation-play-state: paused;
-  }
-
-  .sq-marquee-item {
-    margin-right: 1.25rem;
   }
 
   /* Geometric grid overlay for dark bands (Flagship, Contact aside).
@@ -341,6 +314,135 @@
   @keyframes sq-floaty {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
+  }
+
+  /* Hero "Explore" cue: small bob after the hero has settled */
+  .sq-scroll-cue {
+    animation: sq-scroll-cue 1.5s ease-in-out 1.5s infinite;
+  }
+  @keyframes sq-scroll-cue {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* Work strip: client logos on glossy, app-icon-style tiles with a floor
+     reflection. --rx/--ry tilt the tile and --mx/--my move its specular
+     highlight; RecentWork sets them from the pointer. */
+  .sq-logo-tile {
+    --rx: 0;
+    --ry: 0;
+    --mx: 30%;
+    --my: 18%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 30%/30%;
+    background: linear-gradient(160deg, #ffffff 0%, #f7fbf8 52%, #e8f3ec 100%);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      inset 0 -10px 18px rgb(27 67 50 / 0.07),
+      0 1px 2px rgb(27 67 50 / 0.1),
+      0 12px 22px -10px rgb(27 67 50 / 0.22),
+      0 32px 56px -28px rgb(27 67 50 / 0.42);
+    transform: perspective(800px) rotateX(calc(var(--rx) * 1deg)) rotateY(calc(var(--ry) * 1deg));
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    -webkit-box-reflect: below 12px linear-gradient(transparent 72%, rgb(255 255 255 / 0.3));
+  }
+  /* Glossy top lip, like light on a curved glass icon */
+  .sq-logo-tile::after {
+    content: '';
+    position: absolute;
+    inset: 1px 1px 52% 1px;
+    border-radius: inherit;
+    border-bottom-left-radius: 50% 18%;
+    border-bottom-right-radius: 50% 18%;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.75), rgb(255 255 255 / 0));
+    pointer-events: none;
+  }
+  /* Specular highlight that follows the pointer */
+  .sq-logo-tile::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--mx) var(--my), rgb(255 255 255 / 0.85), rgb(255 255 255 / 0) 42%);
+    opacity: 0.45;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .group:hover .sq-logo-tile,
+  .group:focus-visible .sq-logo-tile {
+    transform: perspective(800px) translateY(-8px) rotateX(calc(var(--rx) * 1deg)) rotateY(calc(var(--ry) * 1deg));
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      inset 0 -10px 18px rgb(27 67 50 / 0.07),
+      0 2px 4px rgb(27 67 50 / 0.1),
+      0 22px 36px -14px rgb(27 67 50 / 0.3),
+      0 46px 70px -30px rgb(27 67 50 / 0.5);
+  }
+  .group:hover .sq-logo-tile::before {
+    opacity: 1;
+  }
+
+  /* Hero scene: breathing glow behind the product (transform + opacity only) */
+  .sq-aurora-pulse {
+    animation: sq-aurora-pulse 7s ease-in-out infinite;
+  }
+  @keyframes sq-aurora-pulse {
+    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.92); }
+    50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.06); }
+  }
+
+  /* Blinking text caret for the typed code card */
+  .sq-caret {
+    animation: sq-caret 1s steps(1) infinite;
+  }
+  @keyframes sq-caret {
+    50% { opacity: 0; }
+  }
+
+  /* Light sweep across a button on hover */
+  .sq-sheen {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .sq-sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 35%, rgb(216 243 220 / 0.55) 50%, transparent 65%);
+    transform: translateX(-120%);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  @media (hover: hover) {
+    .sq-sheen:hover::after {
+      transform: translateX(120%);
+    }
+  }
+
+  /* Call-to-action background shapes: slow compositor-only drift */
+  .sq-drift-a { animation: sq-drift-a 8s ease-in-out infinite; }
+  .sq-drift-b { animation: sq-drift-b 10s ease-in-out infinite; }
+  .sq-drift-c { animation: sq-drift-c 7s ease-in-out infinite; }
+  @keyframes sq-drift-a {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(10px, -15px); }
+  }
+  @keyframes sq-drift-b {
+    0%, 100% { transform: translateY(0) rotate(45deg); }
+    50% { transform: translateY(12px) rotate(55deg); }
+  }
+  @keyframes sq-drift-c {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
 
   /* Eyebrow / overline label */
@@ -857,9 +959,8 @@
   .sq-livedot,
   .sq-floaty,
   .report-live .report-livedot { animation: none !important; }
-  /* Marquee stops dead; the strip becomes a normal horizontal scroller so the
-     items past the fold are still reachable. */
-  .sq-marquee-track { animation: none !important; }
+  .sq-logo-tile { transform: none !important; }
+  /* The work strip stops (handled in RecentWork); its row stays scrollable. */
   .sq-marquee-viewport { overflow-x: auto; mask-image: none !important; -webkit-mask-image: none !important; }
   /* Ring stays, node stops orbiting. */
   .sq-orbit-sweep { animation: none !important; }

@@ -20,10 +20,10 @@ export const FadeIn = ({
   const shouldReduceMotion = useReducedMotion();
 
   const directions = {
-    up: { y: 24 },
-    down: { y: -24 },
-    left: { x: 24 },
-    right: { x: -24 },
+    up: { y: 16 },
+    down: { y: -16 },
+    left: { x: 16 },
+    right: { x: -16 },
     none: {},
   };
 

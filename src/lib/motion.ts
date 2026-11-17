@@ -11,9 +11,9 @@ export const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
 /** Canonical durations (seconds). */
 export const DUR = {
-  fast: 0.4,
-  base: 0.6,
-  slow: 0.85,
+  fast: 0.35,
+  base: 0.5,
+  slow: 0.6,
 } as const;
 
 /** Canonical stagger spacings (seconds between children). */
@@ -27,7 +27,7 @@ export const VIEWPORT = { once: true, margin: '-80px' } as const;
 
 /** Simple fade + rise, e.g. for a single block. */
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
@@ -37,7 +37,7 @@ export const fadeUp: Variants = {
 
 /** Stagger child variant — slightly faster so groups settle quickly. */
 export const fadeUpItem: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,

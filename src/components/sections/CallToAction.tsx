@@ -1,7 +1,8 @@
-import { m as motion, useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'framer-motion';
 import { Section } from '../layout/Section';
 import { Button } from '../ui/Button';
 import { FadeIn } from '../animations/FadeIn';
+import { AnimatedText } from '../animations/AnimatedText';
 
 export const CallToAction = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -17,30 +18,18 @@ export const CallToAction = () => {
         {/* Floating geometric shapes */}
         {!shouldReduceMotion && (
           <>
-            <motion.div
-              className="absolute top-10 left-[10%] w-16 h-16 rounded-full border border-white/[0.07]"
-              animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <motion.div
-              className="absolute bottom-12 right-[15%] w-10 h-10 rounded-lg border border-white/[0.05] rotate-45"
-              animate={{ y: [0, 12, 0], rotate: [45, 55, 45] }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <motion.div
-              className="absolute top-1/2 right-[8%] w-6 h-6 rounded-full bg-white/[0.04]"
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-            />
+            <div className="sq-drift-a absolute top-10 left-[10%] w-16 h-16 rounded-full border border-white/[0.07]" />
+            <div className="sq-drift-b absolute bottom-12 right-[15%] w-10 h-10 rounded-lg border border-white/[0.05]" />
+            <div className="sq-drift-c absolute top-1/2 right-[8%] w-6 h-6 rounded-full bg-white/[0.04]" />
           </>
         )}
 
         <div className="relative z-10">
-          <FadeIn>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 tracking-tight">
-              Bring us the hard part
-            </h2>
-          </FadeIn>
+          <AnimatedText
+            as="h2"
+            text="Bring us the hard part"
+            className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 tracking-tight"
+          />
 
           <FadeIn delay={0.1}>
             <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8">

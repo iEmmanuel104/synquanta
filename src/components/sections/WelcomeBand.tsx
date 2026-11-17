@@ -3,6 +3,7 @@ import { Section } from '../layout/Section';
 import { Button } from '../ui/Button';
 import { PhoneMock } from '../ui/PhoneMock';
 import { FadeIn } from '../animations/FadeIn';
+import { AnimatedText } from '../animations/AnimatedText';
 import { StaggerContainer, staggerItemVariants } from '../animations/StaggerContainer';
 import { AnimatedIcon } from '../ui/AnimatedIcon';
 import { m as motion, useReducedMotion } from 'framer-motion';
@@ -47,9 +48,11 @@ export const WelcomeBand = () => {
         <div>
           <FadeIn>
             <p className="sq-eyebrow mb-4">How we work</p>
-            <h2 className="mb-5 text-3xl font-semibold leading-tight tracking-tight text-forest-deep md:text-4xl lg:text-[40px]">
-              Research comes first. Always.
-            </h2>
+            <AnimatedText
+              as="h2"
+              text="Research comes first. Always."
+              className="mb-5 text-3xl font-semibold leading-tight tracking-tight text-forest-deep md:text-4xl lg:text-[40px]"
+            />
             <p className="mb-6 max-w-xl text-lg leading-relaxed text-neutral-medium-gray">
               No project here starts from a template. It starts with a week of finding out who your
               users actually are and what the people already serving them get wrong. Only then do we

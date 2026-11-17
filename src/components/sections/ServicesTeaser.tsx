@@ -22,7 +22,7 @@ export const ServicesTeaser = () => {
           <motion.div
             key={service.id}
             variants={reduce ? undefined : staggerItemVariants}
-            className="group flex flex-col overflow-hidden rounded-sq-xl border border-cream-green bg-white shadow-sq transition-all duration-300 hover:-translate-y-1.5 hover:shadow-sq-xl"
+            className="group flex flex-col overflow-hidden rounded-sq-xl border border-cream-green bg-white shadow-sq transition-[translate,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-sq-xl"
           >
             <div className="flex aspect-[16/10] items-center justify-center overflow-hidden bg-aurora-cream p-6">
               <img

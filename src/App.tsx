@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { LazyMotion, domAnimation } from 'framer-motion';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header, Footer } from './components/layout';
 import { capturePageview } from './lib/posthog';
@@ -88,6 +88,7 @@ function Pageviews() {
 function App() {
   return (
     <LazyMotion features={domAnimation} strict>
+      <MotionConfig reducedMotion="user">
       <div className="min-h-screen">
         <ScrollManager />
         <Pageviews />
@@ -126,6 +127,7 @@ function App() {
         </main>
         <Footer />
       </div>
+      </MotionConfig>
     </LazyMotion>
   );
 }

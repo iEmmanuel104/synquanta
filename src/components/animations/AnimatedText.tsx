@@ -1,13 +1,13 @@
 import { m as motion, useReducedMotion } from 'framer-motion';
 import { createElement, Fragment } from 'react';
-import { EASE_OUT, DUR, VIEWPORT } from '../../lib/motion';
+import { EASE_OUT, VIEWPORT } from '../../lib/motion';
 
 interface AnimatedTextProps {
   text: string;
   className?: string;
   as?: 'h1' | 'h2' | 'span';
   delay?: number;
-  /** Slightly larger blur on light-on-dark text reads better; cosmetic only. */
+  /** Kept for existing callers; the reveal no longer differs on dark text. */
   light?: boolean;
   /**
    * Gradient/clip classes (e.g. bg-gradient-to-r ... bg-clip-text text-transparent).
@@ -15,12 +15,7 @@ interface AnimatedTextProps {
    * it on the container fails because the words sit in inline-block spans.
    */
   gradientClass?: string;
-  /**
-   * Compressed timing for above-the-fold text that animates on page load
-   * (the hero). The user has already waited through the network + JS mount —
-   * the reveal should finish fast. Scroll-triggered reveals keep the default,
-   * more theatrical pace.
-   */
+  /** Compressed timing for above-the-fold text that animates on page load. */
   quick?: boolean;
 }
 
@@ -34,38 +29,35 @@ const containerVariants = (delay: number, stagger: number) => ({
   },
 });
 
+/* Each word rises from behind its own clipped line: a transform-only reveal
+   that reads as "typeset into place" rather than a fade. */
 const wordVariants = (duration: number) => ({
-  hidden: { opacity: 0, y: 18, filter: 'blur(4px)' },
+  hidden: { y: '110%' },
   visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
+    y: '0%',
     transition: { duration, ease: EASE_OUT },
   },
 });
 
 /**
- * Reveals a heading word-by-word with a cohesive stagger. The full string
- * stays available to screen readers via `aria-label`; per-word spans are
- * `aria-hidden`. Under reduced-motion it renders plain, static text.
+ * Reveals a heading word by word. The full string stays available to screen
+ * readers via `aria-label`; per-word spans are `aria-hidden`. Under
+ * reduced motion it renders plain, static text.
  */
 export const AnimatedText = ({
   text,
   className,
   as = 'span',
   delay = 0,
-  light = false,
   gradientClass,
   quick = false,
 }: AnimatedTextProps) => {
   const shouldReduceMotion = useReducedMotion();
   const words = text.split(' ');
-  const stagger = quick ? 0.03 : 0.045;
-  const duration = quick ? 0.28 : DUR.fast;
+  const stagger = quick ? 0.035 : 0.055;
+  const duration = quick ? 0.4 : 0.6;
 
   if (shouldReduceMotion) {
-    // Plain accessible text node — gradient (if any) goes on the element itself,
-    // which holds the text directly so background-clip:text works.
     return createElement(as, { className: gradientClass ? `${className ?? ''} ${gradientClass}` : className }, text);
   }
 
@@ -82,10 +74,11 @@ export const AnimatedText = ({
     >
       {words.map((word, i) => (
         <Fragment key={`${word}-${i}`}>
-          <span aria-hidden="true" className="inline-block">
+          {/* The padding/negative margin pair keeps descenders (g, y, p) inside
+              the clip without changing the line height. */}
+          <span aria-hidden="true" className="-mb-[0.14em] inline-block overflow-hidden pb-[0.14em] align-bottom">
             <motion.span
               className={`inline-block ${gradientClass ?? ''}`}
-              style={light ? { willChange: 'transform, filter, opacity' } : undefined}
               variants={wordVariants(duration)}
             >
               {word}

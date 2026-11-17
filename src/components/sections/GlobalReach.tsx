@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FadeIn } from '../animations/FadeIn';
+import { AnimatedText } from '../animations/AnimatedText';
 import { Globe, hasWebGL } from '../ui/Globe';
 
 /**
@@ -24,9 +25,11 @@ export const GlobalReach = () => {
           {/* Copy */}
           <FadeIn>
             <p className="sq-eyebrow mb-3.5 text-mint-pale">Global by design</p>
-            <h2 className="mb-5 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl lg:text-[44px]">
-              Distance has never been the hard part
-            </h2>
+            <AnimatedText
+              as="h2"
+              text="Distance has never been the hard part"
+              className="mb-5 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl lg:text-[44px]"
+            />
             <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/70">
               We work remotely with founders and teams in several countries, from a first prototype
               through to a product carrying real traffic. Overlapping hours matter more than a shared
